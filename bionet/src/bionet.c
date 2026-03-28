@@ -9,14 +9,18 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include "entidades.h"
 
-int main(void) {
-	//kdmk
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	return EXIT_SUCCESS;
+int main() {
+	printf("--- BIENVENIDO A BIONET (SERVIDOR) ---\n");
+
+	//Aqui faltan por poner las funciones a las que vamos a llamar
+	//1. Abrir la base de datos
+	//2. Leer archivos CSV
+	//3. Esperar a que un cliente se conecte
+
+	printf("El servidor se está ejecutando...");
+
+	return 0;
 }
 
-int p;
-//hola imenne
-//jdfkb
