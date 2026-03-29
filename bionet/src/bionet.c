@@ -14,12 +14,8 @@
 int main() {
 	printf("--- BIENVENIDO A BIONET (SERVIDOR) ---\n");
 
-	//Aqui faltan por poner las funciones a las que vamos a llamar
-	//1. Abrir la base de datos
-	//2. Leer archivos CSV
-	//3. Esperar a que un cliente se conecte
-
-	printf("El servidor se está ejecutando...");
+	inicializar_db();
+	printf("Servidor listo para recibir comandos");
 
 	return 0;
 }
