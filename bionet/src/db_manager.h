@@ -8,7 +8,7 @@
 #ifndef DB_MANAGER_H_
 #define DB_MANAGER_H_
 
-
+void inicializar_db();
 
 
 
