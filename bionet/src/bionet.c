@@ -9,16 +9,22 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
+#include "entidades.h"
 
-int main(void) {
-	//kdmk
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	return EXIT_SUCCESS;
+int main() {
+	printf("--- BIENVENIDO A BIONET (SERVIDOR) ---\n");
+
+	inicializar_db();
+	printf("Servidor listo para recibir comandos");
+
+	return 0;
 }
 
+<<<<<<< HEAD
 
 
 int p;
 //hola imenne
 //jdfkb
+=======
+>>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
