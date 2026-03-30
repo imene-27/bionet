@@ -10,13 +10,15 @@
 
 #include <stdio.h>
 #include "entidades.h"
+#include "importador.h"
+#include "db_manager.h"
 
 
 int main() {
 	printf("--- BIENVENIDO A BIONET (SERVIDOR) ---\n");
 
 	inicializar_db();
-	printf("Servidor listo para recibir comandos");
+	printf("Servidor listo para recibir comandos\n");
 
 	importar_farmacias("farmacias.csv");
 

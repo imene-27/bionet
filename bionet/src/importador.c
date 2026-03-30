@@ -1,10 +1,9 @@
 /*
  * importador.c
  *
- *  Created on: 29 mar 2026
+ *  Created on: 30 mar 2026
  *      Author: nahia.epelde
  */
-
 
 #include "importador.h"
 #include <stdio.h>
@@ -13,20 +12,15 @@
 #include "sqlite3.h"
 
 
-void importar_farmacias(const char* nombre_archivo){
-	FILE *f = fopen(nombre_archivo, "r");
-	if(f = NULL){
-		printf("Error: No se encuentra el archivo %s\n", nombre_archivo);
+void importar_farmacias(const char* fichero){
+	FILE *f = fopen(fichero, "r");
+	if(f == NULL){
+		printf("Error: No se encuentra el archivo %s\n", fichero);
 		return;
 	}
 
 	sqlite3 *db;
-	if(sqlite3_open("bionet.db", &db) != SQLITE_OK){
-		printf("Error al abrir la BD para importar el archivo\n");
-		flcose(f);
-		return;
-	}
-
+	sqlite3_open("bionet.db", &db);
 	char linea[1024];
 	int contador = 0;
 
@@ -63,5 +57,98 @@ void importar_farmacias(const char* nombre_archivo){
 
 		fclose(f);
 		sqlite3_close(db);
+}
+
+
+void importar_centros_salud(const char* fichero){
+	FILE *f = fopen(fichero, "r");
+	if(f == NULL){
+		printf("Error: No se encuentra el archivo %s\n", fichero);
+		return;
 	}
+
+	sqlite3 *db;
+	sqlite3_open("bionet.db", &db);
+	char linea[1024];
+
+	while(fgets(linea, sizeof(linea), f)) {
+		linea[strcspn(linea, "\n")] = 0;
+		char *id = strtok(linea, ";");
+		char *nombre = strtok(NULL, ";");
+		char *dir = strtok(NULL, ";");
+		char *cp = strtok(NULL, ";");
+
+		if(id && nombre && dir && cp){
+			char sql[1024];
+			sprintf(sql, "INSERT INTO CentroSalud (ID, Nombre, Direccion, CP_FK) VALUES (%s, %s, %s, %s);",
+					id, nombre, dir, cp);
+			sqlite3_exec(db, sql, 0, 0, 0);
+		}
+	}
+	fclose(f);
+	sqlite3_close(db);
+	printf("Centros de salud cargados\n");
+}
+
+
+void importar_medicos(const char* fichero){
+	FILE *f = fopen(fichero, "r");
+	if(f == NULL){
+		printf("Error: No se encuentra el archivo %s\n", fichero);
+		return;
+	}
+
+	sqlite3 *db;
+	sqlite3_open("bionet.db", &db);
+	char linea[1024];
+
+	while(fgets(linea, sizeof(linea), f)) {
+		linea[strcspn(linea, "\n")] = 0;
+		char *id = strtok(linea, ";");
+		char *nombre = strtok(NULL, ";");
+		char *especialidad = strtok(NULL, ";");
+		char *id_centro = strtok(NULL, ";");
+
+		if(id && nombre && especialidad && id_centro) {
+			char sql[1024];
+			sprintf(sql, "INSERT INTO Medico (ID, Nombre, Especialidad, Centro_FK) VALUES (%s, %s, %s, %s);",
+					id, nombre, especialidad, id_centro);
+			sqlite3_exec(db, sql, 0, 0, 0);
+		}
+	}
+	fclose(f);
+	sqlite3_close(db);
+	printf("Plantilla de medicos cargada\n");
+}
+
+
+void importar_stock(const char* fichero){
+	FILE *f = fopen(fichero, "r");
+	if(f == NULL){
+		printf("Error: No se encuentra el archivo %s\n", fichero);
+		return;
+	}
+
+	sqlite3 *db;
+	sqlite3_open("bionet.db", &db);
+	char linea[1024];
+
+	while(fgets(linea, sizeof(linea), f)){
+		linea[strcspn(linea, "\n")] = 0;
+
+		char *id_med = strtok(linea, ";");
+		char *nombre = strtok(NULL, ";");
+		char *cantidad = strtok(NULL, ";");
+		char *id_farma = strtok(NULL, ";");
+
+		if(id_med && nombre && cantidad && id_farma){
+			char sql[1024];
+			sprintf(sql, "INSERT INTO Stock (ID_Medicamento, Nombre, Cantidad, Farmacia_FK) VALUES (%s, %s, %s, %s);",
+					id_med, nombre, cantidad, id_farma);
+			sqlite3_exec(db, sql, 0, 0, 0);
+		}
+	}
+	fclose(f);
+	sqlite3_close(db);
+	printf("Inventario de medicamentos cargado correctamente\n");
 }

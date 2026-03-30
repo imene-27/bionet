@@ -9,7 +9,9 @@
 #define IMPORTADOR_H_
 
 
-void importar_farmacias(const char* nombre_archivo);
-
+void importar_farmacias(const char* fichero);
+void importar_centros_salud(const char* fichero);
+void importar_medicos(const char* fichero);
+void importar_stock(const char* fichero);
 
 #endif /* IMPORTADOR_H_ */
