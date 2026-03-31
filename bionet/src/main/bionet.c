@@ -21,6 +21,9 @@ int main() {
 	printf("Servidor listo para recibir comandos\n");
 
 	importar_farmacias("farmacias.csv");
+	importar_centros_salud("centros.csv");
+	importar_medicos("medicos.csv");
+	importar_stock("stock.csv");
 
 	return 0;
 }
