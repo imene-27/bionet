@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "sqlite3.h"
+#include "../sqlite3/sqlite3.h"
 
 void importar_farmacias(const char* fichero) {
 	FILE *f = fopen(fichero, "r");

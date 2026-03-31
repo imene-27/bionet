@@ -9,9 +9,9 @@
  */
 
 #include <stdio.h>
-#include "entidades.h"
-#include "importador.h"
-#include "db_manager.h"
+#include "../db_manager/entidades.h"
+#include "../db_manager/db_manager.h"
+#include "../importador/importador.h"
 
 
 int main() {
