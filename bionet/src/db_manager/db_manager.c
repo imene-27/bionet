@@ -268,3 +268,102 @@ void ver_ficha_medica(char *dni_usuario){
 	sqlite3_finalize(res);
 	sqlite3_close(db);
 }
+
+
+void buscar_medicos_especialidad(char *especialidad, char *localidad){
+	sqlite3 *db;
+	sqlite3_stmt *res;
+	int es_numero = 1;
+
+	for(int i=0; localidad[i] != `\0´; i++){
+		if(!isdigit(localidad[i])){
+			es_numero = 0;
+			break;
+		}
+	}
+
+	sqlite3_open("bionet.db", &db);
+	char *sql;
+
+	if(es_numero == 1){
+		//Buscar medico con esa especialidad por CP
+		sql = "SELECT m.ID_Medico, m.Nombre, m.Apellido, c.Nombre FROM Medico m "
+	          "JOIN CentroSalud c ON m.ID_Centro_FK = c.ID_Centro "
+	          "WHERE m.Especialidad = ? AND c.CP_FK = ?;";
+
+		if(sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK){
+			sqlite3_bind_text(res, 1, especialidad, -1, SQLITE_STATIC);
+			sqlite3_bind_int(res, 2, atoi(localidad));
+		}
+	} else {
+		//Buscar medico con esa especialidad por localidad
+		sql = "SELECT m.ID_Medico, m.Nombre, m.Apellido, c.Nombre FROM Medico m "
+		      "JOIN CentroSalud c ON m.ID_Centro_FK = c.ID_Centro "
+		      "WHERE m.Especialidad = ? AND c.Municipio = ?;";
+
+		if(sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK){
+			sqlite3_bind_text(res, 1, especialidad, -1, SQLITE_STATIC);
+			sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
+		}
+	}
+
+	//iImprimimos resultados
+	printf("\n--- MEDICOS DE %s EN %s ---\n", especialidad, localidad);
+	int encontrados = 0;
+	while(sqlite3_step(res) == SQLITE_ROW){
+		int id = sqlite_column_int(res, 0);
+		char *nombre = sqlite_column_text(res, 1);
+		char *apellido = sqlite_column_text(res, 2);
+
+		printf("ID: %d | Dr. %s %s (%s)\n", id, nombre, apellido, especialidad);
+
+		encontrados++;
+	}
+
+	if(encontrados == 0){
+		printf("No se han encontrado medicos con estos criterios\n");
+	}
+	sqlite3_finalize(res);
+	sqlite3_close(db);
+}
+
+
+int comprobar_y_reservar(char *dni, int id_medico, char *fecha, char *hora){
+	sqlite3 *db;
+	sqlite3_stmt *res;
+	int ocupado = 0;
+
+	sqlite_open("bionet.db", &db);
+
+	//Comprobamos si el medico esta libre ese dia a esa hora
+	char *sql_compr = "SELECT COUNT(*) FROM Cita WHERE ID_Medico_FK = ? AND Fecha = ? AND Hora = ?;";
+	sqlite3_prepare(db, sql_compr, -1, &res, 0);
+	sqlite_bind_int(res, 1, id_medico);
+	sqlite_bind_text(res, 2, fecha, -1, SQLITE_STATIC);
+	sqlite_bind_text(res, 3, hora, -1, SQLITE_STATIC);
+
+	if(sqlite3_step(res) == SQLITE_ROW){
+		ocupado = sqlite3_column_int(res, 0);
+	}
+	sqlite3_finalize(res);
+
+	//Si esta ocupado, salimos
+	if(ocupado > 0){
+		sqlite_close(db);
+		return 0;
+	}
+
+	//Si esta libre, hacemos el insert en la tabla Cita
+	char *sql_insert = "INSERT INTO Cita(DNI_Usuario_FK, ID_Medico_FK, Fecha, Hora) VALUES (?, ?, ?, ?);";
+	sqlite3_prepare16_v2(db, sql_insert, -1, &res, 0);
+	sqlite3_bind_text(res, 1, dni, -1, SQLITE_STATIC);
+	sqlite3_bind_int(res, 2, id_medico);
+	sqlite3_bind_text(res, 3, fecha, -1, SQLITE_STATIC);
+	sqlite3_bind_text(res, 4, hora, -1, SQLITE_STATIC);
+
+	sqlite3_step(res);
+	sqlite3_finalize(res);
+	sqlite3_close(db);
+
+	return 1;
+}
