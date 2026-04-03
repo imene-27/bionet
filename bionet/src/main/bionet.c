@@ -9,6 +9,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include "../db_manager/entidades.h"
 #include "../db_manager/db_manager.h"
 #include "../importador/importador.h"
@@ -37,7 +38,7 @@ int main() {
 		printf("3. Consultar stock medicamento");
 		printf("4. Ver mi ficha medica");
 		printf("5. Reservar cita medica");
-		printf("0. Salir\n")
+		printf("0. Salir\n");
 		printf("----------------------------------\n");
 		printf("Seleccione una opcion. ");
 		scanf("%d", opcion);
@@ -62,7 +63,7 @@ int main() {
 
 			case 3:
 				printf("Nombre del medicamento: ");
-				fegets(input1, 50, stdin);
+				fgets(input1, 50, stdin);
 				input1[strcspn(input1,  "\n")] = 0;
 				printf("Introduce CP o Municipio para buscar cerca: ");
 				fgets(input2, 50, stdin);
@@ -81,7 +82,7 @@ int main() {
 				int id_medico, exito = 0;
 
 				printf("Especialidad deseada: ");
-				fgest(especialidad, 50, stdin);
+				fgets(especialidad, 50, stdin);
 				especialidad[strcspn(especialidad, "\n")] = 0;;
 
 				printf("introduce CP o Municipio: ");
@@ -120,7 +121,8 @@ int main() {
 				printf("Opcion no valida\n");
 				break;
 		}
+		}
 	}
-
 	return 0;
 }
+
