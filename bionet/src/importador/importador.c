@@ -35,7 +35,7 @@ void importar_farmacias(const char* fichero) {
 		char *guardia = strtok(NULL, ";");
 		char *tel = strtok(NULL, ";");
 
-		printf("DEBUG -> ID: %s | Nom: %s | Dir: %s | CP: %s | Mun: %s | Gua: %s | Tel: %s\n",
+		//printf("DEBUG -> ID: %s | Nom: %s | Dir: %s | CP: %s | Mun: %s | Gua: %s | Tel: %s\n",
 				id, nom, dir, cp, municipio, guardia, tel);
 
 		if (id && nom && dir && cp && municipio && guardia && tel) {

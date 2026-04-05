@@ -1,5 +1,4 @@
-"ID;Nombre;Direccion;CP;Municipio;Guardia;Telefono"
-"1;Farmacia Central;Calle Gran Via 12;48001;Bilbao;1;944123456"
-"2;Farmacia Norte;Avenida Lehendakari 45;48002;Bilbao;0;944654321"
-"3;Farmacia Deusto;Avenida Universidades 2;48014;Bilbao;1;944111222"
-"4;Farmacia Barakaldo;Calle Fueros 8;48901;Barakaldo;0;944333444"
+1;Farmacia Central;Calle Gran Via 12;48001;Bilbao;1;944123456
+2;Farmacia Norte;Avenida Lehendakari 45;48002;Bilbao;0;944654321
+3;Farmacia Deusto;Avenida Universidades 2;48014;Bilbao;1;944111222
+4;Farmacia Barakaldo;Calle Fueros 8;48901;Barakaldo;0;944333444
