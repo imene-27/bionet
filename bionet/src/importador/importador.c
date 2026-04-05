@@ -84,12 +84,20 @@ void importar_centros_salud(const char* fichero) {
 		char *tipoCentro = strtok(NULL, ";");
 		char *tel = strtok(NULL, ";");
 
+		printf("DEBUG CENTROS -> ID: %s | Nom: %s | Dir: %s | CP: %s | Mun: %s | Hor: %s | Tipo: %s | Tel: %s\n",
+		                id, nombre, dir, cp, municipio, horario, tipoCentro, tel);
+
 		if (id && nombre && dir && cp && municipio && horario && tipoCentro && tel) {
 			char sql[1024];
 			sprintf(sql, "INSERT INTO CentroSalud (ID, Nombre, Direccion, CP, Municipio, Horario, TipoCentro, Telefono) "
 					"		VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
 					id, nombre, dir, cp, municipio, horario, tipoCentro, tel);
-			sqlite3_exec(db, sql, 0, 0, 0);
+			char *errMsg = 0;
+			int rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
+			if (rc != SQLITE_OK) {
+				printf("ERROR AL IMPORTAR: %s\n", errMsg);
+				sqlite3_free(errMsg);
+			}
 		}
 	}
 	fclose(f);

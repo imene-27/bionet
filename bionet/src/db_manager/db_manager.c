@@ -188,6 +188,10 @@ void buscar_centros(char *busqueda){
 	sqlite3_stmt *res;
 	char *sql;
 	int es_numero = 1;
+	int encontrados = 0;
+
+	busqueda[strcspn(busqueda, "\n")] = 0;
+	busqueda[strcspn(busqueda, "\r")] = 0;
 
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; busqueda[i] != '\0'; i++){
@@ -197,28 +201,41 @@ void buscar_centros(char *busqueda){
 		}
 	}
 
-	sqlite3_open("bionet.db", &db);
+	if(sqlite3_open("bionet.db", &db) != SQLITE_OK){
+		printf("ERROR: No se pudo abrir la BD");
+		return;
+	}
+	char texto_busqueda[200];
+	sprintf(texto_busqueda, "%%%s%%", busqueda);
 
 	if(es_numero == 1){
 		//Busqueda por CP
-		sql = "SELECT Nombre, Direccion, Municipio FROM CentroSalud WHERE CP = ?;";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_int(res, 1, atoi(busqueda));
+		sql = "SELECT Nombre, Direccion FROM CentroSalud WHERE CP LIKE ?;";
+		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		//sqlite3_bind_int(res, 1, atoi(busqueda));
 	} else {
 		//Busqueda por nombre de municipio
-		sql = "SELECT Nombre, Direccion, Municipio FROM CentroSalud WHERE Municipio = ?;";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+		sql = "SELECT Nombre, Direccion FROM CentroSalud WHERE Municipio LIKE ?;";
+		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
 	}
 
+	int rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+	if(rc!= SQLITE_OK){
+		printf("ERROR DE SQLITE AL BUSCAR CENTROS: %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return;
+	}
+	sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_TRANSIENT);
+
 	printf("--- CENTROS DE SALUD EN: %s ---\n", busqueda);
-	int encontrados = 0;
+
 	while(sqlite3_step(res) == SQLITE_ROW){
 		char *nombre = (char*)sqlite3_column_text(res, 0);
 		char *dir = (char*)sqlite3_column_text(res, 1);
-		char *municipio = (char*)sqlite3_column_text(res, 2);
 
-		printf("ID: %d | %s - %s (%s)\n", encontrados + 1, nombre, dir, municipio);
+
+		printf("%s - %s\n", nombre, dir);
 		encontrados++;
 	}
 
