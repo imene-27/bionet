@@ -204,6 +204,9 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 
 
 
+
+
+
 void ver_ficha_medica(char *dni_usuario){
 	sqlite3 *db;
 	sqlite3_stmt *res;
