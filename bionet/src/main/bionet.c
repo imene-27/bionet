@@ -440,12 +440,12 @@ void menu_usuario(char* dni_sesion) {
 		printf("==================================\n");
 		printf(" 	BIONET: GESTIÓN DE SALUD		\n");
 		printf("==================================\n");
-		printf("1. Buscar Farmacias por CP o municipio\n");
-		printf("2. Buscar Centros de Salud por CP o municipio\n");
-		printf("3. Consultar stock medicamento\n");
-		printf("4. Ver mi ficha medica\n");
-		printf("5. Reservar cita medica\n");
-		printf("0. Salir\n");
+		printf("[1] Buscar Farmacias por CP o municipio\n");
+		printf("[2] Buscar Centros de Salud por CP o municipio\n");
+		printf("[3] Consultar stock medicamento\n");
+		printf("[4] Ver mi ficha medica\n");
+		printf("[5] Reservar cita medica\n");
+		printf("[0] Salir\n");
 		printf("----------------------------------\n");
 		printf("Seleccione una opcion. ");
 		scanf("%d", &opcion);
@@ -479,6 +479,7 @@ void menu_usuario(char* dni_sesion) {
 				input2[strcspn(input2, "\n")] = 0;
 				buscar_medicamento(input1, input2);
 				break;
+
 
 			case 4:
 				printf("Introduzca su DNI: ");
