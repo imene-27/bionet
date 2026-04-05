@@ -30,13 +30,15 @@ void importar_farmacias(const char* fichero) {
 		char *nom = strtok(NULL, ";");
 		char *dir = strtok(NULL, ";");
 		char *cp = strtok(NULL, ";");
+		char *municipio = strtok(NULL, ";");
 		char *guardia = strtok(NULL, ";");
+		char *tel = strtok(NULL, ";");
 
-		if (id && nom && dir && cp && guardia) {
+		if (id && nom && dir && cp && municipio && guardia && tel) {
 			char sql[1024];
-			sprintf(sql, "INSERT INTO Farmacia(ID, Nombre, Direccion, CP_FK, Guardia) "
-						  "VALUES (%s, '%s', '%s', %s, %s);",
-						  id, nom, dir, cp, guardia);
+			sprintf(sql, "INSERT INTO Farmacia(ID, Nombre, Direccion, CP, Municipio, Guardia, Telefono) "
+						  "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+						  id, nom, dir, cp, municipio, guardia, tel);
 
 			char *errMsg = 0;
 			int rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
@@ -66,15 +68,21 @@ void importar_centros_salud(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+
 		char *id = strtok(linea, ";");
 		char *nombre = strtok(NULL, ";");
 		char *dir = strtok(NULL, ";");
 		char *cp = strtok(NULL, ";");
+		char *municipio = strtok(NULL, ";");
+		char *horario = strtok(NULL, ";");
+		char *tipoCentro = strtok(NULL, ";");
+		char *tel = strtok(NULL, ";");
 
-		if (id && nombre && dir && cp) {
+		if (id && nombre && dir && cp && municipio && horario && tipoCentro && tel) {
 			char sql[1024];
-			sprintf(sql, "INSERT INTO CentroSalud (ID, Nombre, Direccion, CP_FK) VALUES (%s, '%s', '%s', %s);",
-					id, nombre, dir, cp);
+			sprintf(sql, "INSERT INTO CentroSalud (ID, Nombre, Direccion, CP, Municipio, Horario, TipoCentro, Telefono) "
+					"		VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+					id, nombre, dir, cp, municipio, horario, tipoCentro, tel);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
 	}
@@ -96,6 +104,7 @@ void importar_medicos(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+
 		char *id = strtok(linea, ";");
 		char *nombre = strtok(NULL, ";");
 		char *especialidad = strtok(NULL, ";");
@@ -103,7 +112,7 @@ void importar_medicos(const char* fichero) {
 
 		if (id && nombre && especialidad && id_centro) {
 			char sql[1024];
-			sprintf(sql, "INSERT INTO Medico (ID, Nombre, Especialidad, Centro_FK) VALUES (%s, '%s', '%s', %s);",
+			sprintf(sql, "INSERT INTO Doctor (ID, Nombre, Especialidad, ID_Centro) VALUES ('%s', '%s', '%s', '%s');",
 					id, nombre, especialidad, id_centro);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
@@ -127,15 +136,15 @@ void importar_stock(const char* fichero) {
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
 
-		char *id_med = strtok(linea, ";");
-		char *nombre = strtok(NULL, ";");
+		char *id_farma = strtok(linea, ";");
+		char *id_medicamento = strtok(NULL, ";");
 		char *cantidad = strtok(NULL, ";");
-		char *id_farma = strtok(NULL, ";");
 
-		if (id_med && nombre && cantidad && id_farma) {
+
+		if (id_farma && id_medicamento && cantidad) {
 			char sql[1024];
-			sprintf(sql, "INSERT INTO Stock (ID_Medicamento, Nombre, Cantidad, Farmacia_FK) VALUES (%s, '%s', %s, %s);",
-					id_med, nombre, cantidad, id_farma);
+			sprintf(sql, "INSERT INTO Vende (ID_Farmacia, ID_Medic, Cantidad) VALUES (%s, %s, %s);",
+					id_farma, id_medicamento, cantidad);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
 	}

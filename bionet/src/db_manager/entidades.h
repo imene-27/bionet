@@ -1,4 +1,4 @@
-/*
+ /*
  * entidades.h
  *
  *  Created on: 28 mar 2026
