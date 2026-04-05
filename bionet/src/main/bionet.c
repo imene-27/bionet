@@ -19,6 +19,12 @@
 void menu_administrador();
 void menu_usuario(char* dni_sesion);
 
+void menu_gestion_centros();
+void menu_gestion_personal();
+void menu_gestion_usuarios();
+void menu_gestion_farmacias();
+void mostrar_logs_sistema();
+
 int main(){
 	char user[MAX_NOMBRE], pass[MAX_PASS];
 
@@ -82,9 +88,17 @@ void menu_administrador(){
 				break;
 
 			case 6:
-
+				printf("\n---IMPORTANDO DATOS DESDE CSV---\n");
+				// Llamamos a las funciones
+				importar_farmacias("datos/farmacias.csv");
+				importar_centros_salud("datos/centros.csv");
+				importar_medicos("datos/medicos.csv");
+				importar_stock("datos/stock.cvs");
+				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
+				break;
 
 			case 0:
+				printf("Saliendo...Apagando el panel.\n");
 				break;
 
 			default:
@@ -278,7 +292,7 @@ void menu_gestion_farmacias(){
 				printf("Nombre: "); fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\n")] = 0;
 				printf("Direccion: "); fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
 				printf("CP: "); scanf("%s", cp); getchar();
-				printf("Municipio: "); fegts(mun, MAX_MUNICIPIO, stdin); mun[strcspn(mun, "\n")] = 0;
+				printf("Municipio: "); fgets(mun, MAX_MUNICIPIO, stdin); mun[strcspn(mun, "\n")] = 0;
 				printf("Telefono: "), scanf("%s", tel); getchar();
 				printf("¿Esta de guardia? (1: Si / 0: No): "); scanf("%d", &guardia); getchar();
 
@@ -292,7 +306,7 @@ void menu_gestion_farmacias(){
 				printf("Nuevo Nombre: ");
 				fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\n")] = 0;
 				printf("Nueva direccion: ");
-				fegts(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
+				fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
 				printf("Nuevo telefono: ");
 				scanf("%s", tel);
 				getchar();

@@ -25,6 +25,7 @@ void importar_farmacias(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+		linea[strcspn(linea, "\r")] = 0;
 
 		char *id = strtok(linea, ";");
 		char *nom = strtok(NULL, ";");
@@ -68,6 +69,7 @@ void importar_centros_salud(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+		linea[strcspn(linea, "\r")] = 0;
 
 		char *id = strtok(linea, ";");
 		char *nombre = strtok(NULL, ";");
@@ -104,6 +106,7 @@ void importar_medicos(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+		linea[strcspn(linea, "\r")] = 0;
 
 		char *id = strtok(linea, ";");
 		char *nombre = strtok(NULL, ";");
@@ -135,6 +138,7 @@ void importar_stock(const char* fichero) {
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
+		linea[strcspn(linea, "\r")] = 0;
 
 		char *id_farma = strtok(linea, ";");
 		char *id_medicamento = strtok(NULL, ";");

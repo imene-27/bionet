@@ -119,6 +119,7 @@ void buscar_farmacias(char *busqueda){
 	sqlite3_stmt *res;
 	char *sql;
 	int es_numero = 1;
+	int encontradas = 0;
 
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; busqueda[i] != '\0'; i++){
@@ -144,7 +145,7 @@ void buscar_farmacias(char *busqueda){
 
 	//Imprimimos los resultados
 	printf("--- RESULTADOS PARA: %s ---\n", busqueda);
-	int encontradas = 0;
+
 	while(sqlite3_step(res) == SQLITE_ROW){
 		char *nombre = (char*)sqlite3_column_text(res, 0);
 		char *dir =(char*)sqlite3_column_text(res, 1);
