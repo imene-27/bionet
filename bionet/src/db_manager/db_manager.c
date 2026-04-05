@@ -121,6 +121,9 @@ void buscar_farmacias(char *busqueda){
 	int es_numero = 1;
 	int encontradas = 0;
 
+	busqueda[strcspn(busqueda, "\n")] = 0;
+	busqueda[strcspn(busqueda, "\r")] = 0;
+
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; busqueda[i] != '\0'; i++){
 		if(!isdigit(busqueda[i])){
@@ -128,20 +131,32 @@ void buscar_farmacias(char *busqueda){
 			break;
 		}
 	}
+	if(sqlite3_open("bionet.db", &db) != SQLITE_OK){
+		printf("ERROR: No se pudo abrir la BD\n");
+		return;
+	}
 
-	sqlite3_open("bionet.db", &db);
 
 	if(es_numero == 1){
 		//Si es un numero (CP)
-		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE CP = ?;";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_int(res, 1, atoi(busqueda));
+		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE CP LIKE '%' || ? || '%';";
+		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
 	} else {
 		//Si es un texto (nombre de un municipio)
-		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE Municipio = ?";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE Municipio LIKE '%' || ? || '%';";
+		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
 	}
+
+	int rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+	if(rc != SQLITE_OK){
+		printf("ERROR DE SQLITE AL BUSCAR : %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return;
+	}
+
+	sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
 
 	//Imprimimos los resultados
 	printf("--- RESULTADOS PARA: %s ---\n", busqueda);

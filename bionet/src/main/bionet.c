@@ -33,8 +33,8 @@ int main(){
 	inicializar_db();
 
 	printf("==================================\n");
-	printf("       BIENVENIDO A BIONET         \n");
-	printf("===================================\n");
+	printf("       BIENVENIDO A BIONET        \n");
+	printf("==================================\n");
 	printf("Usuario/DNI: ");
 	scanf("%s", user);
 	printf("Contraseña: ");
@@ -55,7 +55,8 @@ void menu_administrador(){
 	int opcion = -1;
 	while(opcion != 0){
 		printf("=========================================\n");
-		printf("   BIONET - PANEL DE ADMINISTRACION     \n");
+		printf("    BIONET - PANEL DE ADMINISTRACION     \n");
+		printf("=========================================\n");
 		printf("[1] Gestion de Centros de Salud\n");
 		printf("[2] Gestion de Personal Medico\n");
 		printf("[3] Gestion de usuarios\n");
@@ -95,7 +96,7 @@ void menu_administrador(){
 				importar_farmacias("datos/farmacias.csv");
 				importar_centros_salud("datos/centros.csv");
 				importar_medicos("datos/medicos.csv");
-				importar_stock("datos/stock.cvs");
+				importar_stock("datos/stock.csv");
 				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
 				break;
 
@@ -441,9 +442,9 @@ void menu_usuario(char* dni_sesion) {
 		printf("==================================\n");
 		printf("1. Buscar Farmacias por CP o municipio\n");
 		printf("2. Buscar Centros de Salud por CP o municipio\n");
-		printf("3. Consultar stock medicamento");
-		printf("4. Ver mi ficha medica");
-		printf("5. Reservar cita medica");
+		printf("3. Consultar stock medicamento\n");
+		printf("4. Ver mi ficha medica\n");
+		printf("5. Reservar cita medica\n");
 		printf("0. Salir\n");
 		printf("----------------------------------\n");
 		printf("Seleccione una opcion. ");
@@ -457,6 +458,7 @@ void menu_usuario(char* dni_sesion) {
 				fgets(input1, 50, stdin);
 				//Eliminamos el salto de linea del input
 				input1[strcspn(input1, "\n")] = 0;
+				input1[strcspn(input1, "\r")] = 0;
 				buscar_farmacias(input1);
 				break;
 
@@ -464,6 +466,7 @@ void menu_usuario(char* dni_sesion) {
 				printf("Introduce CP o Municipio: ");
 				fgets(input1, 50, stdin);
 				input1[strcspn(input1, "\n")] = 0;
+				input1[strcspn(input1, "\r")] = 0;
 				buscar_centros(input1);
 				break;
 
