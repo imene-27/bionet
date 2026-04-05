@@ -26,6 +26,8 @@ void menu_gestion_farmacias();
 void mostrar_logs_sistema();
 
 int main(){
+	setvbuf(stdout, NULL, _IONBF, 0);
+
 	char user[MAX_NOMBRE], pass[MAX_PASS];
 
 	inicializar_db();
