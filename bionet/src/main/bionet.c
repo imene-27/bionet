@@ -481,6 +481,8 @@ void menu_usuario(char* dni_sesion) {
 				break;
 
 
+
+
 			case 4:
 				printf("Introduzca su DNI: ");
 				scanf("%s", dni_sesion);
