@@ -1,3 +1,527 @@
-1;Ambulatorio Indautxu;Doctor Areilza 10;48011;Bilbao;08:00-20:00;Publico;944777888
-2;Hospital Basurto;Avenida Montevideo 18;48013;Bilbao;24H;Hospital;944999000
-3;Centro Salud Barakaldo;Plaza Bide Onera 1;48901;Barakaldo;08:00-15:00;Publico;944222111
+﻿1;Consultorio de Otxandio;Elixoste, 11, 48210 Otxandio (Bizkaia);48210;Otxandio;09:00 - 13:00;Consultorio;
+2;Consultorio de Ataun-San Martin;Barrio Elbarrena, 15-D, 20211 Ataun (Gipuzkoa);20211;Ataun;09:00 - 13:00;Consultorio;943805560
+3;Hospital de Leza;Hospital de Leza, 1, 01309 Laguardia (Álava);01309;Laguardia;24 horas;Hospital;945006900
+4;C.S. DE CAMPEZO;Juntas Generales, 6, 01110 Campezo/Kanpezu (Álava);01110;Campezo/Kanpezu;24 horas;PAC;945415345
+5;Centro de Salud de Lekeitio;Barrio Larrotegi, 1, 48280 Lekeitio (Bizkaia);48280;Lekeitio;08:00 - 20:00;Centro de Salud;
+6;Consultorio de La Arboleda;Pérez Galdós, 7, 48520 Valle de Trápaga-Trapagaran (Bizkaia);48520;Valle de Trápaga-Trapagaran;09:00 - 13:00;Consultorio;946604056
+7;Consultorio de Lantarón-Salcedo;El Ayuntamiento, 2, 01213 Lantarón (Álava);01213;Lantarón;09:00 - 13:00;Consultorio;945351011
+8;Centro de Salud de Ondarroa;Ibaiondo, 6, 48700 Ondarroa (Bizkaia);48700;Ondarroa;08:00 - 20:00;Centro de Salud;
+9;PAC DE LEKEITIO;Barrio Larrotegi, 1, 48280 Lekeitio (Bizkaia);48280;Lekeitio;24 horas;PAC;946035860
+10;Ambulatorio de Gros;Avenida Navarra, 14, 20013 Donostia / San Sebastián (Gipuzkoa);20013;Donostia / San Sebastián;08:00 - 20:00;Ambulatorio;943007909
+11;Centro de Salud de Altamira;Barrio Altamira, 19-A, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 20:00;Centro de Salud;
+12;Centro de Salud Mental de Tolosa;Barrio San Esteban, 21-B, 20400 Tolosa (Gipuzkoa);20400;Tolosa;08:00 - 15:00;Centro de Salud Mental;943006889
+13;C.S. DE SALVATIERRA-AGURAIN;Carretera Zuazo, s/n, 01200 Agurain/Salvatierra (Álava);01200;Agurain/Salvatierra;24 horas;PAC;945300023
+14;PUNTO DE REFUERZO DE ATENCIÓN DE DR. AREILZA;Alameda Doctor Areilza, 12, 48011 Bilbao (Bizkaia);48011;Bilbao;24 horas;PAC;946006800
+15;Consultorio de Valdegovia;El Llano, 11-B, 01426 Valdegovía/Gaubea (Álava);01426;Valdegovía/Gaubea;09:00 - 13:00;Consultorio;
+16;Hospital de Día de Gernika;San Juan, 1, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;24 horas;Hospital de Día;946029030
+17;Consultorio de Arraia-Maeztu;Herrería, 9, 01120 Arraia-Maeztu (Álava);01120;Arraia-Maeztu;09:00 - 13:00;Consultorio;945415345
+18;Centro de Salud Mental de Sestao;Antonio Trueba, 17 - Planta 3 / 3. Solairua, 48910 Sestao (Bizkaia);48910;Sestao;08:00 - 15:00;Centro de Salud Mental;946007790
+19;Consultorio de Alegría-Dulantzi;Iruraiz, 1, 01240 Alegría-Dulantzi (Álava);01240;Alegría-Dulantzi;09:00 - 13:00;Consultorio;
+20;Ambulatorio de Deusto;Luis Power, 18, 48014 Bilbao (Bizkaia);48014;Bilbao;08:00 - 20:00;Centro de Salud;
+21;Centro de Salud de Etxebarri;Euskal Herria, 19, 48450 Etxebarri (Bizkaia);48450;Etxebarri;08:00 - 20:00;Centro de Salud;
+22;Ambulatorio de Pasai San Pedro;Marinel, 1, 20110 Pasaia (Gipuzkoa);20110;Pasaia;08:00 - 20:00;Ambulatorio;943006550
+23;Consultorio de Orduña;Adoberías, 2, 48460 Urduña/Orduña (Bizkaia);48460;Urduña/Orduña;09:00 - 13:00;Consultorio;
+24;Consultorio de Amoroto;Barrio Elexalde, 1, 48289 Ispaster (Bizkaia);48289;Ispaster;09:00 - 13:00;Consultorio;
+25;Centro de Salud de Andoain;Rikardo Arregi, 0-B, 20140 Andoain (Gipuzkoa);20140;Andoain;08:00 - 20:00;Centro de Salud;
+26;Hospital de Día de Sestao;Plaza Los Tres Concejos, 1, 48910 Sestao (Bizkaia);48910;Sestao;24 horas;Hospital de Día;946080756
+27;Consultorio de Yécora;El Sur, 6-B, 01322 Yécora/Iekora (Álava);01322;Yécora/Iekora;09:00 - 13:00;Consultorio;945622155
+28;Consultorio Erandio-Goikoa;"J.M. Olague ""Txuma"", 1, 48950 Erandio (Bizkaia)";48950;Erandio;09:00 - 13:00;Consultorio;
+29;Centro de Salud Mental de Adicciones de Novia Salcedo;Novia Salcedo, 9, 48012 Bilbao (Bizkaia);48012;Bilbao;08:00 - 15:00;Centro de Salud Mental;944273366
+30;PUNTO DE REFUERZO GROS;Avenida Navarra, 14, 20013 Donostia / San Sebastián (Gipuzkoa);20013;Donostia / San Sebastián;24 horas;PAC;943007909
+31;Centro de Día de Errenteria;Avenida Galtzaraborda, 69, 20100 Errenteria (Gipuzkoa);20100;Errenteria;08:00 - 15:00;Otros;943249293
+32;Ambulatorio de Beasain;Bernedo Enea, 1, 20200 Beasain (Gipuzkoa);20200;Beasain;08:00 - 20:00;Ambulatorio;943027700
+33;Consultorio de Idiazabal;Kale Nagusia, 50, 20213 Idiazabal (Gipuzkoa);20213;Idiazabal;09:00 - 13:00;Consultorio;
+34;Centro de Alta Resolución de Zalla;Barrio El Carmen, 14, 48860 Zalla (Bizkaia);48860;Zalla;08:00 - 20:00;Centro de Salud;946007590
+35;Hospital de Día de Garamendi;Grupo Reverendo Vicente Garamendi, 1, 48006 Bilbao (Bizkaia);48006;Bilbao;24 horas;Hospital de Día;944330277
+36;Centro de Salud Mental de Ortuella;Avenida Minero, 1, 48530 Ortuella (Bizkaia);48530;Ortuella;08:00 - 15:00;Centro de Salud Mental;946007638
+37;Consultorio de Zuhatzu Kuartango;Entidad Zuhatzu Kuartango, 21-B, 01430 Kuartango (Álava);01430;Kuartango;09:00 - 13:00;Consultorio;
+38;Centro de Salud Mental de Infancia y Adolescencia de Rekalde;Plaza Belategi, 6 - bajo, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 15:00;Centro de Salud Mental;944211717
+39;Consultorio de Güeñes;Jose Miguel Arrieta Mascarua, 6, 48840 Güeñes (Bizkaia);48840;Güeñes;09:00 - 13:00;Consultorio;
+40;C.S. DE ESPEJO;Carretera Bilbao, 61, 01423 Valdegovía/Gaubea (Álava);01423;Valdegovía/Gaubea;24 horas;PAC;945351011
+41;Centro de Salud de Campezo;Juntas Generales, 6, 01110 Campezo/Kanpezu (Álava);01110;Campezo/Kanpezu;08:00 - 20:00;Centro de Salud;945415345
+42;Centro de Salud de Pasai Antxo;Eskalantegi, 68, 20110 Donostia / San Sebastián (Gipuzkoa);20110;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+43;C.S. DE OYÓN;Fueros, 6, 01320 Oyón-Oion (Álava);01320;Oyón-Oion;24 horas;PAC;945622155
+44;Consultorio de Usansolo;Plaza Unkinako plaza, s/n, 48960 Galdakao (Bizkaia);48960;Galdakao;09:00 - 13:00;Consultorio;
+45;Centro de Salud de Trapagaran;San José, s/n, 48510 Valle de Trápaga-Trapagaran (Bizkaia);48510;Valle de Trápaga-Trapagaran;08:00 - 20:00;Centro de Salud;946007760
+46;Consultorio de Txarama;Barrio Txarama, 4, 20400 Leaburu (Gipuzkoa);20400;Leaburu;09:00 - 13:00;Consultorio;943201501
+47;Consultorio de Berrobi;Jose Maria Goikoetxea, 23, 20493 Berrobi (Gipuzkoa);20493;Berrobi;09:00 - 13:00;Consultorio;943161877
+48;PAC DE BERGARA;Paseo Boni Laskurain, 11, 20570 Bergara (Gipuzkoa);20570;Bergara;24 horas;PAC;943035400
+49;Consultorio de Berango;Moreaga, 9, 48640 Berango (Bizkaia);48640;Berango;09:00 - 13:00;Consultorio;
+50;Consultorio de Atxondo;Plaza Los Fueros, 2, 48291 Atxondo (Bizkaia);48291;Atxondo;09:00 - 13:00;Consultorio;
+51;Centro de Salud de Labastida;La Piñuela, 2, 01330 Labastida/Bastida (Álava);01330;Labastida/Bastida;08:00 - 20:00;Centro de Salud;945331258
+52;Centro de Salud de Gernika-Lumo;San Juan, 1, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;08:00 - 20:00;Centro de Salud;
+53;Consultorio de Arantzazu;Barrio Zelaia, 17, 48140 Arantzazu (Bizkaia);48140;Arantzazu;09:00 - 13:00;Consultorio;946007463
+54;Consultorio de Abadiño-Zelaieta;Plaza Txanporta, 4, 48220 Abadiño (Bizkaia);48220;Abadiño;09:00 - 13:00;Consultorio;
+55;Centro de Salud de Ondarreta;Avenida Zumalakarregi, 24, 20008 Donostia / San Sebastián (Gipuzkoa);20008;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+56;Hospital Universitario de Araba - sede Santiago;Olaguibel, 29, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;24 horas;Hospital;945007600
+57;Ambulatorio de Markonzaga;Antonio Trueba, 17, 48910 Sestao (Bizkaia);48910;Sestao;08:00 - 20:00;Ambulatorio;
+58;Consultorio de Dima;Telleri, 25, 48141 Dima (Bizkaia);48141;Dima;09:00 - 13:00;Consultorio;
+59;Centro de Salud de La Paz;La Paz, 1-Y, 48903 Barakaldo (Bizkaia);48903;Barakaldo;08:00 - 20:00;Centro de Salud;946007920
+60;Consultorio de Sondika;Avenida Jose Antonio Agirre Lehendakari, 41, 48150 Sondika (Bizkaia);48150;Sondika;08:00 - 20:00;Centro de Salud;
+61;Consultorio de Berriatua;Erribera, 39, 48710 Berriatua (Bizkaia);48710;Berriatua;09:00 - 13:00;Consultorio;
+62;Consultorio de Asteasu;Mayor-Nagusia, 8, 20159 Asteasu (Gipuzkoa);20159;Asteasu;09:00 - 13:00;Consultorio;943692423
+63;Hospital Universitario de Donostia;Paseo Doctor Begiristain, 109, 20014 Donostia / San Sebastián (Gipuzkoa);20014;Donostia / San Sebastián;24 horas;Hospital;
+64;Centro de Salud de Zuazo;Lurkizaga, 6, 48902 Barakaldo (Bizkaia);48902;Barakaldo;08:00 - 20:00;Centro de Salud;
+65;Hospital de Día de Ortuella;Avenida Minero, 3, 48530 Ortuella (Bizkaia);48530;Ortuella;24 horas;Hospital de Día;946007638
+66;Consultorio de Elciego;Avenida Marqués de Riscal, 6, 01340 Elciego (Álava);01340;Elciego;09:00 - 13:00;Consultorio;
+67;Centro de Salud Mental de Martutene (Centro Penitenciario);Paseo Martutene, 1, 20014 Donostia / San Sebastián (Gipuzkoa);20014;Donostia / San Sebastián;08:00 - 15:00;Centro de Salud Mental;943442360
+68;PAC DE DEUSTO;Luis Power, 18, 48014 Bilbao (Bizkaia);48014;Bilbao;24 horas;PAC;946006666
+69;Consultorio de Lanestosa;Plaza Jose María Makua Zarandona, 1, 48895 Lanestosa (Bizkaia);48895;Lanestosa;09:00 - 13:00;Consultorio;946106869
+70;Centro de Salud de Mina del Morro;Avenida Indalecio Prieto, 11, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Centro de Salud;
+71;Centro de Salud de Bermeo;Tonpoi Bidea, 0-A, 48370 Bermeo (Bizkaia);48370;Bermeo;08:00 - 20:00;Centro de Salud;946029050
+72;Consultorio de Gamiz;Barrio Ergoien, 62, 48113 Gamiz-Fika (Bizkaia);48113;Gamiz-Fika;09:00 - 13:00;Consultorio;
+73;Ambulatorio de Ortuella;Avenida Minero, 1, 48530 Ortuella (Bizkaia);48530;Ortuella;08:00 - 20:00;Ambulatorio;946007630
+74;Centro de Salud de Oyón;Fueros, 6, 01320 Oyón-Oion (Álava);01320;Oyón-Oion;08:00 - 20:00;Centro de Salud;945622155
+75;Centro de Salud de Zumaia;Barrio Basadi, 15, 20750 Zumaia (Gipuzkoa);20750;Zumaia;08:00 - 20:00;Centro de Salud;
+76;Miniresidencia de Bilbao-Begoña;Grupo Begoñalde, 5, 48007 Bilbao (Bizkaia);48007;Bilbao;08:00 - 15:00;Otros;944360471
+77;Consultorio de Belauntza;Núcleo Hiriburu, 14, 20491 Belauntza (Gipuzkoa);20491;Belauntza;09:00 - 13:00;Consultorio;943674309
+78;Consultorio de Meñaka;Barrio Mesterika, 1, 48120 Meñaka (Bizkaia);48120;Meñaka;09:00 - 13:00;Consultorio;
+79;Centro de Salud del Casco Viejo;CORRERIA, 108, 01001 Vitoria-Gasteiz (Álava);01001;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+80;Hospital de Día Ajuriaguerra;Plaza Zumarraga, s/n, 48006 Bilbao (Bizkaia);48006;Bilbao;24 horas;Hospital de Día;944007702
+81;Centro de Salud de Zumarraga;Plaza Geltokien plaza, 2, 20700 Zumarraga (Gipuzkoa);20700;Zumarraga;08:00 - 20:00;Centro de Salud;
+82;Centro de Salud de Lakua-Arriaga;Julián de Arrese, 5, 01010 Vitoria-Gasteiz (Álava);01010;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+83;Centro de Salud de Igorre;Plaza Sabino Arana, 19, 48140 Igorre (Bizkaia);48140;Igorre;08:00 - 20:00;Centro de Salud;
+84;Centro de Salud de Zestoa;Plaza Euskal Herria, 1, 20740 Zestoa (Gipuzkoa);20740;Zestoa;08:00 - 20:00;Centro de Salud;
+85;PUNTO DE REFUERZO ZUMARRAGA;Plaza Geltokien plaza, 2, 20700 Zumarraga (Gipuzkoa);20700;Zumarraga;24 horas;PAC;943035220
+86;Consultorio de Antzuola;Barrio Sagasti, 0-A, 20577 Antzuola (Gipuzkoa);20577;Antzuola;09:00 - 13:00;Consultorio;943766223
+87;Consultorio de Zierbana;Barrio La Cuesta, 0-B, 48508 Zierbena (Bizkaia);48508;Zierbena;09:00 - 13:00;Consultorio;946365511
+88;Centro de Salud de Zuia-Murgia;Aiurdin, 6, 01130 Zuia (Álava);01130;Zuia;08:00 - 20:00;Centro de Salud;
+89;Centro de Salud de Derio;Gorbea, 1, 48160 Derio (Bizkaia);48160;Derio;08:00 - 20:00;Centro de Salud;
+90;Centro de Salud de Santutxu-El Karmelo;Padre Esteban Pernet, 6, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Centro de Salud;
+91;Consultorio de Zaramillo;Camino Geltoki, 6, 48820 Güeñes (Bizkaia);48820;Güeñes;09:00 - 13:00;Consultorio;
+92;PAC DE AMURRIO;Felix Murga, 8-A, 01470 Amurrio (Álava);01470;Amurrio;24 horas;PAC;945025900
+93;Consultorio de Maruri;Barrio Erdigune, 70, 48112 Maruri-Jatabe (Bizkaia);48112;Maruri-Jatabe;09:00 - 13:00;Consultorio;
+94;Consultorio de Anoeta;Solkorre, 6, 20270 Anoeta (Gipuzkoa);20270;Anoeta;09:00 - 13:00;Consultorio;943652339
+95;Consultorio de Abaltzisketa;Núcleo Abaltzisketa, 11, 20269 Abaltzisketa (Gipuzkoa);20269;Abaltzisketa;09:00 - 13:00;Consultorio;943208101
+96;Consultorio de Lezama;Barrio Aretxalde, 80, 48196 Lezama (Bizkaia);48196;Lezama;09:00 - 13:00;Consultorio;
+97;Consultorio de Moreda de Álava;Las Cuevas, 4, 01322 Moreda de Álava/Moreda Araba (Álava);01322;Moreda de Álava/Moreda Araba;09:00 - 13:00;Consultorio;
+98;Consultorio de Armintza;Elizondo, 1, 48620 Lemoiz (Bizkaia);48620;Lemoiz;09:00 - 13:00;Consultorio;
+99;Centro de Salud de Zorroza;Carretera Zorrotza-Kastrexana, 20 - Trasera, 48013 Bilbao (Bizkaia);48013;Bilbao;08:00 - 20:00;Centro de Salud;946006880
+100;Hospital de Día de Adolescentes;Nicolas Alcorta, 4, 48003 Bilbao (Bizkaia);48003;Bilbao;24 horas;Hospital de Día;946182654
+101;Centro de Salud Mental de Santurtzi;Avenida Cristóbal de Murrieta, 70, 48980 Santurtzi (Bizkaia);48980;Santurtzi;08:00 - 15:00;Centro de Salud Mental;944832080
+102;Consultorio de Zambrana;Solana, 13, 01212 Zambrana (Álava);01212;Zambrana;09:00 - 13:00;Consultorio;945331258
+103;Ambulatorio de Irun Centro;Avenida Gipuzkoa, 15, 20302 Irun (Gipuzkoa);20302;Irun;08:00 - 20:00;Ambulatorio;943006700
+104;PAC DE ZARAUTZ;Salbide, 10, 20800 Zarautz (Gipuzkoa);20800;Zarautz;24 horas;PAC;943007999
+105;Consultorio de Barriobusto;Plaza Marcelino Martinez, 1, 01322 Oyón-Oion (Álava);01322;Oyón-Oion;09:00 - 13:00;Consultorio;945622155
+106;Centro de Salud de Arrigorriaga;Paseo Urgoiti, 10, 48480 Arrigorriaga (Bizkaia);48480;Arrigorriaga;08:00 - 20:00;Centro de Salud;
+107;Consultorio de Las Carreras;Kale Nagusia, 2, 48540 Abanto y Ciérvana-Abanto Zierbena (Bizkaia);48540;Abanto y Ciérvana-Abanto Zierbena;09:00 - 13:00;Consultorio;946368543
+108;Centro de Salud de Dumboa;Avenida Navarra, 41, 20302 Irun (Gipuzkoa);20302;Irun;08:00 - 20:00;Centro de Salud;943006789
+109;C.S. DE LAGUARDIA;Plaza La Carcel, 1, 01300 Laguardia (Álava);01300;Laguardia;24 horas;PAC;945600184
+110;Consultorio de Ribera Baja-Rivabellosa;Parrales, 10, 01213 Ribera Baja/Erriberabeitia (Álava);01213;Ribera Baja/Erriberabeitia;09:00 - 13:00;Consultorio;945331258
+111;Consultorio de Ikaztegieta;Barrio San Lorentzo, 0-B, 20267 Ikaztegieta (Gipuzkoa);20267;Ikaztegieta;09:00 - 13:00;Consultorio;943203646
+112;Centro de Salud Mental de Basauri-Gaztela;Gaztela, 7, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 15:00;Centro de Salud Mental;946007330
+113;Consultorio de Labraza;Plaza Marcelino Martinez, 1, 01322 Oyón-Oion (Álava);01322;Oyón-Oion;09:00 - 13:00;Consultorio;945622155
+114;Centro de Salud de La Merced;Luis Iruarrizaga, 1, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 20:00;Centro de Salud;944881515
+115;PAC DEL HOSPITAL DE EIBAR;Avenida Otaola, 6, 20600 Eibar (Gipuzkoa);20600;Eibar;24 horas;PAC;943449000
+116;Unidad de Atención Intensiva de Día;Paseo Aiete, 27, 20009 Donostia / San Sebastián (Gipuzkoa);20009;Donostia / San Sebastián;08:00 - 15:00;Otros;943217187
+117;Centro de Salud de Markina-Xemein;Karmengo, 19, 48270 Markina-Xemein (Bizkaia);48270;Markina-Xemein;08:00 - 20:00;Centro de Salud;
+118;Centro de Salud de Lasarte-Oria;Camino Beko Kale, 1, 20160 Lasarte-Oria (Gipuzkoa);20160;Lasarte-Oria;08:00 - 20:00;Centro de Salud;
+119;Ambulatorio de Las Arenas;Bidebarrieta, 12, 48930 Getxo (Bizkaia);48930;Getxo;08:00 - 20:00;Ambulatorio;
+120;Ambulatorio de Zaballa;Munibe, 2, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 20:00;Ambulatorio;946007844
+121;Consultorio de Barrika;Carretera Ayuntamiento, 4, 48650 Barrika (Bizkaia);48650;Barrika;09:00 - 13:00;Consultorio;
+122;Consultorio de Errezil;Núcleo Errezil, 18, 20737 Errezil (Gipuzkoa);20737;Errezil;09:00 - 13:00;Consultorio;
+123;Consultorio de Irura;Pello Arrese-Igor, 1, 20270 Irura (Gipuzkoa);20270;Irura;09:00 - 13:00;Consultorio;943444933
+124;Centro de Salud Mental de Erandio;Ibarrondo, 0-A, 48950 Erandio (Bizkaia);48950;Erandio;08:00 - 15:00;Centro de Salud Mental;946007148
+125;Consultorio de Zerain;Núcleo Zerain, 12-B, 20214 Zerain (Gipuzkoa);20214;Zerain;09:00 - 13:00;Consultorio;
+126;Consultorio de Aperribai;Barrio Aperribai, 20-A, 48960 Galdakao (Bizkaia);48960;Galdakao;09:00 - 13:00;Consultorio;
+127;Consultorio de Bedia;Barrio Elexalde, 4, 48390 Bedia (Bizkaia);48390;Bedia;09:00 - 13:00;Consultorio;
+128;Ambulatorio de Amara Berri;Javier Barkaiztegi, 2, 20010 Donostia / San Sebastián (Gipuzkoa);20010;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+129;Consultorio de Segura;Kale Nagusia, 9, 20214 Segura (Gipuzkoa);20214;Segura;09:00 - 13:00;Consultorio;
+130;Consultorio de Sopuerta-Mercadillo;Urbanización Llantada, 1, 48190 Sopuerta (Bizkaia);48190;Sopuerta;09:00 - 13:00;Consultorio;946104848
+131;Consultorio de Zegama;Olaran, 2, 20215 Zegama (Gipuzkoa);20215;Zegama;09:00 - 13:00;Consultorio;
+132;Hospital de Día de Barakaldo 1;Etxatxu, 35, 48902 Barakaldo (Bizkaia);48902;Barakaldo;24 horas;Hospital de Día;946552575
+133;C.S. DE IRUÑA DE OCA;Parque Tres de Marzo, 1, 01230 Iruña Oka/Iruña de Oca (Álava);01230;Iruña Oka/Iruña de Oca;24 horas;PAC;945371120
+134;Hospital de Mendaro;Barrio Mendarozabal-Idiazabaltxo, 1, 20850 Mendaro (Gipuzkoa);20850;Mendaro;24 horas;Hospital;943032800
+135;PAC DE HERNANI;Aristizabal, 2, 20120 Hernani (Gipuzkoa);20120;Hernani;24 horas;PAC;943006666
+136;Ambulatorio de Galdakao;Bizkai, s/n, 48960 Galdakao (Bizkaia);48960;Galdakao;08:00 - 20:00;Centro de Salud;
+137;Consultorio de Busturia;Barrio San Bartolome, 31, 48350 Busturia (Bizkaia);48350;Busturia;09:00 - 13:00;Consultorio;
+138;Unidad Terapéutica Educativa de Ortuella;Avenida Minero, 3, 48530 Ortuella (Bizkaia);48530;Ortuella;08:00 - 15:00;Otros;944288080
+139;Centro de Salud de Otxarkoaga;Zizeruena, 1, 48004 Bilbao (Bizkaia);48004;Bilbao;08:00 - 20:00;Centro de Salud;
+140;Consultorio de Olaberria;Jose Maria Aristrain, 3, 20212 Olaberria (Gipuzkoa);20212;Olaberria;09:00 - 13:00;Consultorio;
+141;Consultorio de Zaldibia;Santa Fe, 21-A, 20247 Zaldibia (Gipuzkoa);20247;Zaldibia;09:00 - 13:00;Consultorio;
+142;Consultorio de Asparrena-Araia;Santsaerreka, 7, 01250 Asparrena (Álava);01250;Asparrena;09:00 - 13:00;Consultorio;
+143;Tratamiento Asertivo Comunitario Sin Hogar;Virgen de Begoña, 32, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 15:00;Otros;944007481
+144;PAC DE MUNGIA;Plaza Loradi, 1, 48100 Mungia (Bizkaia);48100;Mungia;24 horas;PAC;946007150
+145;Centro de Salud de Bolueta-Sagarminaga;Sagarminaga, 56, 48004 Bilbao (Bizkaia);48004;Bilbao;08:00 - 20:00;Centro de Salud;
+146;Consultorio de Artea;Plaza Herriko plaza, 2-A, 48142 Artea (Bizkaia);48142;Artea;09:00 - 13:00;Consultorio;
+147;Centro de Salud de Martutene (Centro Penitenciario);Paseo Martutene, 1, 20014 Donostia / San Sebastián (Gipuzkoa);20014;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;943442359
+148;Consultorio de Itziar;Plaza Zabalsoro, 3, 20829 Deba (Gipuzkoa);20829;Deba;09:00 - 13:00;Consultorio;
+149;Consultorio de Gatika;Barrio Sertutxa, 4, 48110 Gatika (Bizkaia);48110;Gatika;09:00 - 13:00;Consultorio;
+150;Centro de Salud de Azkoitia;Barrio Jausoro, 6, 20720 Azkoitia (Gipuzkoa);20720;Azkoitia;08:00 - 20:00;Centro de Salud;943007610
+151;Centro de Salud de Alegia;Bideberrieta, 17-Y, 20260 Alegia (Gipuzkoa);20260;Alegia;08:00 - 20:00;Centro de Salud;943653212
+152;Centro de Salud de Basauri-Urbi (Centro Penitenciario);Lehendakari Aguirre, 92, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 20:00;Centro de Salud;944408360
+153;Dirección General;Álava, 45, 01006 Vitoria-Gasteiz (Álava);01006;Vitoria-Gasteiz;08:00 - 15:00;Otros;945006000
+154;PAC;Bidebarrieta, 12, 48930 Getxo (Bizkaia);48930;Getxo;24 horas;PAC;946007170
+155;Centro de Salud Mental de Ajuriaguerra;Fika, 22, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 15:00;Centro de Salud Mental;944007700
+156;Centro de Salud Mental de Barakaldo -2;Iparragirre, 9, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 15:00;Centro de Salud Mental;944185310
+157;Centro de Salud Mental de Infancia y Adolescencia de Bilbao;Nicolas Alcorta, 2, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 15:00;Centro de Salud Mental;944230047
+158;Centro de Salud Mental de Infancia y Adolescencia de Uribe;Alangobarri, 7, 48990 Getxo (Bizkaia);48990;Getxo;08:00 - 15:00;Centro de Salud Mental;944910322
+159;PAC DE BERMEO;Tonpoi Bidea, 0-A, 48370 Bermeo (Bizkaia);48370;Bermeo;24 horas;PAC;946029050
+160;Centro de Salud Mental de Irun;Virgen Milagrosa, 1, 20303 Irun (Gipuzkoa);20303;Irun;08:00 - 15:00;Centro de Salud Mental;943638380
+161;Centro de Salud Mental de Galdakao;Bizkai, 42-A, 48960 Galdakao (Bizkaia);48960;Galdakao;08:00 - 15:00;Centro de Salud Mental;946007433
+162;Ambulatorio de Basauri-Ariz;Kale Nagusia, 21, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 20:00;Centro de Salud;
+163;Ambulatorio de Irun Centro;Avenida Gipuzkoa, 15, 20302 Irun (Gipuzkoa);20302;Irun;08:00 - 20:00;Centro de Salud;
+164;Centro de Salud de Mamariga;Virgen del Mar, 1, 48980 Santurtzi (Bizkaia);48980;Santurtzi;08:00 - 20:00;Centro de Salud;946007680
+165;Consultorio de Elexalde;Barrio Elejalde, 16, 48480 Zaratamo (Bizkaia);48480;Zaratamo;09:00 - 13:00;Consultorio;
+166;Consultorio de Lizartza;Barrio Plaza Soro, 1, 20490 Lizartza (Gipuzkoa);20490;Lizartza;09:00 - 13:00;Consultorio;
+167;Hospital de Día de Zumarraga;Hiri Lorategia, 20, 20700 Zumarraga (Gipuzkoa);20700;Zumarraga;24 horas;Hospital de Día;943721563
+168;Ambulatorio de Zarautz;Salbide, 10, 20800 Zarautz (Gipuzkoa);20800;Zarautz;08:00 - 20:00;Ambulatorio;
+169;Centro de Salud de Alde Zaharra;Aldamar, s/n - Edificio Pescadería, 20003 Donostia / San Sebastián (Gipuzkoa);20003;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+170;Centro de Salud de San Ignacio;Larrakotorre, 9, 48015 Bilbao (Bizkaia);48015;Bilbao;08:00 - 20:00;Centro de Salud;
+171;Centro de Salud de Villabona;Erniobea, 0-A, 20150 Villabona (Gipuzkoa);20150;Villabona;08:00 - 20:00;Centro de Salud;943006970
+172;PAC DE BALMASEDA;Avenida Encartaciones, 9-A, 48800 Balmaseda (Bizkaia);48800;Balmaseda;24 horas;PAC;946102325
+173;Centro de Salud de Espejo;Carretera Bilbao, 61, 01423 Valdegovía/Gaubea (Álava);01423;Valdegovía/Gaubea;08:00 - 20:00;Centro de Salud;945351011
+174;Consultorio de Elgeta;Plaza Mendizaleen plaza, 3, 20690 Elgeta (Gipuzkoa);20690;Elgeta;09:00 - 13:00;Consultorio;943789027
+175;Centro de Salud de San Martín;Pintor Teodoro Dublang, 23, 01008 Vitoria-Gasteiz (Álava);01008;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+176;Centro de Salud Mental de Zaballa (Centro Penitenciario);Portillo de San Miguel, 1, 01230 Iruña Oka/Iruña de Oca (Álava);01230;Iruña Oka/Iruña de Oca;08:00 - 15:00;Centro de Salud Mental;945207996
+177;Centro de Salud de Amorebieta-Etxano;San Miguel, 17, 48340 Amorebieta-Etxano (Bizkaia);48340;Amorebieta-Etxano;08:00 - 20:00;Centro de Salud;
+178;Hospital de Día de Las Arenas;Paulino Mendivil, 3, 48930 Getxo (Bizkaia);48930;Getxo;24 horas;Hospital de Día;944315896
+179;Consultorio de Kontrasta;San Salvador, 1, 01117 Harana/Valle de Arana (Álava);01117;Harana/Valle de Arana;09:00 - 13:00;Consultorio;945415345
+180;Hospital Gernika-Lumo;Carretera Aita Luis Villasante, 4, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;24 horas;Hospital;946274000
+181;PAC DE GORLIZ;Plaza Jose Antonio Agirre, 1, 48630 Gorliz (Bizkaia);48630;Gorliz;24 horas;PAC;946773461
+182;Centro de Salud Mental de Derio;Gorbea, 1, 48160 Derio (Bizkaia);48160;Derio;08:00 - 15:00;Centro de Salud Mental;
+183;Ambulatorio de Santutxu-Solokoetxe;Sorkunde, 3, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Ambulatorio;944007500
+184;Centro de Salud de Erandio;Ibarrondo, 0-A, 48950 Erandio (Bizkaia);48950;Erandio;08:00 - 20:00;Centro de Salud;
+185;Consultorio de Urrestilla;Kaletxiki, 9, 20738 Azpeitia (Gipuzkoa);20738;Azpeitia;09:00 - 13:00;Consultorio;
+186;Centro de Salud Mental de Portugalete;Avenida Campanzar, 4-A, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 15:00;Centro de Salud Mental;944596510
+187;Ambulatorio de Begoña;Virgen de Begoña, 32, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Ambulatorio;
+188;Hospital de Día de Adolescentes;Angulema, 4, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;24 horas;Hospital de Día;945318742
+189;Centro de Salud de Aiete;Paseo Aiete, 27, 20009 Donostia / San Sebastián (Gipuzkoa);20009;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+190;Consultorio de Leza;Calle Mayor, 4, 01309 Leza (Álava);01309;Leza;09:00 - 13:00;Consultorio;
+191;Consultorio de Arrankudiaga;Barrio Elexalde, 19-C, 48498 Arrankudiaga-Zollo (Bizkaia);48498;Arrankudiaga-Zollo;09:00 - 13:00;Consultorio;
+192;PAC DE BEGOÑA;Virgen de Begoña, 32, 48006 Bilbao (Bizkaia);48006;Bilbao;24 horas;PAC;944007620
+193;Consultorio de Ubidea;Barrio San Juan, 4, 48145 Ubide (Bizkaia);48145;Ubide;09:00 - 13:00;Consultorio;
+194;Centro de Salud de Kueto;Gran Vía de Jose Agirre y Lekube, 56, 48910 Sestao (Bizkaia);48910;Sestao;08:00 - 20:00;Centro de Salud;946007880
+195;Centro de Salud de Astigarraga;Plaza Errekatxo, 9, 20115 Astigarraga (Gipuzkoa);20115;Astigarraga;08:00 - 20:00;Centro de Salud;
+196;Consultorio de Lemoiz;Barrio Urizar, 56, 48620 Lemoiz (Bizkaia);48620;Lemoiz;09:00 - 13:00;Consultorio;
+197;Centro de Salud de Muskiz;Barrio Cendeja, 29-A, 48550 Muskiz (Bizkaia);48550;Muskiz;08:00 - 20:00;Centro de Salud;946707252
+198;Unidad de Atención Precoz;Paseo Aiete, 27 - Planta 2 / 2. Solairua, 20009 Donostia / San Sebastián (Gipuzkoa);20009;Donostia / San Sebastián;08:00 - 15:00;Otros;943396647
+199;Centro de Salud Mental de Azpeitia;Jose Artetxe, 7, 20730 Azpeitia (Gipuzkoa);20730;Azpeitia;08:00 - 15:00;Centro de Salud Mental;943025407
+200;Consultorio de Bakio;Basigoko Bide Nagusia, 23, 48130 Bakio (Bizkaia);48130;Bakio;09:00 - 13:00;Consultorio;
+201;Consultorio de Aranguren;Barrio La Inmaculada, 24, 48850 Zalla (Bizkaia);48850;Zalla;09:00 - 13:00;Consultorio;946670647
+202;Centro de Salud de Sodupe;Sodupe Goikoa, 13, 48830 Güeñes (Bizkaia);48830;Güeñes;08:00 - 20:00;Centro de Salud;946692325
+203;Hospital de Día Unidad de Subagudos del Hospital de Zamudio;Barrio Arteaga, 45, 48170 Zamudio (Bizkaia);48170;Zamudio;24 horas;Hospital de Día;944006529
+204;Centro de Salud Mental de Bombero Etxaniz;Plaza Bombero Echániz, 1, 48010 Bilbao (Bizkaia);48010;Bilbao;08:00 - 15:00;Centro de Salud Mental;
+205;Consultorio de La Quadra;Plaza Herriko Plaza-La Quadra, 2, 48820 Güeñes (Bizkaia);48820;Güeñes;09:00 - 13:00;Consultorio;946693276
+206;Centro de Salud de Usurbil;Paseo Gernika, 2, 20170 Usurbil (Gipuzkoa);20170;Usurbil;08:00 - 20:00;Centro de Salud;
+207;Consultorio de Areatza;Askatasun, 34-B, 48143 Areatza (Bizkaia);48143;Areatza;09:00 - 13:00;Consultorio;
+208;Consultorio de Sukarrieta;Plaza Ander Deuna, 6, 48395 Sukarrieta (Bizkaia);48395;Sukarrieta;09:00 - 13:00;Consultorio;
+209;Centro de Salud de Altza;Paseo Larratxo, 95, 20017 Donostia / San Sebastián (Gipuzkoa);20017;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+210;Consultorio de Galdames-San Pedro;Barrio San Pedro, 6, 48191 Galdames (Bizkaia);48191;Galdames;09:00 - 13:00;Consultorio;946104006
+211;Consultorio de Baños de Ebro;Laguardia, 3, 01307 Baños de Ebro/Mañueta (Álava);01307;Baños de Ebro/Mañueta;09:00 - 13:00;Consultorio;945600184
+212;Consultorio de Amaroz;Barrio Amarotz, 10, 20400 Tolosa (Gipuzkoa);20400;Tolosa;09:00 - 13:00;Consultorio;943672637
+213;Consultorio de Arkotxa;Barrio Arkotxa, 66, 48480 Zaratamo (Bizkaia);48480;Zaratamo;09:00 - 13:00;Consultorio;
+214;Consultorio de Fontecha;Calle Real, 26, 01423 Lantarón (Álava);01423;Lantarón;09:00 - 13:00;Consultorio;945359019
+215;Consultorio de Elvillar;Plaza Santa María, 10, 01309 Elvillar/Bilar (Álava);01309;Elvillar/Bilar;09:00 - 13:00;Consultorio;945600184
+216;Consultorio de Legorreta;Kale Nagusia, 12, 20250 Legorreta (Gipuzkoa);20250;Legorreta;09:00 - 13:00;Consultorio;943806524
+217;Consultorio de Muxika;Barrio Kurtzero, 20, 48392 Muxika (Bizkaia);48392;Muxika;09:00 - 13:00;Consultorio;
+218;Ambulatorio de Llodio;Avenida Zumalakarregi, 1, 01400 Laudio/Llodio (Álava);01400;Laudio/Llodio;08:00 - 20:00;Centro de Salud;
+219;Centro de Salud de Irala;Ugalde, 7, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 20:00;Centro de Salud;946006720
+220;Centro de Salud de Basauri-Kareaga;Karmelo Torre, 6, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 20:00;Centro de Salud;
+221;Consultorio de Carranza;Barrio Concha, 17, 48891 Karrantza Harana/Valle de Carranza (Bizkaia);48891;Karrantza Harana/Valle de Carranza;09:00 - 13:00;Consultorio;946806519
+222;Consultorio de Aulesti;Donibane Enparantza, 1, 48380 Aulesti (Bizkaia);48380;Aulesti;09:00 - 13:00;Consultorio;
+223;Centro de Salud Mental de Donostia-Egia;Tejería, 2, 20012 Donostia / San Sebastián (Gipuzkoa);20012;Donostia / San Sebastián;08:00 - 15:00;Centro de Salud Mental;943007920
+224;Centro de Salud Mental de Donostia-Amara;Jose Maria Salaberria, 9, 20010 Donostia / San Sebastián (Gipuzkoa);20010;Donostia / San Sebastián;08:00 - 15:00;Centro de Salud Mental;943006501
+225;PAC DE MARKONZAGA;Antonio Trueba, 17, 48910 Sestao (Bizkaia);48910;Sestao;24 horas;PAC;946007800
+226;Consultorio de Laukiz;Lauaxeta, 7, 48111 Laukiz (Bizkaia);48111;Laukiz;09:00 - 13:00;Consultorio;
+227;Ambulatorio de Kabiezes;Jose Miguel Barandiaran, 21, 48980 Santurtzi (Bizkaia);48980;Santurtzi;08:00 - 20:00;Centro de Salud;946007610
+228;Consultorio de Mendexa;Barrio Zelaia, 3, 48289 Mendexa (Bizkaia);48289;Mendexa;09:00 - 13:00;Consultorio;
+229;Centro de Salud de Casco Viejo Bilbao;Ronda, 4, 48005 Bilbao (Bizkaia);48005;Bilbao;08:00 - 20:00;Centro de Salud;
+230;Consultorio de Kripan;Plaza Plaza de la Barbacana, 9, 01308 Kripan (Álava);01308;Kripan;09:00 - 13:00;Consultorio;945622155
+231;Hospital Zamudio;Barrio Arteaga, 45, 48170 Zamudio (Bizkaia);48170;Zamudio;24 horas;Hospital;
+232;Consultorio de Orexa;Plaza Errebote, 1, 20490 Orexa (Gipuzkoa);20490;Orexa;09:00 - 13:00;Consultorio;943682035
+233;Consultorio de Zaldibar;Avenida Euskal Herria, 0-C, 48250 Zaldibar (Bizkaia);48250;Zaldibar;09:00 - 13:00;Consultorio;
+234;Centro de Salud de Lutxana;Texidor, 1, 48903 Barakaldo (Bizkaia);48903;Barakaldo;08:00 - 20:00;Centro de Salud;946007900
+235;Centro de Salud Mental de Durango;Barrio Arripausueta, 1, 48200 Durango (Bizkaia);48200;Durango;08:00 - 15:00;Centro de Salud Mental;946032892
+236;Consultorio de Ataun-San Gregorio;Barrio San Gregorio, 12, 20211 Ataun (Gipuzkoa);20211;Ataun;09:00 - 13:00;Consultorio;943805560
+237;Consultorio de Zamudio;Camino Abarkoetxe, 11, 48170 Zamudio (Bizkaia);48170;Zamudio;09:00 - 13:00;Consultorio;
+238;Centro de Salud de Gallarta;Nueva Avenida, 2, 48500 Abanto y Ciérvana-Abanto Zierbena (Bizkaia);48500;Abanto y Ciérvana-Abanto Zierbena;08:00 - 20:00;Centro de Salud;946007570
+239;PAC SAN JUAN DE DIOS;Avenida Cristóbal de Murrieta, 70, 48980 Santurtzi (Bizkaia);48980;Santurtzi;24 horas;PAC;944939900
+240;Centro de Salud de Oñati;San Juan, 17, 20560 Oñati (Gipuzkoa);20560;Oñati;08:00 - 20:00;Centro de Salud;943035430
+241;Consultorio de Lagrán;Portal de Cristo, 19, 01118 Lagrán (Álava);01118;Lagrán;09:00 - 13:00;Consultorio;415345
+242;Consultorio de Samaniego;El Ochavo, 0-A, 01307 Samaniego (Álava);01307;Samaniego;09:00 - 13:00;Consultorio;945600184
+243;Consultorio de Urkabustaiz-Izarra;Logorri, 1, 01440 Urkabustaiz (Álava);01440;Urkabustaiz;09:00 - 13:00;Consultorio;
+244;Consultorio de Berriz;Gabiola, 6, 48240 Berriz (Bizkaia);48240;Berriz;09:00 - 13:00;Consultorio;
+245;Consultorio de Nabarniz;Barrio Elexalde, 3, 48312 Nabarniz (Bizkaia);48312;Nabarniz;09:00 - 13:00;Consultorio;
+246;Consultorio de Mutriku;Domingo Ibaibarriaga, 16, 20830 Mutriku (Gipuzkoa);20830;Mutriku;09:00 - 13:00;Consultorio;
+247;Ambulatorio de Llodio;Avenida Zumalakarregi, 1, 01400 Laudio/Llodio (Álava);01400;Laudio/Llodio;08:00 - 20:00;Ambulatorio;946007480
+248;Consultorio de La Iberia;Plaza Los Tres Concejos, 1, 48910 Sestao (Bizkaia);48910;Sestao;09:00 - 13:00;Consultorio;946081442
+249;Centro de Salud de Abetxuko;El Cristo, 6, 01013 Vitoria-Gasteiz (Álava);01013;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+250;Consultorio de Arratzu;Barrio Loiola, 4, 48383 Arratzu (Bizkaia);48383;Arratzu;09:00 - 13:00;Consultorio;
+251;Centro de Salud de Astrabudua;Meso, 35, 48950 Erandio (Bizkaia);48950;Erandio;08:00 - 20:00;Centro de Salud;
+252;Centro de salud de Plentzia;Frontoi, 4, 48620 Plentzia (Bizkaia);48620;Plentzia;08:00 - 20:00;Centro de Salud;
+253;Centro de Salud de Legutiano;Gorbea, 2, 01170 Legutio (Álava);01170;Legutio;08:00 - 20:00;Centro de Salud;
+254;Centro de Salud Mental de Gernika;Carretera Aita Luis Villasante, 4, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;08:00 - 15:00;Centro de Salud Mental;946274032
+255;Centro de Salud Mental de Ercilla;Ercilla, 4, 48009 Bilbao (Bizkaia);48009;Bilbao;08:00 - 15:00;Centro de Salud Mental;944230049
+256;Centro de Salud Mental de Beasain;Avenida Ezkiaga, 1-A, 20200 Beasain (Gipuzkoa);20200;Beasain;08:00 - 15:00;Centro de Salud Mental;943886762
+257;Consultorio de Basauri-San Miguel;Garbileku, 2, 48970 Basauri (Bizkaia);48970;Basauri;09:00 - 13:00;Consultorio;
+258;Consultorio de Antoñana;Arquillos de Abajo, 4, 01128 Campezo/Kanpezu (Álava);01128;Campezo/Kanpezu;09:00 - 13:00;Consultorio;945415345
+259;PAC DE DONOSTIA;Bengoetxea, 4, 20004 Donostia / San Sebastián (Gipuzkoa);20004;Donostia / San Sebastián;24 horas;PAC;943006537
+260;Consultorio de Gorozika;Barrio Gorozika, 8, 48391 Muxika (Bizkaia);48391;Muxika;09:00 - 13:00;Consultorio;
+261;Consultorio de Baliarrain;Andra Mari Zeruratze, 9, 20259 Baliarrain (Gipuzkoa);20259;Baliarrain;09:00 - 13:00;Consultorio;943203647
+262;Centro de Salud de Amara Centro;Prim, 61, 20006 Donostia / San Sebastián (Gipuzkoa);20006;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+263;Consultorio de Ispaster;Plaza Iñigo Egiluz, 1, 48288 Ispaster (Bizkaia);48288;Ispaster;09:00 - 13:00;Consultorio;
+264;Centro de Salud Mental de Ayala-Llodio;Baia, 6, 01400 Laudio/Llodio (Álava);01400;Laudio/Llodio;08:00 - 15:00;Centro de Salud Mental;944041383
+265;Ambulatorio de Amara Berri;Javier Barkaiztegi, 2, 20010 Donostia / San Sebastián (Gipuzkoa);20010;Donostia / San Sebastián;08:00 - 20:00;Ambulatorio;943007900
+266;Centro de Salud de La Peña;Ibaialde, 1, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 20:00;Centro de Salud;944007435
+267;Centro de Salud de Retuerto;Retuerto, 4, 48903 Barakaldo (Bizkaia);48903;Barakaldo;08:00 - 20:00;Centro de Salud;944595940
+268;Ambulatorio de Bombero Etxaniz;Plaza Bombero Echániz, 1, 48014 Bilbao (Bizkaia);48014;Bilbao;08:00 - 20:00;Ambulatorio;
+269;Centro de Orientación y Tratamiento Adicciones (COTA);Julián de Arrese, 5, 01010 Vitoria-Gasteiz (Álava);01010;Vitoria-Gasteiz;08:00 - 15:00;Otros;945294040
+270;Centro de Salud de Alonsotegi;Plaza Doctor Madinabeitia, 2, 48810 Alonsotegi (Bizkaia);48810;Alonsotegi;08:00 - 20:00;Centro de Salud;
+271;Centro de Salud de Mungia;Plaza Loradi, 1, 48100 Mungia (Bizkaia);48100;Mungia;08:00 - 20:00;Centro de Salud;
+272;Centro de Salud Mental de Andoain;Rikardo Arregi, 0-B, 20140 Andoain (Gipuzkoa);20140;Andoain;08:00 - 15:00;Centro de Salud Mental;943006678
+273;Consultorio de San Vicente de Arana;Montoza, 15, 01117 Harana/Valle de Arana (Álava);01117;Harana/Valle de Arana;09:00 - 13:00;Consultorio;945415345
+274;Consultorio de Ugao-Miravalles;Landako, 1, 48490 Ugao-Miraballes (Bizkaia);48490;Ugao-Miraballes;09:00 - 13:00;Consultorio;
+275;Tratamiento Asertivo Comunitario de Uribe;San Martin, 17, 48993 Getxo (Bizkaia);48993;Getxo;08:00 - 15:00;Otros;944912523
+276;Ambulatorio de Beasain;Bernedo Enea, 1, 20200 Beasain (Gipuzkoa);20200;Beasain;08:00 - 20:00;Centro de Salud;
+277;Unidad de Salud Mental Infanto-Juvenil;Olaguibel, 31, 01002 Vitoria-Gasteiz (Álava);01002;Vitoria-Gasteiz;08:00 - 15:00;Centro de Salud Mental;945277711
+278;Consultorio de Bergüenda;San Juan, 7, 01423 Lantarón (Álava);01423;Lantarón;09:00 - 13:00;Consultorio;945351011
+279;Centro de Salud de Urban;Plaza El Desierto, 5, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 20:00;Centro de Salud;946007580
+280;Centro de Salud de Habana-Cuba;Cuba, 7, 01012 Vitoria-Gasteiz (Álava);01012;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+281;Centro de Salud de Gorliz;Plaza Jose Antonio Agirre, 1, 48630 Gorliz (Bizkaia);48630;Gorliz;08:00 - 20:00;Centro de Salud;946773461
+282;PUNTO DE REFUERZO AMARA BERRI;Javier Barkaiztegi, 2, 20010 Donostia / San Sebastián (Gipuzkoa);20010;Donostia / San Sebastián;24 horas;PAC;943007900
+283;Consultorio de Itsasondo;Kale Nagusia, 7, 20249 Itsasondo (Gipuzkoa);20249;Itsasondo;09:00 - 13:00;Consultorio;
+284;Consultorio de Leintz-Gatzaga;Plaza San Miguel, 2, 20530 Leintz-Gatzaga (Gipuzkoa);20530;Leintz-Gatzaga;09:00 - 13:00;Consultorio;943714452
+285;Guardias de Laguardia;Plaza La Carcel, 1, 01300 Laguardia (Álava);01300;Laguardia;24 horas;Guardia localizada;945600184
+286;Centro de Salud de Lazkao;Plaza Euskadi, 3, 20210 Lazkao (Gipuzkoa);20210;Lazkao;08:00 - 20:00;Centro de Salud;943805560
+287;Hospital de Día de Erandio;Ibarrondo, 0-A, 48950 Erandio (Bizkaia);48950;Erandio;24 horas;Hospital de Día;946007149
+288;Consultorio de Fruiz;Barrio Aldai, 90, 48116 Fruiz (Bizkaia);48116;Fruiz;09:00 - 13:00;Consultorio;
+289;Centro de Salud de Sansomendi;Paula Montal, 28, 01010 Vitoria-Gasteiz (Álava);01010;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+290;Ambulatorio de Rekalde;Carretera Errekalde-Larraskitu, 2-A, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 20:00;Ambulatorio;946006700
+291;PAC DE REKALDE;Carretera Errekalde-Larraskitu, 2-A, 48002 Bilbao (Bizkaia);48002;Bilbao;24 horas;PAC;946006700
+292;Hospital de Día de Durango;Avenida Landako, 3, 48200 Durango (Bizkaia);48200;Durango;24 horas;Hospital de Día;946203484
+293;C.S. DE LEGUTIANO;Gorbea, 2, 01170 Legutio (Álava);01170;Legutio;24 horas;PAC;945455017
+294;Consultorio de Soraluze;Kalebarren, 13, 20590 Soraluze-Placencia de las Armas (Gipuzkoa);20590;Soraluze-Placencia de las Armas;09:00 - 13:00;Consultorio;943752300
+295;Consultorio de Villabuena de Álava;Calle Mayor, 35, 01307 Villabuena de Álava/Eskuernaga (Álava);01307;Villabuena de Álava/Eskuernaga;09:00 - 13:00;Consultorio;
+296;Hospital de Día de Basauri;Gaztela, 1, 48970 Basauri (Bizkaia);48970;Basauri;24 horas;Hospital de Día;946007333
+297;Centro de Salud de Lakuabizkarra;Duque de Wellington, 27, 01010 Vitoria-Gasteiz (Álava);01010;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+298;Centro de Salud de Deba;Bastinuixa, 1, 20820 Deba (Gipuzkoa);20820;Deba;08:00 - 20:00;Centro de Salud;
+299;Ambulatorio de Olaguibel;Olaguibel, 31, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;08:00 - 20:00;Ambulatorio;945007900
+300;Centro de Salud Mental de Uribe;San Nicolás, 2-A, 48990 Getxo (Bizkaia);48990;Getxo;08:00 - 15:00;Centro de Salud Mental;944911500
+301;Centro de Salud Mental Urbi 2 (Penitenciaria);Avenida Agirre Lehendakaria, 92, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 15:00;Centro de Salud Mental;944408360
+302;Consultorio de Okondo;Avenida Garaikoetxea, 2-Y, 01409 Okondo (Álava);01409;Okondo;09:00 - 13:00;Consultorio;
+303;Centro de Salud Mental de Infancia y Adolescencia de Barrualdea;Ibaizabal, 6, 48960 Galdakao (Bizkaia);48960;Galdakao;08:00 - 15:00;Centro de Salud Mental;944565216
+304;Consultorio de Bidania-Goiatz;Agerre-Azpi, 17, 20496 Bidania-Goiatz (Gipuzkoa);20496;Bidania-Goiatz;09:00 - 13:00;Consultorio;943446107
+305;Centro de Salud de Markonzaga;Antonio Trueba, 15, 48910 Sestao (Bizkaia);48910;Sestao;08:00 - 20:00;Centro de Salud;946007800
+306;Equipo de psiquiatría del niño y adolescente Donostialdea;Aldamar, 20, 20003 Donostia / San Sebastián (Gipuzkoa);20003;Donostia / San Sebastián;08:00 - 15:00;Centro de Salud Mental;943006590
+307;Centro de Salud de Errenteria-Iztieta;San Sebastián, 1, 20100 Errenteria (Gipuzkoa);20100;Errenteria;08:00 - 20:00;Centro de Salud;
+308;Consultorio de Salinas de Añana;La Fuente, 1, 01426 Añana (Álava);01426;Añana;09:00 - 13:00;Consultorio;945351011
+309;Centro de Salud Mental de Salburua;Avenida Praga, 2, 01003 Vitoria-Gasteiz (Álava);01003;Vitoria-Gasteiz;08:00 - 15:00;Centro de Salud Mental;945294060
+310;Consultorio de Aramaio;Nardeaga, 30, 01160 Aramaio (Álava);01160;Aramaio;09:00 - 13:00;Consultorio;945445340
+311;Centro de Salud de Tolosa;Jardín Gernikako Arbola, 10, 20400 Tolosa (Gipuzkoa);20400;Tolosa;08:00 - 20:00;Centro de Salud;943006800
+312;PAC DE BEASAIN;Bernedo Enea, 1, 20200 Beasain (Gipuzkoa);20200;Beasain;24 horas;PAC;943027700
+313;Consultorio de Izurtza;Barrio Elizalde, 12, 48213 Izurtza (Bizkaia);48213;Izurtza;09:00 - 13:00;Consultorio;
+314;Ambulatorio de Eibar;Toribio Etxebarria, 29, 20600 Eibar (Gipuzkoa);20600;Eibar;08:00 - 20:00;Centro de Salud;943032500
+315;Centro de Salud de Zabalgana;Avenida La Ilustración, 47, 01015 Vitoria-Gasteiz (Álava);01015;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+316;Consultorio de Peñacerrada;Plaza Los Fueros, 5, 01212 Peñacerrada-Urizaharra (Álava);01212;Peñacerrada-Urizaharra;09:00 - 13:00;Consultorio;945331258
+317;Administración de la Red de Salud Mental de Bizkaia;María Díaz de Haro, 60, 48010 Bilbao (Bizkaia);48010;Bilbao;08:00 - 15:00;Otros;
+318;Consultorio de Artziniega;Plaza Goiko plaza, 4, 01474 Artziniega (Álava);01474;Artziniega;09:00 - 13:00;Consultorio;
+319;Centro de Salud de Zaramaga;Puerto de Azazeta, 2, 01013 Vitoria-Gasteiz (Álava);01013;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+320;Centro de Salud de Lezo;Plaza Lopene, 4, 20100 Lezo (Gipuzkoa);20100;Lezo;08:00 - 20:00;Centro de Salud;943344400
+321;Consultorio de Ibarrangelu;Barrio Elexalde, 1, 48311 Ibarrangelu (Bizkaia);48311;Ibarrangelu;09:00 - 13:00;Consultorio;
+322;Consultorio de Gautegiz Arteaga;Zelaieta, 45, 48314 Gautegiz Arteaga (Bizkaia);48314;Gautegiz Arteaga;09:00 - 13:00;Consultorio;
+323;Ambulatorio de Olaguibel;Olaguibel, 31, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+324;Centro de Salud de Ibarra;Euskal Herria, 14, 20400 Ibarra (Gipuzkoa);20400;Ibarra;08:00 - 20:00;Centro de Salud;943672411
+325;Centro de Salud de Gazalbide-Txagorritxu;Chile, 9, 01009 Vitoria-Gasteiz (Álava);01009;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+326;Centro de Salud de Bergara;Paseo Boni Laskurain, 11, 20570 Bergara (Gipuzkoa);20570;Bergara;08:00 - 20:00;Centro de Salud;943035400
+327;Centro de Salud de Ordizia;Etxezarreta, 11, 20240 Ordizia (Gipuzkoa);20240;Ordizia;08:00 - 20:00;Centro de Salud;943007635
+328;PAC DE ONDARROA;Ibaiondo, 6, 48700 Ondarroa (Bizkaia);48700;Ondarroa;24 horas;PAC;946037999
+329;Centro de Salud Mental de Donostia Antiguo;Avenida Zumalakarregi, 24, 20008 Donostia / San Sebastián (Gipuzkoa);20008;Donostia / San Sebastián;08:00 - 15:00;Centro de Salud Mental;943006610
+330;Centro de Salud de Eskoriatza;Plaza Eduardo Gorosarri, 7, 20540 Eskoriatza (Gipuzkoa);20540;Eskoriatza;08:00 - 20:00;Centro de Salud;943714452
+331;Consultorio de Sopuerta-La Baluga;San Pedro, 1, 48190 Sopuerta (Bizkaia);48190;Sopuerta;09:00 - 13:00;Consultorio;946104949
+332;Consultorio de Munitibar;Barrio Munitibar, 3, 48381 Munitibar-Arbatzegi Gerrikaitz (Bizkaia);48381;Munitibar-Arbatzegi Gerrikaitz;09:00 - 13:00;Consultorio;
+333;Centro de Salud de Gazteleku;Príncipe de Viana, 5, 48007 Bilbao (Bizkaia);48007;Bilbao;08:00 - 20:00;Centro de Salud;
+334;Consultorio de Etxebarria;Plaza Peñanekua, 1, 48277 Etxebarria (Bizkaia);48277;Etxebarria;09:00 - 13:00;Consultorio;
+335;Consultorio de Alda;Plaza La Rimona, 1, 01117 Harana/Valle de Arana (Álava);01117;Harana/Valle de Arana;09:00 - 13:00;Consultorio;945415345
+336;Consultorio de Berastegi;Plaza Herriko plaza, 1, 20492 Berastegi (Gipuzkoa);20492;Berastegi;09:00 - 13:00;Consultorio;943683361
+337;Consultorio de Elantxobe;Portu, 2-B, 48310 Elantxobe (Bizkaia);48310;Elantxobe;09:00 - 13:00;Consultorio;
+338;Centro de Salud de Basurto;Jardín Iparralde, 1, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 20:00;Centro de Salud;
+339;Consultorio de Ibarruri;Barrio Ibarruri, 12, 48391 Muxika (Bizkaia);48391;Muxika;09:00 - 13:00;Consultorio;
+340;PUNTO DE REFUERZO ORTUELLA;Avenida Minero, 3, 48530 Ortuella (Bizkaia);48530;Ortuella;24 horas;PAC;946007630
+341;Consultorio de Murueta;Barrio Kanpantxua, 3-B, 48394 Murueta (Bizkaia);48394;Murueta;09:00 - 13:00;Consultorio;
+342;Ambulatorio de Azpeitia;Jose Artetxe, 7, 20730 Azpeitia (Gipuzkoa);20730;Azpeitia;08:00 - 20:00;Ambulatorio;943025400
+343;Centro de Salud Mental de Zarautz;Salbide, 10, 20800 Zarautz (Gipuzkoa);20800;Zarautz;08:00 - 15:00;Centro de Salud Mental;943007980
+344;Centro de Salud de Zurbaran;Avenida Zumalakarregi, 99, 48007 Bilbao (Bizkaia);48007;Bilbao;08:00 - 20:00;Centro de Salud;
+345;Consultorio de Apellaniz;Barrio Elespara, 2, 01129 Arraia-Maeztu (Álava);01129;Arraia-Maeztu;09:00 - 13:00;Consultorio;945415345
+346;Centro de Salud de Orio;Arrantzale, 1, 20810 Orio (Gipuzkoa);20810;Orio;08:00 - 20:00;Centro de Salud;
+347;Consultorio de Mallabia;Mallazpi, 0-A, 48269 Mallabia (Bizkaia);48269;Mallabia;09:00 - 13:00;Consultorio;943032630
+348;PAC DE AZPEITIA;Jose Artetxe, 7, 20730 Azpeitia (Gipuzkoa);20730;Azpeitia;24 horas;PAC;943025400
+349;Centro de Alta Resolución de Zalla;Barrio El Carmen, 14, 48860 Zalla (Bizkaia);48860;Zalla;08:00 - 20:00;Ambulatorio;946007590
+350;Consultorio de Navaridas;Fabulista Samaniego, 4, 01309 Navaridas (Álava);01309;Navaridas;09:00 - 13:00;Consultorio;
+351;Hospital San Eloy;Avenida Miranda, 5, 48902 Barakaldo (Bizkaia);48902;Barakaldo;24 horas;Hospital;
+352;Tratamiento Asertivo Comunitario de Barrualdea;San Juan, 1, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;08:00 - 15:00;Otros;946035822
+353;Consultorio de Forua;Torre-Barri, 4, 48393 Forua (Bizkaia);48393;Forua;09:00 - 13:00;Consultorio;
+354;Centro de Salud de Sopela;Sugurdialde, 1, 48600 Sopela (Bizkaia);48600;Sopela;08:00 - 20:00;Centro de Salud;
+355;Ambulatorio de Santutxu-Solokoetxe;Sorkunde, 3, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Centro de Salud;
+356;Consultorio de Ziortza-Bolibar;Domingo Ugartetxea, 3, 48278 Ziortza-Bolibar (Bizkaia);48278;Ziortza-Bolibar;09:00 - 13:00;Consultorio;944597615
+357;PAC DE ERRENTERIA-IZTIETA;San Sebastián, 1, 20100 Errenteria (Gipuzkoa);20100;Errenteria;24 horas;PAC;943007940
+358;Centro de Salud de Errenteria-Beraun;Avenida Galtzaraborda, 67, 20100 Errenteria (Gipuzkoa);20100;Errenteria;08:00 - 20:00;Centro de Salud;
+359;Centro de Salud de Miribilla;Mina San Luis, 16, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 20:00;Centro de Salud;
+360;Consultorio de Zeanuri;Barrio Arregia, 11, 48144 Zeanuri (Bizkaia);48144;Zeanuri;09:00 - 13:00;Consultorio;
+361;Hospital de Día de Psiquiatría;Angulema, 1, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;24 horas;Hospital de Día;945282100
+362;Consultorio de Urduliz;Aita Gotzon, 20, 48610 Urduliz (Bizkaia);48610;Urduliz;09:00 - 13:00;Consultorio;
+363;Consultorio de Respaldiza;Barrio La Iglesia, 16, 01476 Ayala/Aiara (Álava);01476;Ayala/Aiara;09:00 - 13:00;Consultorio;
+364;Hospital de Gorliz;Paseo Urezarantza, 1, 48630 Gorliz (Bizkaia);48630;Gorliz;24 horas;Hospital;944006600
+365;Hospital Santa Marina;Carretera Santa Marina, 41, 48004 Bilbao (Bizkaia);48004;Bilbao;24 horas;Hospital;944006900
+366;Consultorio de Errigoiti;Barrio Uria, 10, 48309 Errigoiti (Bizkaia);48309;Errigoiti;09:00 - 13:00;Consultorio;
+367;Ambulatorio de Zarautz;Salbide, 10, 20800 Zarautz (Gipuzkoa);20800;Zarautz;08:00 - 20:00;Centro de Salud;
+368;Hospital Universitario Galdakao-Usansolo;Barrio Labeaga, 46-A, 48960 Usansolo (Bizkaia);48960;Usansolo;24 horas;Hospital;
+369;Consultorio de Zigoitia-Gopegi;Plaza Euskaldun Berria, 1, 01138 Zigoitia (Álava);01138;Zigoitia;09:00 - 13:00;Consultorio;
+370;Consultorio de Fika;Barrio Elexalde, 30, 48113 Gamiz-Fika (Bizkaia);48113;Gamiz-Fika;09:00 - 13:00;Consultorio;
+371;Centro de Salud de Durango-Landako;Barrio Arripausueta, 1, 48200 Durango (Bizkaia);48200;Durango;08:00 - 20:00;Centro de Salud;
+372;Centro de Salud de Rontegi;Arrontegi, 12, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 20:00;Centro de Salud;946007770
+373;Centro de Salud de Laguardia;Plaza La Carcel, 1, 01300 Laguardia (Álava);01300;Laguardia;08:00 - 20:00;Centro de Salud;945600184
+374;Centro de Salud de Salvatierra;Galzar, 1, 01200 Agurain/Salvatierra (Álava);01200;Agurain/Salvatierra;08:00 - 20:00;Centro de Salud;
+375;Hospital de Urduliz-Alfredo Espinosa;Goieta, 32, 48610 Urduliz (Bizkaia);48610;Urduliz;24 horas;Hospital;946134800
+376;Consultorio de Berantevilla;Calle Mayor, 40, 01211 Berantevilla (Álava);01211;Berantevilla;09:00 - 13:00;Consultorio;945331258
+377;Consultorio de Ereño;Barrio Elexalde-Zeeta, 10, 48313 Ereño (Bizkaia);48313;Ereño;09:00 - 13:00;Consultorio;
+378;Centro de Salud Mental de Otxarkoaga;Zizeruena, 1, 48004 Bilbao (Bizkaia);48004;Bilbao;08:00 - 15:00;Centro de Salud Mental;944007699
+379;Consultorio de Zeberio;Barrio Zubialde, 10, 48499 Zeberio (Bizkaia);48499;Zeberio;09:00 - 13:00;Consultorio;
+380;Centro de Salud Mental de Infancia y Adolescencia de Ezkerraldea;El Carmen, 2, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 15:00;Centro de Salud Mental;946007785
+381;Consultorio de Mañaria;Ebaristo Bustinza Kirikiño, 19, 48212 Mañaria (Bizkaia);48212;Mañaria;09:00 - 13:00;Consultorio;
+382;Guardias de Labastida;La Piñuela, 2, 01330 Labastida/Bastida (Álava);01330;Labastida/Bastida;24 horas;Guardia localizada;945331258
+383;Centro de Salud Mental de Adicciones Ajuriaguerra;Fika, 22, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 15:00;Centro de Salud Mental;944007720
+384;Consultorio de Aizarnazabal;Baltasar Etxabe, 19, 20749 Aizarnazabal (Gipuzkoa);20749;Aizarnazabal;09:00 - 13:00;Consultorio;
+385;Consultorio de Beizama;Núcleo Beizama, 1, 20739 Beizama (Gipuzkoa);20739;Beizama;09:00 - 13:00;Consultorio;943811777
+386;Tratamiento Asertivo Comunitario de Bilbao;Virgen de Begoña, 32, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 15:00;Otros;944007481
+387;Consultorio de Gizaburuaga;Larraigana, 1, 48289 Gizaburuaga (Bizkaia);48289;Gizaburuaga;09:00 - 13:00;Consultorio;
+388;Centro de Salud de Arangoiti;Camino Berrizbidea, 50, 48014 Bilbao (Bizkaia);48014;Bilbao;08:00 - 20:00;Centro de Salud;
+389;Centro de Salud de Balmaseda;Avenida Encartaciones, 9-A, 48800 Balmaseda (Bizkaia);48800;Balmaseda;08:00 - 20:00;Centro de Salud;946102325
+390;Centro de Salud de Loiola;Avenida Felisa Martín Bravo, 4, 20014 Donostia / San Sebastián (Gipuzkoa);20014;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+391;Centro de Salud Mental de Basauri;Kale Nagusia, 21, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 15:00;Centro de Salud Mental;946007343
+392;Consultorio de Lapuebla de Labarca;Tejerías, 2, 01306 Lapuebla de Labarca (Álava);01306;Lapuebla de Labarca;09:00 - 13:00;Consultorio;
+393;Centro de Salud de Intxaurrondo;Paseo Zarategi, 92, 20015 Donostia / San Sebastián (Gipuzkoa);20015;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+394;Centro de Salud Aranbizkarra 2;Burgos, 23, 01002 Vitoria-Gasteiz (Álava);01002;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+395;C.S. DE ZUIA-MURGIA;Aiurdin, 6, 01130 Zuia (Álava);01130;Zuia;24 horas;PAC;945430030
+396;Centro de Salud de Algorta;Bidezabal, 30, 48993 Getxo (Bizkaia);48993;Getxo;08:00 - 20:00;Centro de Salud;
+397;Consultorio de Mundaka;Goiko kalea, 1, 48360 Mundaka (Bizkaia);48360;Mundaka;09:00 - 13:00;Consultorio;
+398;Centro de Salud de Olarizu;Heraclio Fournier, 19-C, 01006 Vitoria-Gasteiz (Álava);01006;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+399;Hospital de Zaldibar;Avenida Bilbo, 19, 48250 Zaldibar (Bizkaia);48250;Zaldibar;24 horas;Hospital;946032800
+400;Guardias Rurales Karranza;Barrio Concha, 17, 48891 Karrantza Harana/Valle de Carranza (Bizkaia);48891;Karrantza Harana/Valle de Carranza;24 horas;Guardia localizada;
+401;Ambulatorio de Basauri-Ariz;Kale Nagusia, 21, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 20:00;Ambulatorio;
+402;Centro de Salud de Indautxu;Alameda Doctor Areilza, 12, 48011 Bilbao (Bizkaia);48011;Bilbao;08:00 - 20:00;Centro de Salud;
+403;Ambulatorio de Begoña;Virgen de Begoña, 32, 48006 Bilbao (Bizkaia);48006;Bilbao;08:00 - 20:00;Centro de Salud;
+404;Centro de Salud de Alango;Alango, 30, 48992 Getxo (Bizkaia);48992;Getxo;08:00 - 20:00;Centro de Salud;
+405;Hospital de Día de Barakaldo 2;Etxatxu, 35, 48902 Barakaldo (Bizkaia);48902;Barakaldo;24 horas;Hospital de Día;946552575
+406;Ambulatorio de Ortuella;Avenida Minero, 1, 48530 Ortuella (Bizkaia);48530;Ortuella;08:00 - 20:00;Centro de Salud;946007630
+407;Consultorio de Gordexola;Plaza Molinar, 3, 48192 Gordexola (Bizkaia);48192;Gordexola;09:00 - 13:00;Consultorio;946798023
+408;PAC DE BASAURI-ARIZ;Kale Nagusia, 21, 48970 Basauri (Bizkaia);48970;Basauri;24 horas;PAC;946007345
+409;C.S. DE LABASTIDA;La Piñuela, 2, 01330 Labastida/Bastida (Álava);01330;Labastida/Bastida;24 horas;PAC;945331258
+410;Consultorio de Gabiria;Núcleo Gabiria, 5, 20217 Gabiria (Gipuzkoa);20217;Gabiria;09:00 - 13:00;Consultorio;
+411;Centro de Salud de Leioa;Plaza Ikeabarri, 1, 48940 Leioa (Bizkaia);48940;Leioa;08:00 - 20:00;Centro de Salud;
+412;Centro de Salud de Zaballa (Centro Penitenciario);Portillo de San Miguel, 1, 01230 Iruña Oka/Iruña de Oca (Álava);01230;Iruña Oka/Iruña de Oca;08:00 - 20:00;Centro de Salud;945318600
+413;Ambulatorio de Eibar;Toribio Etxebarria, 29, 20600 Eibar (Gipuzkoa);20600;Eibar;08:00 - 20:00;Ambulatorio;943032500
+414;Consultorio de Ullíbarri-Arana;Calle Mayor, 0-B, 01117 Harana/Valle de Arana (Álava);01117;Harana/Valle de Arana;09:00 - 13:00;Consultorio;945415345
+415;Consultorio de Orozko;Sastegi, 10, 48410 Orozko (Bizkaia);48410;Orozko;09:00 - 13:00;Consultorio;946339611
+416;Ambulatorio de Bombero Etxaniz;Plaza Bombero Echániz, 1, 48010 Bilbao (Bizkaia);48010;Bilbao;08:00 - 20:00;Centro de Salud;
+417;Hospital de Día de Adicciones Manuene;Barrio Basara, 29, 48195 Larrabetzu (Bizkaia);48195;Larrabetzu;24 horas;Hospital de Día;944558169
+418;Centro de Salud Mental de Zalla;Barrio El Carmen, 14 - 1º, 48860 Zalla (Bizkaia);48860;Zalla;08:00 - 15:00;Centro de Salud Mental;946007600
+419;Centro de Salud de Iruña de Oca;Parque Tres de Marzo, 1, 01230 Iruña Oka/Iruña de Oca (Álava);01230;Iruña Oka/Iruña de Oca;08:00 - 20:00;Centro de Salud;
+420;Centro de Salud de San Adrián;Juan de Garay, 53 - Trasera, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 20:00;Centro de Salud;
+421;Hospital Psiquiátrico de Araba;Álava, 43, 01006 Vitoria-Gasteiz (Álava);01006;Vitoria-Gasteiz;24 horas;Hospital;945006555
+422;Consultorio de Artzentales-Traslaviña;Avenida Lehendakari Agirre, 12, 48879 Artzentales (Bizkaia);48879;Artzentales;09:00 - 13:00;Consultorio;946809205
+423;Consultorio de Elduain;Núcleo Elduain, 1, 20493 Elduain (Gipuzkoa);20493;Elduain;09:00 - 13:00;Consultorio;943161874
+424;Consultorio de Elorrio;Esteibarlanda, 10, 48230 Elorrio (Bizkaia);48230;Elorrio;09:00 - 13:00;Consultorio;946238070
+425;Consultorio de Larrabetzu;Errebale, 2, 48195 Larrabetzu (Bizkaia);48195;Larrabetzu;09:00 - 13:00;Consultorio;
+426;Hospital de Día de Ermua;Aldapa, 5, 48260 Ermua (Bizkaia);48260;Ermua;24 horas;Hospital de Día;943170630
+427;Primeros Episodios de Bilbao;Ronda, 4, 48005 Bilbao (Bizkaia);48005;Bilbao;08:00 - 15:00;Otros;944793410
+428;Centro de Salud Mental de Bermeo;Tonpoi Bidea, 4, 48370 Bermeo (Bizkaia);48370;Bermeo;08:00 - 15:00;Centro de Salud Mental;946029066
+429;Consultorio de Lemoa;Barrio Elizondo, 31, 48330 Lemoa (Bizkaia);48330;Lemoa;09:00 - 13:00;Consultorio;
+430;Centro de Salud Mental de Zabalgana;Avenida La Ilustración, 47, 01015 Vitoria-Gasteiz (Álava);01015;Vitoria-Gasteiz;08:00 - 15:00;Centro de Salud Mental;945294080
+431;Consultorio de Durana;Plaza La Landa, 1, 01520 Arratzua-Ubarrundia (Álava);01520;Arratzua-Ubarrundia;09:00 - 13:00;Consultorio;
+432;Consultorio de Bernedo;La Sarrea, 6, 01118 Bernedo (Álava);01118;Bernedo;09:00 - 13:00;Consultorio;945415345
+433;Centro de Salud de Buenavista;Avenida Campanzar, 2, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 20:00;Centro de Salud;944596500
+434;Ambulatorio de Galdakao;Bizkai, 42-A, 48960 Galdakao (Bizkaia);48960;Galdakao;08:00 - 20:00;Ambulatorio;946007400
+435;Consultorio de Iurreta;Bixente Kapanaga, 9, 48215 Iurreta (Bizkaia);48215;Iurreta;09:00 - 13:00;Consultorio;946818400
+436;Consultorio de Barrundia-Ozaeta;Boilar, 12, 01206 Barrundia (Álava);01206;Barrundia;09:00 - 13:00;Consultorio;
+437;Consultorio de Albiztur;Núcleo Erdigunea, 22, 20495 Albiztur (Gipuzkoa);20495;Albiztur;09:00 - 13:00;Consultorio;943300359
+438;Centro de Salud Gernikaldea;Carretera Aita Luis Villasante, 4, 48300 Gernika-Lumo (Bizkaia);48300;Gernika-Lumo;08:00 - 20:00;Centro de Salud;
+439;Centro de Salud Mental de Zumarraga;Hiri Lorategia, 20, 20700 Zumarraga (Gipuzkoa);20700;Zumarraga;08:00 - 15:00;Centro de Salud Mental;943721563
+440;PAC DEL HOSPITAL SAN ELOY - BARAKALDO;Avenida Miranda, 5, 48902 Barakaldo (Bizkaia);48902;Barakaldo;24 horas;PAC;944006700
+441;Consultorio de Luiaondo;La Torre, 17, 01408 Ayala/Aiara (Álava);01408;Ayala/Aiara;09:00 - 13:00;Consultorio;
+442;Hospital Universitario de Araba - sede Txagorritxu;Jose Achotegui, 3, 01009 Vitoria-Gasteiz (Álava);01009;Vitoria-Gasteiz;24 horas;Hospital;945007000
+443;Unidad Terapéutica Educativa de Vitoria-Gasteiz;Nieves Cano, 18, 01006 Vitoria-Gasteiz (Álava);01006;Vitoria-Gasteiz;08:00 - 15:00;Otros;945187018
+444;Centro de Salud de Hernani;Aristizabal, 2, 20120 Hernani (Gipuzkoa);20120;Hernani;08:00 - 20:00;Centro de Salud;943006666
+445;Centro de Salud de Aretxabaleta;Errekabarren, 10, 20550 Aretxabaleta (Gipuzkoa);20550;Aretxabaleta;08:00 - 20:00;Centro de Salud;943711959
+446;Hospital de Bidasoa;Barrio Jaitzubia, 154, 20280 Hondarribia (Gipuzkoa);20280;Hondarribia;24 horas;Hospital;943007700
+447;Centro de Salud Mental de Barakaldo-Adicciones;Arrontegi, 12, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 15:00;Centro de Salud Mental;944388505
+448;Consultorio de Mendata;Barrio Elexalde, 2, 48382 Mendata (Bizkaia);48382;Mendata;09:00 - 13:00;Consultorio;
+449;Guardias de Oyón;Fueros, 6, 01320 Oyón-Oion (Álava);01320;Oyón-Oion;24 horas;Guardia localizada;945622155
+450;Centro de Salud de Abadiño-Matiena;Avenida Trañabarren, 13, 48220 Abadiño (Bizkaia);48220;Abadiño;08:00 - 20:00;Centro de Salud;
+451;Consultorio de Amezketa;Bartolome Deuna, 27, 20268 Amezketa (Gipuzkoa);20268;Amezketa;09:00 - 13:00;Consultorio;943653182
+452;Consultorio de Ormaiztegi;San Andres, 29, 20216 Ormaiztegi (Gipuzkoa);20216;Ormaiztegi;09:00 - 13:00;Consultorio;
+453;Equipo de Psiquiatría Infanto Juvenil de Irún;Eguzkiza, 13, 20280 Irun (Gipuzkoa);20280;Irun;08:00 - 15:00;Centro de Salud Mental;943007746
+454;Centro de Salud Mental de Eibar;Torrekua, 1, 20600 Eibar (Gipuzkoa);20600;Eibar;08:00 - 15:00;Centro de Salud Mental;943032653
+455;Centro de Salud de Salburua;Avenida Praga, 2, 01003 Vitoria-Gasteiz (Álava);01003;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+456;PAC DE AMOREBIETA;San Miguel, 17, 48340 Amorebieta-Etxano (Bizkaia);48340;Amorebieta-Etxano;24 horas;PAC;946007200
+457;Primeros Episodios de Barrualdea;Gaztela, 7, 48970 Basauri (Bizkaia);48970;Basauri;08:00 - 15:00;Otros;946007330
+458;Centro de Salud de Bidebieta;Paseo Julio Urkixo, 24, 20016 Donostia / San Sebastián (Gipuzkoa);20016;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+459;Centro de Salud de Urnieta;Plaza Etxeberri, 9, 20130 Urnieta (Gipuzkoa);20130;Urnieta;08:00 - 20:00;Centro de Salud;943006680
+460;Centro de Salud de Zaballa;Munibe, 2, 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 20:00;Centro de Salud;946007844
+461;Consultorio de Morga;Eleiz-Ondo, 10, 48115 Morga (Bizkaia);48115;Morga;09:00 - 13:00;Consultorio;
+462;PAC DE OLAGUIBEL;Olaguibel, 31 - 2ª planta / 2. solairua, 01004 Vitoria-Gasteiz (Álava);01004;Vitoria-Gasteiz;24 horas;PAC;945007900
+463;Ambulatorio de Repelega;Barrengoitia, 9, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 20:00;Ambulatorio;946007500
+464;Centro de Salud Mental de Arrasate;Avenida Nafarroa, 14, 20500 Arrasate / Mondragón (Gipuzkoa);20500;Arrasate / Mondragón;08:00 - 15:00;Centro de Salud Mental;
+465;Hospital Universitario Basurto;Avenida Montevideo, 18, 48013 Bilbao (Bizkaia);48013;Bilbao;24 horas;Hospital;
+466;Centro de Salud de Hondarribia;Matxin Arzu, 2, 20280 Hondarribia (Gipuzkoa);20280;Hondarribia;08:00 - 20:00;Centro de Salud;943007640
+467;Centro de Salud Aranbizkarra 1;Sierras Alavesas, 20, 01002 Vitoria-Gasteiz (Álava);01002;Vitoria-Gasteiz;08:00 - 20:00;Centro de Salud;
+468;Hospital de Día de Txurdinaga;Avenida Julián Gaiarre, 22, 48004 Bilbao (Bizkaia);48004;Bilbao;24 horas;Hospital de Día;944007780
+469;GUARDIAS RURALES KARRANZA;Barrio Concha, 17, 48891 Karrantza Harana/Valle de Carranza (Bizkaia);48891;Karrantza Harana/Valle de Carranza;24 horas;PAC;946806519
+470;Consultorio de Viñaspre;Las Escuelas, 7, 01308 Lanciego/Lantziego (Álava);01308;Lanciego/Lantziego;09:00 - 13:00;Consultorio;945622155
+471;Centro de Salud de Ermua;Camino Elorreta, 0-A, 48260 Ermua (Bizkaia);48260;Ermua;08:00 - 20:00;Centro de Salud;943032630
+472;Ambulatorio de Rekalde;Carretera Errekalde-Larraskitu, 2-A, 48002 Bilbao (Bizkaia);48002;Bilbao;08:00 - 20:00;Centro de Salud;
+473;Consultorio de Mutiloa;Núcleo Mutiloa Bildua, 1-A, 20214 Mutiloa (Gipuzkoa);20214;Mutiloa;09:00 - 13:00;Consultorio;
+474;Centro de Salud Mental de Barakaldo;Munibe, 2 - 3.a (Anb), 48901 Barakaldo (Bizkaia);48901;Barakaldo;08:00 - 15:00;Centro de Salud Mental;946007835
+475;Consultorio de Puentelarrá;Calle Real, 2-1, 01423 Lantarón (Álava);01423;Lantarón;09:00 - 13:00;Consultorio;945385012
+476;PAC DE TOLOSALDEA;Paseo Boni Laskurain, 11, 20570 Bergara (Gipuzkoa);20570;Bergara;24 horas;PAC;943035400
+477;Centro de Salud de Getaria;Avenida Cristóbal Balenciaga, 14, 20808 Getaria (Gipuzkoa);20808;Getaria;08:00 - 20:00;Centro de Salud;
+478;Primeros Episodios de Uribe;San Martin, 17, 48993 Getxo (Bizkaia);48993;Getxo;08:00 - 15:00;Otros;944912523
+479;Hospital de Bermeo;Tonpoi Bidea, 2, 48370 Bermeo (Bizkaia);48370;Bermeo;24 horas;Hospital;946029000
+480;Consultorio de Ezkio-Itsaso;Errekabarrena, 5, 20709 Ezkio-Itsaso (Gipuzkoa);20709;Ezkio-Itsaso;09:00 - 13:00;Consultorio;
+481;Ambulatorio de Doctor Areilza;Alameda Doctor Areilza, 12, 48011 Bilbao (Bizkaia);48011;Bilbao;08:00 - 20:00;Ambulatorio;946006800
+482;Centro de Salud de Oiartzun;Avenida Manuel Lekuona, 3, 20180 Oiartzun (Gipuzkoa);20180;Oiartzun;08:00 - 20:00;Centro de Salud;
+483;Ambulatorio de Kabiezes;Jose Miguel Barandiaran, 21, 48980 Santurtzi (Bizkaia);48980;Santurtzi;08:00 - 20:00;Ambulatorio;946007610
+484;Servicio de Rehabilitación Comunitaria;Reyes Católicos, 6, 01013 Vitoria-Gasteiz (Álava);01013;Vitoria-Gasteiz;08:00 - 15:00;Otros;945259517
+485;Consultorio de Aia;Joan Etorle, 18, 20809 Aia (Gipuzkoa);20809;Aia;08:00 - 20:00;Centro de Salud;
+486;Unidad Terapéutica Educativa de Lasarte-Oria;Camino Urnieta, 2, 20160 Lasarte-Oria (Gipuzkoa);20160;Lasarte-Oria;08:00 - 15:00;Otros;943369103
+487;Consultorio de Loiu;Plaza Aransotegi, 2, 48180 Loiu (Bizkaia);48180;Loiu;09:00 - 13:00;Consultorio;
+488;Consultorio de Gaztelu;Barrio Gaztelu, 1, 20491 Gaztelu (Gipuzkoa);20491;Gaztelu;09:00 - 13:00;Consultorio;943161880
+489;PAC DE IRUN CENTRO;Avenida Gipuzkoa, 15, 20302 Irun (Gipuzkoa);20302;Irun;24 horas;PAC;943006700
+490;Consultorio de Ea;Plaza Donibane, 2, 48287 Ea (Bizkaia);48287;Ea;09:00 - 13:00;Consultorio;
+491;Consultorio de Lanciego;Plaza La Iglesia, 1, 01308 Lanciego/Lantziego (Álava);01308;Lanciego/Lantziego;09:00 - 13:00;Consultorio;945622155
+492;Tratamiento Asertivo Comunitario de Ezkerraldea;Avenida Campanzar, 4-A, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 15:00;Otros;944596510
+493;Hospital de Eibar;Avenida Otaola, 6, 20600 Eibar (Gipuzkoa);20600;Eibar;24 horas;Hospital;943449000
+494;PAC DE ZALLA;Barrio El Carmen, 14, 48860 Zalla (Bizkaia);48860;Zalla;24 horas;PAC;946007590
+495;Ambulatorio de Azpeitia;Jose Artetxe, 7, 20730 Azpeitia (Gipuzkoa);20730;Azpeitia;08:00 - 20:00;Centro de Salud;
+496;Hospital de Alto Deba;Avenida Nafarroa, 16, 20500 Arrasate / Mondragón (Gipuzkoa);20500;Arrasate / Mondragón;24 horas;Hospital;943035300
+497;PAC DE DURANGO;Barrio Arripausueta, 1, 48200 Durango (Bizkaia);48200;Durango;24 horas;PAC;946032880
+498;Centro de Salud de Amurrio;Felix Murga, 8-A, 01470 Amurrio (Álava);01470;Amurrio;08:00 - 20:00;Centro de Salud;945025900
+499;Consultorio de Ribera Alta-Pobes;Álava, 4, 01420 Erriberagoitia/Ribera Alta (Álava);01420;Erriberagoitia/Ribera Alta;09:00 - 13:00;Consultorio;
+500;Centro de Salud de Egia;Ametzagaña, 8, 20012 Donostia / San Sebastián (Gipuzkoa);20012;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;
+501;Centro de Salud Javier Sáenz de Buruaga;Plaza Ensanche, 11, 48009 Bilbao (Bizkaia);48009;Bilbao;08:00 - 20:00;Centro de Salud;
+502;Consultorio de Mendaro;Avenida Kilimon, 7, 20850 Mendaro (Gipuzkoa);20850;Mendaro;09:00 - 13:00;Consultorio;
+503;Ambulatorio de Txurdinaga;Avenida Gabriel Aresti, 11, 48004 Bilbao (Bizkaia);48004;Bilbao;08:00 - 20:00;Ambulatorio;
+504;Centro de Salud de Txurdinaga;Avenida Txomin Garat, 16, 48004 Bilbao (Bizkaia);48004;Bilbao;08:00 - 20:00;Centro de Salud;944007600
+505;Centro de Salud Mental de Errenteria;Avenida Galtzaraborda, 69, 20100 Errenteria (Gipuzkoa);20100;Errenteria;08:00 - 15:00;Centro de Salud Mental;943249293
+506;Centro infanto-juvenil Saralegi;Plaza Saralegi, 8 - Ibaiondo, 48003 Bilbao (Bizkaia);48003;Bilbao;08:00 - 15:00;Otros;
+507;Centro de Adicciones Bitarte;Jose Arana, 7, 20001 Donostia / San Sebastián (Gipuzkoa);20001;Donostia / San Sebastián;08:00 - 15:00;Otros;943298040
+508;Hospital Universitario Cruces;Plaza Cruces, 12, 48903 Barakaldo (Bizkaia);48903;Barakaldo;24 horas;Hospital;
+509;Consultorio de Leaburu;Barrio Leaburu, 2, 20491 Leaburu (Gipuzkoa);20491;Leaburu;09:00 - 13:00;Consultorio;943672428
+510;Ambulatorio de Gros;Avenida Navarra, 14, 20013 Donostia / San Sebastián (Gipuzkoa);20013;Donostia / San Sebastián;08:00 - 20:00;Centro de Salud;943007909
+511;Ambulatorio de Repelega;Barrengoitia, 9, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 20:00;Centro de Salud;946007500
+512;Centro de Salud de Pasai Donibane;Donibane, 15, 20110 Pasaia (Gipuzkoa);20110;Pasaia;08:00 - 20:00;Centro de Salud;943346474
+513;Ambulatorio de Larzabal;Barrio Lartzabal, 2, 20100 Errenteria (Gipuzkoa);20100;Errenteria;08:00 - 20:00;Ambulatorio;943006100
+514;Ambulatorio de Las Arenas;Bidebarrieta, 12, 48930 Getxo (Bizkaia);48930;Getxo;08:00 - 20:00;Centro de Salud;
+515;Centro de Salud de Arrasate;Avenida Nafarroa, 14, 20500 Arrasate / Mondragón (Gipuzkoa);20500;Arrasate / Mondragón;08:00 - 20:00;Centro de Salud;
+516;Centro de Salud de Legazpi;Latxartegi, 1, 20230 Legazpi (Gipuzkoa);20230;Legazpi;08:00 - 20:00;Centro de Salud;
+517;Centro de Salud de San Vicente;Elejalde, 1, 48902 Barakaldo (Bizkaia);48902;Barakaldo;08:00 - 20:00;Centro de Salud;946007940
+518;Consultorio de Orbiso;Centro, 14, 01117 Campezo/Kanpezu (Álava);01117;Campezo/Kanpezu;09:00 - 13:00;Consultorio;945415345
+519;Ambulatorio de Pasai San Pedro;Marinel, 1, 20110 Pasaia (Gipuzkoa);20110;Pasaia;08:00 - 20:00;Centro de Salud;
+520;Consultorio de Trucios;Avenida Lehendakari Agirre, 60, 48880 Trucios-Turtzioz (Bizkaia);48880;Trucios-Turtzioz;09:00 - 13:00;Consultorio;946809127
+521;Hospital de Día de Uribe;San Nicolas, 2, 48990 Getxo (Bizkaia);48990;Getxo;24 horas;Hospital de Día;944911555
+522;Consultorio de Arrieta;Barrio Libao, 16, 48114 Arrieta (Bizkaia);48114;Arrieta;09:00 - 13:00;Consultorio;
+523;Centro de Salud de Castaños;General Castaños, 34, 48920 Portugalete (Bizkaia);48920;Portugalete;08:00 - 20:00;Centro de Salud;
+524;Centro de Salud de Torrekua;Avenida Otaola, 6, 20600 Eibar (Gipuzkoa);20600;Eibar;08:00 - 20:00;Centro de Salud;
+525;Hospital de Zumarraga;Diseminado Sakabanatuak, 77, 20700 Zumarraga (Gipuzkoa);20700;Zumarraga;24 horas;Hospital;943035000
+526;Centro de Salud de Elgoibar;Bernardo Ezenarro, 13, 20870 Elgoibar (Gipuzkoa);20870;Elgoibar;08:00 - 20:00;Centro de Salud;943032610
+527;Ambulatorio de Deusto;Luis Power, 18, 48014 Bilbao (Bizkaia);48014;Bilbao;08:00 - 20:00;Ambulatorio;946006666

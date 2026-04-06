@@ -27,6 +27,8 @@ void db_insertar_farmacia(char* nom, char* dir, char* cp, char* mun, char* tel, 
 void db_modificar_farmacia(int id, char* nuevo_nom, char* nueva_dir, char* nuevo_tel);
 void db_modificar_guardia(int id, int estado);
 void db_eliminar_farmacia(int id);
-void registrar_log(const char* mensaje);
+void registrar_log(const char* categoria, const char* detalle);
+int validar_paciente(char* dni, char* pass);
+void registrar_usuario(char* dni, char* nombre, char* email, char* municipio, char* pass, char* historial);
 
 #endif /* DB_MANAGER_H_ */

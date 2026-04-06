@@ -18,6 +18,7 @@
 #define MAX_CP 10
 #define MAX_PASS 20
 #define MAX_SQL 2048
+#define MAX_INFO_LOG 100
 
 
 // Configuración de la Base de Datos

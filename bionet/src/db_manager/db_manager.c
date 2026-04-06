@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
+#include <string.h>
 #include "db_manager.h"
 #include "constantes.h"
 
@@ -321,6 +323,13 @@ void ver_ficha_medica(char *dni_usuario){
 			printf("============================================\n");
 			printf(" PACIENTE: %s %s\n", sqlite3_column_text(res, 0), sqlite3_column_text(res, 1));
 			printf(" RESIDENCIA: %s\n", sqlite3_column_text(res, 2));
+
+			// Registro de LOG
+			char info_log[MAX_INFO_LOG];
+			sprintf(info_log, "Consulta de ficha medica completa por el usuario: %s", dni_usuario);
+			registrar_log("[ACCESO PRIVADO]", info_log);
+
+
 		} else{
 			printf("[!] Usuario no encontrado\n");
 			sqlite3_finalize(res);
@@ -456,13 +465,27 @@ int comprobar_y_reservar(char *dni, int id_medico, char *fecha, char *hora){
 
 	//Si esta libre, hacemos el insert en la tabla Cita
 	char *sql_insert = "INSERT INTO Cita(DNI_Usuario, ID_Doctor, Fecha, Hora) VALUES (?, ?, ?, ?);";
-	sqlite3_prepare16_v2(db, sql_insert, -1, &res, 0);
+	sqlite3_prepare_v2(db, sql_insert, -1, &res, 0);
 	sqlite3_bind_text(res, 1, dni, -1, SQLITE_STATIC);
 	sqlite3_bind_int(res, 2, id_medico);
 	sqlite3_bind_text(res, 3, fecha, -1, SQLITE_STATIC);
 	sqlite3_bind_text(res, 4, hora, -1, SQLITE_STATIC);
 
-	sqlite3_step(res);
+
+
+	int rc = sqlite3_step(res);
+	if(rc == SQLITE_DONE){
+		//Mensaje informativo para añadir en el log
+		char info[MAX_INFO_LOG];
+		sprintf(info, "Cita resevada por %s con Medico ID %d el %s", dni, id_medico, fecha);
+		registrar_log("[ACCION USUARIO]", info);
+		printf("[OK] Reserva confirmada. \n");
+
+	}else{
+		printf("[ERROR] No se pudo guardar la cita en la DB. \n");
+	}
+
+
 	sqlite3_finalize(res);
 	sqlite3_close(db);
 
@@ -482,7 +505,7 @@ void db_insertar_centro(char* nom, char* dir, char* cp, char* mun, char* hor,
 				  nom, dir, cp, mun, hor, tipo, tel);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("CENTRO", sql);
 		printf("[DB] Centro guardado con extio. \n");
 
 	} else {
@@ -501,7 +524,7 @@ void db_modificar_centro(int id, char* nuevo_nombre){
 	sprintf(sql, "UPDATE CentroSalud SET Nombre = '%s' WHERE ID = %d;", nuevo_nombre, id);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("CENTRO", sql);
 		printf("[DB] Centro actualizado correctamente. \n");
 	}
 
@@ -516,7 +539,7 @@ void db_eliminar_centro(int id){
 	sprintf(sql, "DELETE FROM CentroSalud WHERE ID = %d;", id);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("CENTRO", sql);
 		printf("[DB] Centro con ID %d eliminado. \n", id);
 	}
 
@@ -532,7 +555,7 @@ void db_insertar_medico(char* nombre, char* especialidad, int id_centro){
 			nombre, especialidad, id_centro);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("MEDICO", sql);
 		printf("[OK] Medico dado de alta correctamente. \n");
 
 	} else{
@@ -552,7 +575,7 @@ void db_eliminar_medico(int id){
 	sprintf(sql, "DELETE FROM Doctor where ID = %d;", id);
 
 	if(sqlite3_exec(db, sql, 0,0,0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("MEDICO", sql);
 		printf("[OK] Medico con ID = %d eliminado del sistema.\n", id);
 	}
 
@@ -568,7 +591,7 @@ void db_eliminar_usuario(char* dni){
 	sprintf(sql, "DELETE FROM Usuario WHERE DNI = '%s';", dni);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("USUARIO", sql);
 		printf("[OK] Usuario con DNI %s eliminado.\n", dni);
 
 	}else{
@@ -587,7 +610,7 @@ void db_modificar_password_usuario(char* dni, char* nueva_pass){
 	sprintf(sql, "UPDATE Usuario SET Pass = '%s' WHERE DNI = '%s';", nueva_pass, dni);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("USUARIO", sql);
 		printf("[OK] Contraseña actualizada correctamente para el DNI %s.\n", dni);
 
 	} else{
@@ -607,7 +630,7 @@ void db_insertar_farmacia(char* nom, char* dir, char* cp, char* mun, char* tel, 
 				" VALUES ('%s', '%s', '%s', '%s', '%s', %d);", nom, dir, cp, mun, tel, guardia);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("FARMACIA",sql);
 		printf("[OK] Farmacia añadida correctamente.\n");
 
 	} else{
@@ -627,7 +650,7 @@ void db_modificar_farmacia(int id, char* nuevo_nom, char* nueva_dir, char* nuevo
 			nuevo_nom, nueva_dir, nuevo_tel, id);
 
 	if(sqlite3_exec(db, sql, 0,0,0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("FARMACIA", sql);
 		printf("[OK] Datos de la farmacia actualizados correctamente.\n");
 
 	} else{
@@ -645,7 +668,7 @@ void db_modificar_guardia(int id, int estado){
 	sprintf(sql, "UPDATE Farmacia SET Guardia = %d WHERE ID = %d;", estado, id);
 
 	if(sqlite3_exec(db, sql, 0,0,0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("FARMACIA", sql);
 		printf("[OK] Estado de guardia actualizado correctamente.\n");
 
 	} else{
@@ -669,7 +692,7 @@ void db_eliminar_farmacia(int id){
 	sprintf(sql, "DELETE FROM Farmacia WHERE ID = %d;", id);
 
 	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
-		registrar_log(sql);
+		registrar_log("FARMACIA", sql);
 		printf("[OK] Farmacia con ID %d eliminada correctamente. \n", id);
 
 	} else {
@@ -680,13 +703,86 @@ void db_eliminar_farmacia(int id){
 
 }
 
-void registrar_log(const char* mensaje){
+void registrar_log(const char* categoria, const char* detalle){
 	FILE *f = fopen("log.txt", "a");
 	if(f != NULL){
-		fprintf(f, "[LOG] %s\n", mensaje);
+		time_t t = time(NULL);
+		struct tm tm = *localtime(&t);
+
+		fprintf(f, "[%d-%02d-%02d  %02d:%02d]  [%s] %s\n",
+						tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+						tm.tm_hour, tm.tm_min, categoria, detalle);
 		fclose(f);
 	}
 
+}
+
+
+int validar_paciente(char* dni, char* pass){
+	sqlite3 *db;
+	sqlite3_stmt *res;
+	int login_correcto = 0;
+
+	sqlite3_open(DB_NAME, &db);
+
+	//Verificamos cuantos usuarios coinciden con DNI y Contraseña
+	char *sql = "SELECT COUNT(*) FROM Usuario WHERE DNI = ? AND Pass = ?;";
+
+	if(sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK){
+		sqlite3_bind_text(res, 1, dni, -1, SQLITE_STATIC);
+		sqlite3_bind_text(res, 2, pass, -1, SQLITE_STATIC);
+
+		if(sqlite3_step(res) == SQLITE_ROW){
+			login_correcto = sqlite3_column_int(res, 0);
+		}
+
+	}
+	sqlite3_finalize(res);
+
+	//Registramos el intento en el log
+	if(login_correcto){
+		char info_log[MAX_INFO_LOG];
+		sprintf(info_log, "LOGIN EXITOSO: Paciente con DNI %s", dni);
+		registrar_log("[ACCESO]", info_log);
+
+	} else{
+		char info_log[MAX_INFO_LOG];
+		sprintf(info_log, "LOGIN FALLIDO: Acceso del paciente con DNI %s denegado", dni);
+		registrar_log("[SEGURIDAD]", info_log);
+	}
+
+	sqlite3_close(db);
+	return login_correcto;
+
+}
+
+void registrar_usuario(char* dni, char* nombre, char* email, char* municipio, char* pass, char* historial){
+	sqlite3 *db;
+	char sql[MAX_SQL];
+	int rc = sqlite3_open(DB_NAME, &db);
+
+	if(rc != SQLITE_OK){
+		printf("[ERROR] No se pudo acceder a la base de datos para el registro. \n");
+		return;
+	}
+
+	//Preparamos la sentencia SQL
+	sprintf(sql, "INSERT INTO Usuario (DNI, Nombre, Email, Pass, Tipo, Historial_Breve, Municipio) "
+			"       VALUES ('%s', '%s', '%s', '%s', 'PACIENTE', '%s', '%s');",
+					dni, nombre, email, pass, historial, municipio);
+
+
+	if(sqlite3_exec(db, sql, 0, 0, 0) == SQLITE_OK){
+		char info[MAX_INFO_LOG];
+		sprintf(info, "NUEVO REGISTRO: %s (DNI: %s) con historial medico inicial.", nombre, dni);
+		registrar_log("[SISTEMA]", info);
+		printf("\n[OK] Registro completado con éxito.\n");
+
+	}else{
+		printf("\n[!] Error: El DNI ya existe o los datos son incorrectos.\n");
+	}
+
+	sqlite3_close(db);
 }
 
 
