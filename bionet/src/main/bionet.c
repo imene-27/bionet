@@ -416,6 +416,8 @@ void menu_gestion_farmacias(){
 				db_insertar_farmacia(nombre, dir, cp, mun, tel, guardia);
 				break;
 
+
+
 			case 2:
 				printf("ID de la farmcia a modificar: ");
 				scanf("%s", id);
