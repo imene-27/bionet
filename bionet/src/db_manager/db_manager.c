@@ -255,13 +255,13 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; localidad[i] != '\0'; i++){
-		if(!isdigit(localidad[i])){
+		if(!isdigit((unsigned char)localidad[i])){
 			es_numero = 0;
 			break;
 		}
 	}
 
-	sqlite3_open("bionet.db", &db);
+	sqlite3_open(DB_NAME, &db);
 
 	if(es_numero == 1){
 		//Busqueda del medicamento por CP de farmacia
@@ -272,6 +272,7 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_int(res, 2, atoi(localidad));
+
 	} else {
 		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
 		      "JOIN Vende v ON f.ID = v.ID_Farmacia "
@@ -281,30 +282,29 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
 
-
-		printf("--- STOCK DE `%s´ EN `%s´ ---\n", nombre_med, localidad);
-		int encontrados = 0;
-		while(sqlite3_step(res) == SQLITE_ROW){
-			char *farmacia = (char*)sqlite3_column_text(res, 0);
-			int cantidad = sqlite3_column_int(res, 1);
-
-			if(cantidad >0){
-				printf("Farmacia: %-20s | Stock: %d unidades\n", farmacia, cantidad);
-			} else {
-				printf("Farmacia: %-20s | [AGOTAADO]\n", farmacia);
-			}
-			encontrados++;
-		}
-
-		if(encontrados == 0){
-			printf("No se ha encontrado el medicamento en esta zona\n");
-		}
 	}
+
+	printf("\n--- STOCK DE '%s' EN '%s' ---\n", nombre_med, localidad);
+	int encontrados = 0;
+	while(sqlite3_step(res) == SQLITE_ROW){
+		char *farmacia = (char*)sqlite3_column_text(res, 0);
+		int cantidad = sqlite3_column_int(res, 1);
+
+		if(cantidad >0){
+			printf("Farmacia: %-20s | Stock: %d unidades\n", farmacia, cantidad);
+		} else {
+			printf("Farmacia: %-20s | [AGOTADO]\n", farmacia);
+		}
+		encontrados++;
+	}
+
+	if(encontrados == 0){
+		printf("[!] No se han encontrado farmacias con ese medicamento en la zona indicada.\n");
+	}
+
+	sqlite3_finalize(res);
+	sqlite3_close(db);
 }
-
-
-
-
 
 
 void ver_ficha_medica(char *dni_usuario){
@@ -371,28 +371,29 @@ void ver_ficha_medica(char *dni_usuario){
 				   (char*)sqlite3_column_text(res, 2), (char*)sqlite3_column_text(res, 3));
 			hay_citas = 1;
 		}
-		if (!hay_citas) printf(" No tiene citas pendientes.\n");
+		if (!hay_citas) printf("No tiene citas pendientes.\n");
 	}
-	printf("============================================\n");
+
 
 	sqlite3_finalize(res);
 	sqlite3_close(db);
 }
 
 
-void buscar_medicos_especialidad(char *especialidad, char *localidad){
+int buscar_medicos_especialidad(char *especialidad, char *localidad){
 	sqlite3 *db;
 	sqlite3_stmt *res;
 	int es_numero = 1;
 
+
 	for(int i=0; localidad[i] != '\0'; i++){
-		if(!isdigit(localidad[i])){
+		if(!isdigit((unsigned char)localidad[i])){
 			es_numero = 0;
 			break;
 		}
 	}
 
-	sqlite3_open("bionet.db", &db);
+	sqlite3_open(DB_NAME, &db);
 	char *sql;
 
 	if(es_numero == 1){
@@ -417,8 +418,8 @@ void buscar_medicos_especialidad(char *especialidad, char *localidad){
 		}
 	}
 
-	//iImprimimos resultados
-	printf("\n--- MEDICOS DE %s EN %s ---\n", especialidad, localidad);
+	//Imprimimos resultados
+	printf("\n--- MÉDICOS DE %s EN %s ---\n", especialidad, localidad);
 	int encontrados = 0;
 	while(sqlite3_step(res) == SQLITE_ROW){
 		int id = sqlite3_column_int(res, 0);
@@ -431,10 +432,12 @@ void buscar_medicos_especialidad(char *especialidad, char *localidad){
 	}
 
 	if(encontrados == 0){
-		printf("No se han encontrado medicos con estos criterios\n");
+		printf("[!] No se han encontrado medicos con estos criterios\n");
 	}
 	sqlite3_finalize(res);
 	sqlite3_close(db);
+
+	return encontrados;
 }
 
 
