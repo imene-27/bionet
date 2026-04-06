@@ -60,7 +60,10 @@ void inicializar_db() {
 
 
 				"CREATE TABLE IF NOT EXISTS Medicamento(ID INTEGER PRIMARY KEY, "
+				"    									ID_FARMA INTEGER, "
 				"		                                Nombre TEXT, "
+				"                                       Tipo TEXT, "
+				"                                       Precio DOUBLE, "
 				"                     					Unidades INTEGER);"
 
 
