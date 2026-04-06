@@ -17,8 +17,11 @@
 #include "../importador/importador.h"
 
 void menu_administrador();
-void menu_usuario(char* dni_sesion);
+void menu_paciente(char* dni_sesion);
 
+void login_paciente();
+void login_admin();
+void registro_nuevo_paciente();
 void menu_gestion_centros();
 void menu_gestion_personal();
 void menu_gestion_usuarios();
@@ -28,27 +31,137 @@ void mostrar_logs_sistema();
 int main(){
 	setvbuf(stdout, NULL, _IONBF, 0);
 
-	char user[MAX_NOMBRE], pass[MAX_PASS];
 
 	inicializar_db();
 
-	printf("==================================\n");
-	printf("       BIENVENIDO A BIONET        \n");
-	printf("==================================\n");
-	printf("Usuario/DNI: ");
-	scanf("%s", user);
-	printf("Contraseña: ");
-	scanf("%s", pass);
+	int opcion_inicial = -1;
+	while(opcion_inicial != 0){
 
-	// Login
-	if(strcmp(user, "admin") == 0 && strcmp(pass, "1234") == 0){
-		menu_administrador();
-	} else {
-		menu_usuario(user);
+		printf("==================================\n");
+		printf("       BIENVENIDO A BIONET        \n");
+		printf("==================================\n");
+		printf("[1] Login Paciente \n");
+		printf("[2] Login Administrador \n");
+		printf("[3] Registrarse (Nuevo Paciente) \n");
+		printf("[0] Salir \n");
+		printf("Seleccione: ");
+		scanf("%d", &opcion_inicial);
+
+		getchar();
+
+		switch(opcion_inicial){
+			case 1:
+				login_paciente();
+				break;
+
+			case 2:
+				login_admin();
+				break;
+
+			case 3:
+				registro_nuevo_paciente();
+				break;
+
+			case 0:
+				printf("[Saliendo....] Applicación apagada.\n");
+				break;
+
+			default:
+				printf("Opción no válida. \n");
+		}
+
 	}
 
 	return 0;
 }
+
+void login_paciente(){
+	char dni[MAX_DNI], pass[MAX_PASS];
+
+	printf("\n=====================================\n");
+	printf("           ACCESO PACIENTES             \n");
+	printf("======================================\n");
+
+	printf("DNI: ");
+	scanf("%s", dni);
+	getchar();
+
+	printf("Contraseña: ");
+	scanf("%s", pass);
+	getchar();
+
+	//Llamamos a la funcion de la DB para validar el Usuario
+	if(validar_paciente(dni, pass)){
+		printf("\n[OK] Bienvenido al sistema BioNet. \n");
+		menu_paciente(dni);
+
+	} else{
+		printf("\n[!] DNI o contraeña incorrectos. \n");
+		printf("¿No tienes cuenta? Selecciona 'Registrarse' en el menu principal. \n");
+	}
+
+}
+
+void login_admin(){
+	char user[20], pass[MAX_PASS];
+	printf("\n=====================================\n");
+	printf("          ACCESO ADMINISTRADOR          \n");
+	printf("=======================================\n");
+
+		printf("Usuario: ");
+		scanf("%s", user);
+
+		printf("Contraseña: ");
+		scanf("%s", pass);
+
+		if(strcmp(user, "admin") == 0 && strcmp(pass, "1234") == 0){
+			registrar_log("[LOGIN]", "ADMIN ha entrado al panel de control");
+			menu_administrador();
+
+		}else{
+			printf("[!] Datos de administrador incorrectos. \n");
+		}
+
+}
+
+void registro_nuevo_paciente(){
+	char dni[MAX_DNI], nombre[MAX_NOMBRE], email[MAX_NOMBRE], pass[MAX_PASS], mun[MAX_MUNICIPIO], historial[200];
+
+	printf("\n====================================\n");
+	printf("      REGISTRO DE NUEVO PACIENTE      \n");
+	printf("======================================\n");
+
+
+	printf("DNI: ");
+	scanf("%s", dni);
+	getchar();
+
+	printf("Nombre Completo: ");
+	fgets(nombre, MAX_NOMBRE, stdin);
+	nombre[strcspn(nombre, "\n")] = 0;
+
+	printf("Email: ");
+	fgets(email, MAX_NOMBRE, stdin);
+	email[strcspn(email, "\n")] = 0;
+
+	printf("Municipio: ");
+	fgets(mun, MAX_MUNICIPIO, stdin);
+	mun[strcspn(mun, "\n")] = 0;
+
+	printf("Contraseña: ");
+	scanf("%s", pass);
+	getchar();
+
+	printf("Historial médico breve (alergias, enfermedades....): ");
+	fgets(historial, 200, stdin);
+	historial[strcspn(historial, "\n")] = 0;
+
+
+	//Llamamos a la DB para guardarlo
+	registrar_usuario(dni, nombre, email, mun, pass, historial);
+
+}
+
 
 // MENÚ PARA EL ADMINISTRADOR
 void menu_administrador(){
@@ -67,6 +180,7 @@ void menu_administrador(){
 		printf("-------------------------------\n");
 		printf("Seleccione una opcion: ");
 		scanf("%d", &opcion);
+
 		getchar();
 
 		switch(opcion){
@@ -181,18 +295,18 @@ void menu_gestion_personal(){
 	char id[MAX_ID], nombre[MAX_NOMBRE], especialidad[15], id_centro[MAX_ID];
 
 	while(sub_opcion != 0){
-		printf("\n   BIONET: GESTION DE PERSONAL MEDICO  \n");
-		printf("[1] Dar de alta a un medico\n");
-		printf("[2] Dar de baja a un medico\n");
+		printf("\n   BIONET: GESTIÓN DE PERSONAL MÉDICO  \n");
+		printf("[1] Dar de alta a un médico\n");
+		printf("[2] Dar de baja a un médico\n");
 		printf("[0] Volver al menu anterior\n");
 		printf("--------------------------------------------\n");
-		printf("Seleccione una opcion: ");
+		printf("Seleccione una opción: ");
 		scanf("%d", &sub_opcion);
 		getchar();
 
 		switch(sub_opcion){
 			case 1:
-				printf("Nombre completo del medico: ");
+				printf("Nombre completo del médico: ");
 				fgets(nombre, MAX_NOMBRE, stdin);
 				nombre[strcspn(nombre, "\n")] = 0;
 
@@ -208,7 +322,7 @@ void menu_gestion_personal(){
 				break;
 
 			case 2:
-				printf("Introduzca el ID del medico para dar de baja: ");
+				printf("Introduzca el ID del médico para dar de baja: ");
 				scanf("%s", id);
 				getchar();
 
@@ -421,8 +535,8 @@ void mostrar_logs_sistema(){
 }
 
 
-// Menu para el usuario:
-void menu_usuario(char* dni_sesion) {
+// Menu para el paciente:
+void menu_paciente(char* dni_sesion) {
 	int opcion = -1;
 	char input1[50], input2[50];
 
@@ -447,7 +561,7 @@ void menu_usuario(char* dni_sesion) {
 		printf("[5] Reservar cita medica\n");
 		printf("[0] Salir\n");
 		printf("----------------------------------\n");
-		printf("Seleccione una opcion. ");
+		printf("Seleccione una opcion: ");
 		scanf("%d", &opcion);
 		//Limpiamos el buffer del salto de linea
 		getchar();
@@ -497,7 +611,7 @@ void menu_usuario(char* dni_sesion) {
 				fgets(especialidad, 50, stdin);
 				especialidad[strcspn(especialidad, "\n")] = 0;;
 
-				printf("introduce CP o Municipio: ");
+				printf("Introduce CP o Municipio: ");
 				fgets(localidad, 50, stdin);
 				localidad[strcspn(localidad, "\n")] = 0;
 
