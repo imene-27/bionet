@@ -595,8 +595,6 @@ void menu_paciente(char* dni_sesion) {
 				break;
 
 
-
-
 			case 4:
 				printf("Introduzca su DNI: ");
 				scanf("%s", dni_sesion);
@@ -604,7 +602,7 @@ void menu_paciente(char* dni_sesion) {
 				break;
 
 			case 5: {
-				char especialidad[50], localidad[50], fecha[15], hora[10];
+				char especialidad[50], localidad[MAX_MUNICIPIO], fecha[15], hora[10];
 				int id_medico, exito = 0;
 
 				printf("Especialidad deseada: ");
@@ -612,30 +610,45 @@ void menu_paciente(char* dni_sesion) {
 				especialidad[strcspn(especialidad, "\n")] = 0;;
 
 				printf("Introduce CP o Municipio: ");
-				fgets(localidad, 50, stdin);
+				fgets(localidad, MAX_MUNICIPIO, stdin);
 				localidad[strcspn(localidad, "\n")] = 0;
 
-				buscar_medicos_especialidad(especialidad, localidad);
-				printf("\nIntroduzca el ID del medico elegido: ");
-				scanf("%d", &id_medico);
-				printf("Introduzca su DNI para la reserva: ");
-				scanf("%s", dni_sesion);
+				//Guardamos cuántos médicos se han encontrado
+				int encontrados = buscar_medicos_especialidad(especialidad, localidad);
 
-				// Hacemos un bucle hasta encontrar una fecha y hora disponible
-				while (!exito) {
-					printf("\n--- COMPROBAR DISPONIBILIDAD ---\n");
-					printf("Fecha (AAAA-MM-DD): ");
-					scanf("%s", fecha);
-					printf("Hora (HH:MM): ");
-					scanf("%s", hora);
+				// Solo si hay médicos, pedimos lo datos de la cita
+				if(encontrados > 0){
+					printf("\nIntroduzca el ID del médico elegido: ");
+					scanf("%d", &id_medico);
+					printf("Introduzca su DNI para la reserva: ");
+					scanf("%s", dni_sesion);
+					getchar();
 
-					if (comprobar_y_reservar(dni_sesion, id_medico, fecha, hora)) {
-						printf("\n[OK] ¡Cita reservada con exito!\n");
-						exito = 1;
-					} else {
-						printf("\n[!] El Dr. ya tiene una cita a esa hora. Intente con otra.\n");
+					// Hacemos un bucle hasta encontrar una fecha y hora disponible
+					while (!exito) {
+						printf("\n--- COMPROBAR DISPONIBILIDAD ---\n");
+						printf("Fecha (AAAA-MM-DD): ");
+						scanf("%s", fecha);
+						printf("Hora (HH:MM): ");
+						scanf("%s", hora);
+						getchar();
+
+						if (comprobar_y_reservar(dni_sesion, id_medico, fecha, hora)) {
+							printf("\n[OK] ¡Cita reservada con exito!\n");
+							exito = 1;
+						} else {
+							printf("\n[!] El Dr. ya tiene una cita a esa hora. Intente con otra.\n");
+							printf("¿Desea probar otra hora? (S/N): ");
+							char respuesta;
+							scanf("%c", &respuesta);
+							if(respuesta == 'n' || respuesta == 'N') break;
+						}
 					}
+
+				} else {
+					printf("Volviendo al menú principal...\n");
 				}
+
 				break;
 
 

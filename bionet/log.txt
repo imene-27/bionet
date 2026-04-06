@@ -12,3 +12,6 @@
 [2026-04-06  12:41]  [MEDICO] INSERT INTO Doctor(Nombre, Especialidad, ID_Centro) VALUES ('Roberto', 'Neurologia', 2);
 [2026-04-06  12:42]  [USUARIO] DELETE FROM Usuario WHERE DNI = '20976428Z';
 [2026-04-06  12:43]  [FARMACIA] UPDATE Farmacia SET Guardia = 0 WHERE ID = 2;
+[2026-04-06  12:46]  [[SISTEMA]] NUEVO REGISTRO: Imene Sadoun (DNI: 20976428Z) con historial medico inicial.
+[2026-04-06  12:46]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-04-06  12:55]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
