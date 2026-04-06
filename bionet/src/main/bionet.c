@@ -210,7 +210,7 @@ void menu_administrador(){
 				importar_farmacias("datos/farmacias.csv");
 				importar_centros_salud("datos/centros.csv");
 				importar_medicos("datos/medicos.csv");
-				importar_stock("datos/stock.csv");
+				importar_stock("datos/medicamento.csv");
 				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
 				break;
 
