@@ -152,15 +152,19 @@ void importar_stock(const char* fichero) {
 		linea[strcspn(linea, "\n")] = 0;
 		linea[strcspn(linea, "\r")] = 0;
 
-		char *id_farma = strtok(linea, ";");
-		char *id_medicamento = strtok(NULL, ";");
-		char *cantidad = strtok(NULL, ";");
+		char *id = strtok(linea, ";");
+		char *id_farma = strtok(NULL, ";");
+		char *nombre = strtok(NULL, ";");
+		char *tipo = strtok(NULL, ";");
+		char *precio = strtok(NULL, ";");
+		char *unidades = strtok(NULL, ";");
 
 
-		if (id_farma && id_medicamento && cantidad) {
+		if (id && id_farma && nombre && tipo && precio && unidades) {
 			char sql[1024];
-			sprintf(sql, "INSERT INTO Vende (ID_Farmacia, ID_Medic, Cantidad) VALUES (%s, %s, %s);",
-					id_farma, id_medicamento, cantidad);
+			sprintf(sql, "INSERT INTO Medicamento (ID, ID_FARMA, Nombre, Tipo, Precio, Unidades) "
+					"VALUES (%s, %s, %s, %s, %s, %s);",
+					id, id_farma, nombre, tipo, precio, unidades);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
 	}

@@ -64,7 +64,7 @@ void inicializar_db() {
 				"		                                Nombre TEXT, "
 				"                                       Tipo TEXT, "
 				"                                       Precio DOUBLE, "
-				"                     					Unidades INTEGER);"
+				"                     					Unidades INTEGER) REFERENCES Farmacia(ID));"
 
 
 				"CREATE TABLE IF NOT EXISTS Doctor(ID INTEGER PRIMARY KEY, "
@@ -256,6 +256,11 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 	char *sql;
 	int es_numero = 1;
 
+	nombre_med[strcspn(nombre_med, "\n")] = 0;
+	nombre_med[strcspn(nombre_med, "\r")] = 0;
+	localidad[strcspn(localidad, "\n")] = 0;
+	localidad[strcspn(localidad, "\r")] = 0;
+
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; localidad[i] != '\0'; i++){
 		if(!isdigit((unsigned char)localidad[i])){
@@ -264,26 +269,34 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		}
 	}
 
-	sqlite3_open(DB_NAME, &db);
+	if(sqlite3_open("bionet.db", &db) != SQLITE_OK){
+		printf("Error al abrir la base de datos.\n");
+		return;
+	}
+
+	char busqueda_med[250];
+	sprintf(busqueda_med, "%%%s%%", nombre_med);
+
+	char busqueda_loc[250];
+	sprintf(busqueda_loc, "%%%s%%", localidad);
 
 	if(es_numero == 1){
 		//Busqueda del medicamento por CP de farmacia
-		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
-			   "JOIN Vende v ON f.ID = v.ID_Farmacia "
-				"JOIN Medicamento m ON v.ID_Medic = m.ID "
-				"WHERE m.Nombre = ? AND f.CP = ?;";
+		sql = "SELECT f.Nombre, m.Unidades FROM Farmacia f "
+				"JOIN Medicamento m ON f.ID = m.ID_FARMA "
+				"WHERE m.Nombre LIKE ? AND f.CP = ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
+		sqlite3_bind_text(res, 1, busqueda_med, -1, SQLITE_TRANSIENT);
 		sqlite3_bind_int(res, 2, atoi(localidad));
 
 	} else {
-		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
-		      "JOIN Vende v ON f.ID = v.ID_Farmacia "
-			   "JOIN Medicamento m ON v.ID_Medic = m.ID "
-			   "WHERE m.Nombre = ? AND f.Municipio = ?;";
+		//Busqueda por municipio
+		sql = "SELECT f.Nombre, m.Unidades FROM Farmacia f "
+			   "JOIN Medicamento m ON f.ID = m.ID_FARMA "
+			   "WHERE m.Nombre LIKE ? AND f.Municipio LIKE ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
-		sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
+		sqlite3_bind_text(res, 1, busqueda_med, -1, SQLITE_TRANSIENT);
+		sqlite3_bind_text(res, 2, busqueda_loc, -1, SQLITE_TRANSIENT);
 
 	}
 
