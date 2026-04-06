@@ -163,7 +163,7 @@ void importar_stock(const char* fichero) {
 		if (id && id_farma && nombre && tipo && precio && unidades) {
 			char sql[1024];
 			sprintf(sql, "INSERT INTO Medicamento (ID, ID_FARMA, Nombre, Tipo, Precio, Unidades) "
-					"VALUES (%s, %s, %s, %s, %s, %s);",
+					"VALUES (%s, %s, '%s', '%s', %s, %s);",
 					id, id_farma, nombre, tipo, precio, unidades);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
