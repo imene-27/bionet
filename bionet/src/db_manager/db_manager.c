@@ -61,14 +61,12 @@ void inicializar_db() {
 
 				"CREATE TABLE IF NOT EXISTS Medicamento(ID INTEGER PRIMARY KEY, "
 				"		                                Nombre TEXT, "
-<<<<<<< HEAD
 				"                                       Tipo TEXT, "
 				"                                       Precio DOUBLE, "
 				"                     					Unidades INTEGER, "
 			    "      									FOREIGN KEY (ID_FARMA) REFERENCES Farmacia(ID));"
-=======
 				"                     					Unidades INTEGER);"
->>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
+
 
 
 				"CREATE TABLE IF NOT EXISTS Doctor(ID INTEGER PRIMARY KEY, "
