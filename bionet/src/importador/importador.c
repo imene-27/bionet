@@ -132,6 +132,7 @@ void importar_medicos(const char* fichero) {
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
 	}
+
 	fclose(f);
 	sqlite3_close(db);
 	printf("Plantilla de medicos cargada\n");
