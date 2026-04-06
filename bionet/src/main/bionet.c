@@ -214,6 +214,7 @@ void menu_administrador(){
 				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
 				break;
 
+
 			case 0:
 				printf("Saliendo...Apagando el panel.\n");
 				break;
