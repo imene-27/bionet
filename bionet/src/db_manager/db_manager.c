@@ -64,7 +64,8 @@ void inicializar_db() {
 				"		                                Nombre TEXT, "
 				"                                       Tipo TEXT, "
 				"                                       Precio DOUBLE, "
-				"                     					Unidades INTEGER) REFERENCES Farmacia(ID));"
+				"                     					Unidades INTEGER, "
+			    "      									FOREIGN KEY (ID_FARMA) REFERENCES Farmacia(ID));"
 
 
 				"CREATE TABLE IF NOT EXISTS Doctor(ID INTEGER PRIMARY KEY, "

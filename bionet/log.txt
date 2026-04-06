@@ -33,3 +33,8 @@
 [2026-04-06  23:09]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 67985252G denegado
 [2026-04-06  23:11]  [[SISTEMA]] NUEVO REGISTRO: Oihane Cueva (DNI: 67985252G) con historial medico inicial.
 [2026-04-06  23:11]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
+[2026-04-06  23:19]  [[LOGIN]] ADMIN ha entrado al panel de control
+[2026-04-06  23:21]  [[LOGIN]] ADMIN ha entrado al panel de control
+[2026-04-06  23:25]  [[LOGIN]] ADMIN ha entrado al panel de control
+[2026-04-06  23:27]  [[SISTEMA]] NUEVO REGISTRO: Oihane Cueva (DNI: 67985252G) con historial medico inicial.
+[2026-04-06  23:27]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
