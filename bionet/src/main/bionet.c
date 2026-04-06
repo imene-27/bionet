@@ -215,6 +215,7 @@ void menu_administrador(){
 				break;
 
 
+
 			case 0:
 				printf("Saliendo...Apagando el panel.\n");
 				break;
