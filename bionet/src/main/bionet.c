@@ -432,9 +432,6 @@ void menu_gestion_farmacias(){
 				break;
 
 
-
-
-
 			case 3:
 				printf("ID de la farmacia a eliminar: ");
 				scanf("%s", id);
