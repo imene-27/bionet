@@ -109,7 +109,7 @@ void importar_centros_salud(const char* fichero) {
 void importar_medicos(const char* fichero) {
 	FILE *f = fopen(fichero, "r");
 	if (f == NULL) {
-		printf("[!] Error: No se encuentra el archivo %s\n", fichero);
+		printf("Error: No se encuentra el archivo %s\n", fichero);
 		return;
 	}
 
@@ -130,7 +130,13 @@ void importar_medicos(const char* fichero) {
 			char sql[MAX_SQL];
 			sprintf(sql, "INSERT OR REPLACE INTO Doctor (ID, Nombre, Especialidad, ID_Centro) VALUES ('%s', '%s', '%s', '%s');",
 					id, nombre, especialidad, id_centro);
-			sqlite3_exec(db, sql, 0, 0, 0);
+
+			char *errMsg = 0;
+			int rc = sqlite3_exec(db, sql, 0, 0, &errMsg);
+			if(rc != SQLITE_OK){
+				printf("ERROR Fallo al insertar medico");
+				sqlite3_free(errMsg);
+			}
 		}
 	}
 
@@ -179,4 +185,7 @@ void importar_stock(const char* fichero) {
 	fclose(f);
 	sqlite3_close(db);
 	printf("Inventario de medicamentos cargado correctamente\n");
+
 }
+
+
