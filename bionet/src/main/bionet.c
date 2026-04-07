@@ -784,6 +784,7 @@ void menu_paciente(char* dni_sesion) {
 				fgets(localidad, MAX_MUNICIPIO, stdin);
 				localidad[strcspn(localidad, "\n")] = 0;
 
+
 				//Guardamos cuántos médicos se han encontrado
 				int encontrados = buscar_medicos_especialidad(especialidad, localidad);
 
