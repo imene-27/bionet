@@ -45,7 +45,7 @@ void importar_farmacias(const char* fichero) {
 		if (id && nom && dir && cp && municipio && guardia && tel) {
 			char sql[MAX_SQL];
 			sprintf(sql, "INSERT OR REPLACE INTO Farmacia(ID, Nombre, Direccion, CP, Municipio, Guardia, Telefono) "
-						  "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
+						  "VALUES (%s, '%s', '%s', %s, '%s', %s, '%s');",
 						  id, nom, dir, cp, municipio, guardia, tel);
 
 			char *errMsg = 0;

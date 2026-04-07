@@ -242,7 +242,10 @@ void buscar_centros(char *busqueda){
 		sqlite3_close(db);
 		return;
 	}
-	sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_TRANSIENT);
+
+	char busqueda_comodines[100];
+	sprintf(busqueda_comodines, "%%%s%%", busqueda);
+	sqlite3_bind_text(res, 1, busqueda_comodines, -1, SQLITE_TRANSIENT);
 
 	printf("--- CENTROS DE SALUD EN: %s ---\n", busqueda);
 
@@ -269,10 +272,13 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 	int es_numero = 1;
 
 	nombre_med[strcspn(nombre_med, "\r\n")] = 0;
-	localidad[strcspn(nombre_med, "\r\n")] = 0;
+	localidad[strcspn(localidad, "\r\n")] = 0;
 
+	char *loc_limpia = localidad;
+	while(isspace((unsigned char)* loc_limpia)) loc_limpia++;
 
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
+	if(strlen(loc_limpia) == 0) return;
 	for (int i=0; localidad[i] != '\0'; i++){
 		if(!isdigit((unsigned char)localidad[i])){
 			es_numero = 0;
@@ -289,12 +295,12 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		//Busqueda del medicamento por CP de farmacia
 		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
 			   "JOIN Stock s ON f.ID = s.ID_Farmacia "
-			   "WHERE s.Nombre = ? AND f.CP = ?;";
+			   "WHERE s.Nombre LIKE ? AND CAST(f.CP AS TEXT) LIKE ?;";
 
 	} else {
 		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
 		      "JOIN Stock s ON f.ID = s.ID_Farmacia "
-			   "WHERE s.Nombre = ? AND f.Municipio = ?;";
+			   "WHERE s.Nombre LIKE ? AND f.Municipio LIKE ?;";
 
 	}
 
@@ -409,6 +415,10 @@ int buscar_medicos_especialidad(char *especialidad, char *localidad){
 	sqlite3_stmt *res;
 	int es_numero = 1;
 
+	especialidad[strcspn(especialidad, "\r\n")] = 0;
+	localidad[strcspn(localidad, "\r\n")] = 0;
+
+
 
 	for(int i=0; localidad[i] != '\0'; i++){
 		if(!isdigit((unsigned char)localidad[i])){
@@ -424,7 +434,7 @@ int buscar_medicos_especialidad(char *especialidad, char *localidad){
 		//Buscar medico con esa especialidad por CP
 		sql = "SELECT d.ID, d.Nombre, c.Nombre FROM Doctor d "
 	          "JOIN CentroSalud c ON d.ID_Centro = c.ID "
-	          "WHERE d.Especialidad = ? AND c.CP = ?;";
+	          "WHERE d.Especialidad = ? AND CAST(c.CP AS TEXT) LIKE ?;";
 
 		if(sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK){
 			sqlite3_bind_text(res, 1, especialidad, -1, SQLITE_STATIC);
@@ -434,12 +444,20 @@ int buscar_medicos_especialidad(char *especialidad, char *localidad){
 		//Buscar medico con esa especialidad por localidad
 		sql = "SELECT d.ID, d.Nombre, c.Nombre FROM Doctor d "
 		      "JOIN CentroSalud c ON d.ID_Centro = c.ID "
-		      "WHERE d.Especialidad = ? AND c.Municipio = ?;";
+		      "WHERE d.Especialidad = ? AND c.Municipio LIKE ? COLLATE NOCASE;";
 
 		if(sqlite3_prepare_v2(db, sql, -1, &res, 0) == SQLITE_OK){
-			sqlite3_bind_text(res, 1, especialidad, -1, SQLITE_STATIC);
-			sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
+			printf("[!] Error SQL: %s\n", sqlite3_errmsg(db));
+			sqlite3_close(db);
+			return 0;
+
 		}
+
+		char loc_pattern[100];
+		sprintf(loc_pattern,"%%%s%%", localidad);
+
+		sqlite3_bind_text(res, 1, especialidad, -1, SQLITE_STATIC);
+		sqlite3_bind_text(res, 2, loc_pattern, -1, SQLITE_STATIC);
 	}
 
 	//Imprimimos resultados
@@ -448,10 +466,9 @@ int buscar_medicos_especialidad(char *especialidad, char *localidad){
 	while(sqlite3_step(res) == SQLITE_ROW){
 		int id = sqlite3_column_int(res, 0);
 		char *nombre = (char*)sqlite3_column_text(res, 1);
-		char *apellido = (char*)sqlite3_column_text(res, 2);
+		char *nombre_centro = (char*)sqlite3_column_text(res, 2);
 
-		printf("ID: %d | Dr. %s %s (%s)\n", id, nombre, apellido, especialidad);
-
+		printf("ID: %-3d | Dr. %-20s | Centro: %s\n", id, nombre, nombre_centro);
 		encontrados++;
 	}
 
@@ -856,7 +873,7 @@ void auto_carga_datos(){
 		importar_farmacias("datos/farmacias.csv");
 		importar_centros_salud("datos/centros.csv");
 		importar_medicos("datos/medicos.csv");
-		importar_stock("datos/medicamento.csv");
+		importar_stock("datos/stock.csv");
 
 		printf("[OK] Sincronización inicial finalizada con éxito.\n\n");
 	}

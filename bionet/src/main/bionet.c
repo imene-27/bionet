@@ -758,14 +758,18 @@ void menu_paciente(char* dni_sesion) {
 				break;
 
 			case 3:
+				fflush(stdin);
+
 				printf("Nombre del medicamento: ");
 				fgets(input1, 50, stdin);
 				input1[strcspn(input1,  "\n")] = 0;
 				input1[strcspn(input1, "\r")] = 0;
+
 				printf("Introduce CP o Municipio para buscar cerca: ");
 				fgets(input2, 50, stdin);
 				input2[strcspn(input2, "\n")] = 0;
 				input2[strcspn(input2, "\r")] = 0;
+
 				buscar_medicamento(input1, input2);
 				break;
 
@@ -798,7 +802,7 @@ void menu_paciente(char* dni_sesion) {
 				for (int i = 0; i < total_especialidades; i++) {
 					printf("[%d] %s\n", i+1, lista_especialidades[i]);
 				}
-				printf("Selecciones el número de la especialidad: ");
+				printf("Seleccione el número de la especialidad: ");
 				scanf("%d", &opcion_esp);
 				getchar();
 
@@ -852,7 +856,7 @@ void menu_paciente(char* dni_sesion) {
 					}
 
 				} else {
-					printf("No se encontraron médicis de esa especialidad en la zona.\n");
+					printf("No se encontraron médicos de esa especialidad en la zona.\n");
 					printf("Volviendo al menú principal...\n");
 				}
 
