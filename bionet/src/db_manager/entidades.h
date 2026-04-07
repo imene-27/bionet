@@ -53,9 +53,12 @@ typedef struct {
 //Definimos las estructura para Medicamento
 typedef struct {
 	int id_medic;
+	int id_farmacia;
 	char nombre[50];
+	char tipo[30];
+	double precio;
 	int unidades;
-} Medicamento;
+} Stock;
 
 
 //Definimos las estructura para Cita

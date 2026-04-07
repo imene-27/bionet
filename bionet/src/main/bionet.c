@@ -589,7 +589,7 @@ void menu_sincronizacion_csv(){
 			case 3:
 				printf("[SISTEMA] Actualizando farmacias y stock....\n");
 				importar_farmacias("datos/farmacias.csv");
-				importar_stock("datos/medicamento.csv");
+				importar_stock("datos/stock.csv");
 				registrar_log("[ADMIN]", "Sincronización manual de farmacia y stock realizada");
 				printf("[OK] Farmacias y stock actualizados.\n");
 				break;
@@ -599,7 +599,7 @@ void menu_sincronizacion_csv(){
 				importar_medicos("datos/medicos.csv");
 				importar_centros_salud("datos/centros.csv");
 				importar_farmacias("datos/farmacias.csv");
-				importar_stock("datos/medicamento.csv");
+				importar_stock("datos/stock.csv");
 				registrar_log("[ADMIN]", "Sincronizacion total de CSV completada.");
 				printf("[OK] Todos los datos han sido refrescados");
 				break;
@@ -761,9 +761,11 @@ void menu_paciente(char* dni_sesion) {
 				printf("Nombre del medicamento: ");
 				fgets(input1, 50, stdin);
 				input1[strcspn(input1,  "\n")] = 0;
+				input1[strcspn(input1, "\r")] = 0;
 				printf("Introduce CP o Municipio para buscar cerca: ");
 				fgets(input2, 50, stdin);
 				input2[strcspn(input2, "\n")] = 0;
+				input2[strcspn(input2, "\r")] = 0;
 				buscar_medicamento(input1, input2);
 				break;
 
