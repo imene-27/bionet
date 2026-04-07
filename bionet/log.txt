@@ -20,13 +20,3 @@
 [2026-04-07  13:13]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
 [2026-04-07  13:13]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
 [2026-04-07  13:13]  [[LOGIN]] ADMIN ha entrado al panel de control
-[2026-04-07  15:29]  [[SISTEMA]] NUEVO REGISTRO: Oihane Cueva (DNI: 67985252G) con historial medico inicial.
-[2026-04-07  15:29]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
-[2026-04-07  15:31]  [[SISTEMA]] Aplicación cerrada por el usuario.
-[2026-04-07  15:35]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
-[2026-04-07  16:18]  [[LOGIN]] ADMIN ha entrado al panel de control
-[2026-04-07  16:18]  [[ADMIN]] Sincronización manual de médicos realizada
-[2026-04-07  16:18]  [[SISTEMA]] Aplicación cerrada por el usuario.
-[2026-04-07  16:42]  [[LOGIN]] ADMIN ha entrado al panel de control
-[2026-04-07  16:42]  [[ADMIN]] Sincronización manual de médicos realizada
-[2026-04-07  16:42]  [[SISTEMA]] Aplicación cerrada por el usuario.

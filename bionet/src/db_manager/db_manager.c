@@ -65,14 +65,9 @@ void inicializar_db(char *ruta) {
 				"										Telefono TEXT);"
 
 
-				"CREATE TABLE IF NOT EXISTS Stock(ID INTEGER, "
-				"								  ID_Farmacia INTEGER, "
-				"		                          Nombre TEXT, "
-				"								  Tipo TEXT, "
-				"								  Precio DOUBLE, "
-				"								  Cantidad INTEGER, "
-			    "          						  PRIMARY KEY (ID, ID_Farmacia),"
-				"								  FOREIGN KEY (ID_Farmacia) REFERENCES Farmacia(ID));"
+				"CREATE TABLE IF NOT EXISTS Medicamento(ID INTEGER PRIMARY KEY, "
+				"		                                Nombre TEXT, "
+				"                     					Unidades INTEGER);"
 
 
 				"CREATE TABLE IF NOT EXISTS Doctor(ID INTEGER PRIMARY KEY, "
@@ -94,7 +89,7 @@ void inicializar_db(char *ruta) {
 				"										Nombre TEXT, "
 				"										ID_Medicamento INTEGER, "
 				"										Dosis TEXT, "
-				"										FOREIGN KEY (ID_Medicamento) REFERENCES Stock (ID));"
+				"										FOREIGN KEY (ID_Medicamento) REFERENCES Medicamento (ID));"
 
 
 				"CREATE TABLE IF NOT EXISTS Vende(ID_Farmacia INTEGER, "
@@ -102,7 +97,7 @@ void inicializar_db(char *ruta) {
 				"								  Cantidad INTEGER, "
 				"								  PRIMARY KEY (ID_Farmacia, ID_Medic),"
 				"								  FOREIGN KEY (Id_Farmacia) REFERENCES Farmacia(ID),"
-				"								  FOREIGN KEY (ID_Medic) REFERENCES Stock(ID)); "
+				"								  FOREIGN KEY (ID_Medic) REFERENCES Medicamento(ID)); "
 
 				"CREATE TABLE IF NOT EXISTS FichaMedica(DNI_User TEXT PRIMARY KEY, "
 				"										Enfermedades TEXT, "
@@ -276,18 +271,19 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 
 	if(es_numero == 1){
 		//Busqueda del medicamento por CP de farmacia
-		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
-			   "JOIN Stock s ON f.ID = s.ID_Farmacia "
-				"WHERE s.Nombre = ? AND f.CP = ?;";
+		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
+			   "JOIN Vende v ON f.ID = v.ID_Farmacia "
+				"JOIN Medicamento m ON v.ID_Medic = m.ID "
+				"WHERE m.Nombre = ? AND f.CP = ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_int(res, 2, atoi(localidad));
 
 	} else {
-		// Busqueda por municipio
-		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
-		      "JOIN Stock s ON f.ID = s.ID_Farmacia "
-			   "WHERE s.Nombre = ? AND UPPER(f.Municipio) = UPPER(?);";
+		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
+		      "JOIN Vende v ON f.ID = v.ID_Farmacia "
+			   "JOIN Medicamento m ON v.ID_Medic = m.ID "
+			   "WHERE m.Nombre = ? AND f.Municipio = ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
@@ -842,7 +838,7 @@ void auto_carga_datos(){
 		importar_farmacias("datos/farmacias.csv");
 		importar_centros_salud("datos/centros.csv");
 		importar_medicos("datos/medicos.csv");
-		importar_stock("datos/stock.csv");
+		importar_stock("datos/medicamento.csv");
 
 		printf("[OK] Sincronización inicial finalizada con éxito.\n\n");
 	}
