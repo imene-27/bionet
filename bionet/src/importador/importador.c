@@ -9,18 +9,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "constantes.h"
 #include "../sqlite3/sqlite3.h"
 
 void importar_farmacias(const char* fichero) {
 	FILE *f = fopen(fichero, "r");
 	if (f == NULL) {
-		printf("Error: No se encuentra el archivo %s\n", fichero);
+		printf("[!] Error: No se encuentra el archivo %s\n", fichero);
 		return;
 	}
 
 	sqlite3 *db;
-	sqlite3_open("bionet.db", &db);
-	char linea[1024];
+	sqlite3_open(DB_NAME, &db);
+	char linea[MAX_LINEA];
 	int contador = 0;
 
 	while (fgets(linea, sizeof(linea), f)) {
@@ -39,8 +40,8 @@ void importar_farmacias(const char* fichero) {
 			//	id, nom, dir, cp, municipio, guardia, tel);
 
 		if (id && nom && dir && cp && municipio && guardia && tel) {
-			char sql[1024];
-			sprintf(sql, "INSERT INTO Farmacia(ID, Nombre, Direccion, CP, Municipio, Guardia, Telefono) "
+			char sql[MAX_SQL];
+			sprintf(sql, "INSERT OR REPLACE INTO Farmacia(ID, Nombre, Direccion, CP, Municipio, Guardia, Telefono) "
 						  "VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s');",
 						  id, nom, dir, cp, municipio, guardia, tel);
 
@@ -63,13 +64,13 @@ void importar_farmacias(const char* fichero) {
 void importar_centros_salud(const char* fichero) {
 	FILE *f = fopen(fichero, "r");
 	if (f == NULL) {
-		printf("Error: No se encuentra el archivo %s\n", fichero);
+		printf("[!] Error: No se encuentra el archivo %s\n", fichero);
 		return;
 	}
 
 	sqlite3 *db;
-	sqlite3_open("bionet.db", &db);
-	char linea[1024];
+	sqlite3_open(DB_NAME, &db);
+	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
@@ -88,8 +89,8 @@ void importar_centros_salud(const char* fichero) {
 		                id, nombre, dir, cp, municipio, horario, tipoCentro, tel);
 
 		if (id && nombre && dir && cp && municipio && horario && tipoCentro && tel) {
-			char sql[1024];
-			sprintf(sql, "INSERT INTO CentroSalud (ID, Nombre, Direccion, CP, Municipio, Horario, TipoCentro, Telefono) "
+			char sql[MAX_SQL];
+			sprintf(sql, "INSERT OR REPLACE INTO CentroSalud (ID, Nombre, Direccion, CP, Municipio, Horario, TipoCentro, Telefono) "
 					"		VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');",
 					id, nombre, dir, cp, municipio, horario, tipoCentro, tel);
 			char *errMsg = 0;
@@ -108,13 +109,13 @@ void importar_centros_salud(const char* fichero) {
 void importar_medicos(const char* fichero) {
 	FILE *f = fopen(fichero, "r");
 	if (f == NULL) {
-		printf("Error: No se encuentra el archivo %s\n", fichero);
+		printf("[!] Error: No se encuentra el archivo %s\n", fichero);
 		return;
 	}
 
 	sqlite3 *db;
-	sqlite3_open("bionet.db", &db);
-	char linea[1024];
+	sqlite3_open(DB_NAME, &db);
+	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
@@ -126,8 +127,8 @@ void importar_medicos(const char* fichero) {
 		char *id_centro = strtok(NULL, ";");
 
 		if (id && nombre && especialidad && id_centro) {
-			char sql[1024];
-			sprintf(sql, "INSERT INTO Doctor (ID, Nombre, Especialidad, ID_Centro) VALUES ('%s', '%s', '%s', '%s');",
+			char sql[MAX_SQL];
+			sprintf(sql, "INSERT OR REPLACE INTO Doctor (ID, Nombre, Especialidad, ID_Centro) VALUES ('%s', '%s', '%s', '%s');",
 					id, nombre, especialidad, id_centro);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
@@ -146,8 +147,8 @@ void importar_stock(const char* fichero) {
 	}
 
 	sqlite3 *db;
-	sqlite3_open("bionet.db", &db);
-	char linea[1024];
+	sqlite3_open(DB_NAME, &db);
+	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
@@ -159,8 +160,8 @@ void importar_stock(const char* fichero) {
 
 
 		if (id_farma && id_medicamento && cantidad) {
-			char sql[1024];
-			sprintf(sql, "INSERT INTO Vende (ID_Farmacia, ID_Medic, Cantidad) VALUES (%s, %s, %s);",
+			char sql[MAX_SQL];
+			sprintf(sql, "INSERT OR REPLACE INTO Vende (ID_Farmacia, ID_Medic, Cantidad) VALUES (%s, %s, %s);",
 					id_farma, id_medicamento, cantidad);
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}

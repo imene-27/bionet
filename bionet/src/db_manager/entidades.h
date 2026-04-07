@@ -91,5 +91,13 @@ typedef struct {
 	char municipio[50];
 } CodigoPostal;
 
+//Estructura para manjear la configuración
+typedef struct{
+	int puerto;
+	char ruta_db[MAX_PATH];
+	char ruta_logs[MAX_PATH];
+}Config;
+extern Config miConfig;
+
 
 #endif /* ENTIDADES_H_ */

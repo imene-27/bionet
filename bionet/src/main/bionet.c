@@ -27,12 +27,23 @@ void menu_gestion_personal();
 void menu_gestion_usuarios();
 void menu_gestion_farmacias();
 void mostrar_logs_sistema();
+void menu_sincronizacion_csv();
+void guardar_config(Config c);
+void cargar_config(Config *c);
+void menu_configuracion();
+
+Config miConfig;
 
 int main(){
 	setvbuf(stdout, NULL, _IONBF, 0);
 
+	//Cargar configuración
+	cargar_config(&miConfig);
 
-	inicializar_db();
+	inicializar_db(miConfig.ruta_db);
+
+	//Cargamos los datos (si es necesario)
+	auto_carga_datos();
 
 	int opcion_inicial = -1;
 	while(opcion_inicial != 0){
@@ -63,6 +74,7 @@ int main(){
 				break;
 
 			case 0:
+				registrar_log("[SISTEMA]", "Aplicación cerrada por el usuario.");
 				printf("[Saliendo....] Applicación apagada.\n");
 				break;
 
@@ -110,9 +122,11 @@ void login_admin(){
 
 		printf("Usuario: ");
 		scanf("%s", user);
+		getchar();
 
 		printf("Contraseña: ");
 		scanf("%s", pass);
+		getchar();
 
 		if(strcmp(user, "admin") == 0 && strcmp(pass, "1234") == 0){
 			registrar_log("[LOGIN]", "ADMIN ha entrado al panel de control");
@@ -175,7 +189,8 @@ void menu_administrador(){
 		printf("[3] Gestion de usuarios\n");
 		printf("[4] Gestion de Farmacias\n");
 		printf("[5] Ver logs del sistema\n");
-		printf("[6] Configuración\n");
+		printf("[6] Sincronización de Datos (CSV)\n");
+		printf("[7] Configuración\n");
 		printf("[0] Salir y apagar servidor\n");
 		printf("-------------------------------\n");
 		printf("Seleccione una opcion: ");
@@ -205,15 +220,19 @@ void menu_administrador(){
 				break;
 
 			case 6:
-				printf("\n---IMPORTANDO DATOS DESDE CSV---\n");
-				// Llamamos a las funciones
-				importar_farmacias("datos/farmacias.csv");
-				importar_centros_salud("datos/centros.csv");
-				importar_medicos("datos/medicos.csv");
-				importar_stock("datos/medicamento.csv");
-				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
+//				printf("\n---IMPORTANDO DATOS DESDE CSV---\n");
+//				// Llamamos a las funciones
+//				importar_farmacias("datos/farmacias.csv");
+//				importar_centros_salud("datos/centros.csv");
+//				importar_medicos("datos/medicos.csv");
+//				importar_stock("datos/medicamento.csv");
+//				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
+				menu_sincronizacion_csv();
 				break;
 
+			case 7:
+				menu_configuracion();
+				break;
 
 
 			case 0:
@@ -475,12 +494,12 @@ void mostrar_logs_sistema(){
 	char linea[MAX_LINEA];
 
 	while(sub_opcion != 0){
-		printf("=================================\n");
+		printf("\n=================================\n");
 		printf("   BIONET: LOGS DEL SISTEMA       \n");
 		printf("==================================\n");
 
 		//Mostramos el contenido del archivo
-		f = fopen("log.txt", "r");
+		f = fopen(miConfig.ruta_logs, "r");
 		if(f == NULL){
 			printf("[!] No hay logs registrados o el archivo no existe.\n");
 
@@ -513,7 +532,7 @@ void mostrar_logs_sistema(){
 				getchar();
 
 				if(conf == 'S' || conf == 's'){
-					f = fopen("log.txt", "w");
+					f = fopen(miConfig.ruta_logs, "w");
 					if(f != NULL){
 						fprintf(f, "[%s] Logs vaciados correctamente\n", __DATE__);
 						fclose(f);
@@ -535,6 +554,159 @@ void mostrar_logs_sistema(){
 
 }
 
+void menu_sincronizacion_csv(){
+	int sub_opcion = -1;
+	while(sub_opcion != 0){
+		printf("\n=================================\n");
+		printf("     SINCRONIZACION DE DATOS CSV    \n");
+		printf("===================================\n");
+		printf("[1] Sincronizar Personal Médico\n");
+		printf("[2] Sincronizar Centros de Salud\n");
+		printf("[3] Sincronizar Farmacias y Stock\n");
+		printf("[4] Volver a importar todos los archivos\n");
+		printf("[0] Volver al panel de administración\n");
+		printf("--------------------------------------\n");
+		printf("Seleccione una opción: ");
+
+		scanf("%d", &sub_opcion);
+		getchar();
+
+		switch(sub_opcion){
+			case 1:
+				printf("[SISTEMA] Actualizando médicos...\n");
+				importar_medicos("datos/medicos.csv");
+				registrar_log("[ADMIN]", "Sincronización manual de médicos realizada");
+				printf("[OK] Médicos actualizados");
+				break;
+
+			case 2:
+				printf("[SISTEMA] Actualizando centros....\n");
+				importar_centros_salud("datos/centros.csv");
+				registrar_log("[ADMIN]", "Sincronización manual de centros de salud realizada");
+				printf("[OK] Centros de salud actualizados.\n");
+				break;
+
+			case 3:
+				printf("[SISTEMA] Actualizando farmacias y stock....\n");
+				importar_farmacias("datos/farmacias.csv");
+				importar_stock("datos/medicamento.csv");
+				registrar_log("[ADMIN]", "Sincronización manual de farmacia y stock realizada");
+				printf("[OK] Farmacias y stock actualizados.\n");
+				break;
+
+			case 4:
+				printf("[!] Iniciando sincronización masiva del sistema....\n");
+				importar_medicos("datos/medicos.csv");
+				importar_centros_salud("datos/centros.csv");
+				importar_farmacias("datos/farmacias.csv");
+				importar_stock("datos/medicamento.csv");
+				registrar_log("[ADMIN]", "Sincronizacion total de CSV completada.");
+				printf("[OK] Todos los datos han sido refrescados");
+				break;
+
+			case 0:
+				printf("Volviendo al panel anterior....\n");
+				break;
+
+			default:
+				printf("Opcion no válida.\n");
+				break;
+
+		}
+	}
+}
+
+//Función para guardar la config en el archivo
+void guardar_config(Config c){
+	FILE *f = fopen("config.txt", "w");
+	if(f == NULL){
+		printf("[!] Error al abrir el archivo para escribir. \n");
+		return;
+	}
+
+	fprintf(f, "puerto=%d\n", c.puerto);
+	fprintf(f, "ruta_db=%s\n", c.ruta_db);
+	fprintf(f, "ruta_logs=%s\n", c.ruta_logs);
+	fclose(f);
+	printf("[OK] ¡Configuración guardada con éxito!\n");
+
+}
+
+//Función para cargar la config
+void cargar_config(Config *c){
+	FILE *f = fopen("config.txt", "r");
+	if(f == NULL){
+		//Valores por defecto si el archivo no existe
+		c->puerto = 8080;
+		strcpy(c->ruta_db, "./database/bionet.db");
+		strcpy(c->ruta_logs, "./logs/errores.log");
+		return;
+	}
+	fscanf(f, "puerto=%d\n", &c->puerto);
+	fscanf(f, "ruta_db=%s\n", c->ruta_db);
+	fscanf(f, "ruta_logs=%s\n", c->ruta_logs);
+	fclose(f);
+}
+
+void menu_configuracion(){
+	int sub_opcion = -1;
+	char mensaje_log[MAX_INFO_LOG];
+
+	while(sub_opcion != 0){
+		cargar_config(&miConfig);
+
+		printf("\n==========================\n");
+		printf("        CONFIGURACION        \n");
+		printf("=============================\n");
+		printf("[1] Cambiar puerto de escucha\n");
+		printf("[2] Cambiar ruta Base de Datos\n");
+		printf("[3] Cambiar ruta de logs\n");
+		printf("[0] Volver al panel del administrador\n");
+		printf("Seleccione una opcion: ");
+
+		scanf("%d", &sub_opcion);
+		getchar();
+
+		switch(sub_opcion){
+			case 1:
+				printf("Nuevo puerto: ");
+				scanf("%d", &miConfig.puerto);
+				guardar_config(miConfig);
+
+				//Registro en el LOG
+				sprintf(mensaje_log, "ADMIN: Cambio de puerto a %d", miConfig.puerto);
+				registrar_log("[CONFIGURACION]", mensaje_log);
+				break;
+
+			case 2:
+				printf("Nueva ruta de Base de Datos: ");
+				scanf("%s", miConfig.ruta_db);
+				guardar_config(miConfig);
+
+				sprintf(mensaje_log, "ADMIN: Nueva ruta DB establecida %s", miConfig.ruta_db);
+				registrar_log("[CONFIGURACION]", mensaje_log);
+				break;
+
+			case 3:
+				printf("Nueva ruta de Logs: ");
+				scanf("%s", miConfig.ruta_logs);
+				guardar_config(miConfig);
+
+				sprintf(mensaje_log, "ADMIN: El sistema de logs se ha movido a esa ruta");
+				registrar_log("[CONFIGURACION]", mensaje_log);
+				break;
+
+			case 0:
+				printf("[Saliendo...] Volviendo al panel del administrador.\n");
+				break;
+
+			default:
+				printf("Opcion no válida.\n");
+
+		}
+
+	}
+}
 
 // Menu para el paciente:
 void menu_paciente(char* dni_sesion) {
@@ -597,8 +769,6 @@ void menu_paciente(char* dni_sesion) {
 
 
 			case 4:
-				printf("Introduzca su DNI: ");
-				scanf("%s", dni_sesion);
 				ver_ficha_medica(dni_sesion);
 				break;
 
