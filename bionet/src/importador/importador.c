@@ -165,11 +165,12 @@ void importar_stock(const char* fichero){
 		char *precio = strtok(NULL, ";");
 		char *cantidad = strtok(NULL, ";");
 
-		if (id_farma && nombre && tipo && precio && cantidad) {
+		if (id && id_farma && nombre && tipo && precio && cantidad) {
 			char sql[MAX_SQL];
 			char *err_msg = 0;
-			sprintf(sql, "INSERT OR REPLACE INTO Stock (ID, ID_Farmacia, Nombre, Tipo, Precio, Cantidad) VALUES (%s, %s, %s, %s, %s, %s);",
+			sprintf(sql, "INSERT OR REPLACE INTO Stock (ID, ID_Farmacia, Nombre, Tipo, Precio, Cantidad) VALUES (%s, %s, '%s', '%s', %s, %s);",
 					id, id_farma, nombre, tipo, precio, cantidad);
+
 			int rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
 			if(rc != SQLITE_OK){
 				printf("ERROR al importar %s: %s\n", nombre, err_msg);
@@ -178,18 +179,11 @@ void importar_stock(const char* fichero){
 
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
-		fclose(f);
-		sqlite3_close(db);
-		printf("Inventario de medicamentos cargado correctamente\n");
+
 	}
-
-<<<<<<< HEAD
-
-
-=======
 	fclose(f);
 	sqlite3_close(db);
 	printf("Inventario de medicamentos cargado correctamente\n");
->>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
+
 }
 
