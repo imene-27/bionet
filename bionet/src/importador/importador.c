@@ -183,7 +183,13 @@ void importar_stock(const char* fichero){
 		printf("Inventario de medicamentos cargado correctamente\n");
 	}
 
+<<<<<<< HEAD
 
 
+=======
+	fclose(f);
+	sqlite3_close(db);
+	printf("Inventario de medicamentos cargado correctamente\n");
+>>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
 }
 
