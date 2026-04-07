@@ -29,3 +29,5 @@
 [2026-04-07  17:46]  [[LOGIN]] ADMIN ha entrado al panel de control
 [2026-04-07  17:46]  [[ADMIN]] Sincronización manual de farmacia y stock realizada
 [2026-04-07  17:47]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-04-07  22:02]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-04-07  22:05]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z

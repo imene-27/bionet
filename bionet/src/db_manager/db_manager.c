@@ -268,6 +268,10 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 	char *sql;
 	int es_numero = 1;
 
+	nombre_med[strcspn(nombre_med, "\r\n")] = 0;
+	localidad[strcspn(nombre_med, "\r\n")] = 0;
+
+
 	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
 	for (int i=0; localidad[i] != '\0'; i++){
 		if(!isdigit((unsigned char)localidad[i])){
@@ -276,26 +280,32 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		}
 	}
 
-	sqlite3_open(miConfig.ruta_db, &db);
+	if(sqlite3_open(miConfig.ruta_db, &db) != SQLITE_OK){
+		printf("[!] Error al abrir la base de datos.\n");
+		return;
+	}
 
 	if(es_numero == 1){
 		//Busqueda del medicamento por CP de farmacia
 		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
 			   "JOIN Stock s ON f.ID = s.ID_Farmacia "
 			   "WHERE s.Nombre = ? AND f.CP = ?;";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
-		sqlite3_bind_int(res, 2, atoi(localidad));
 
 	} else {
 		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
 		      "JOIN Stock s ON f.ID = s.ID_Farmacia "
 			   "WHERE s.Nombre = ? AND f.Municipio = ?;";
-		sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
-		sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
 
 	}
+
+	if(sqlite3_prepare_v2(db, sql, -1, &res, 0) != SQLITE_OK){
+		printf("[!] Error en la consulta SQL: %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return;
+	}
+
+	sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
+	sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);
 
 	printf("\n--- STOCK DE '%s' EN '%s' ---\n", nombre_med, localidad);
 	int encontrados = 0;
@@ -303,7 +313,7 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 		char *farmacia = (char*)sqlite3_column_text(res, 0);
 		int cantidad = sqlite3_column_int(res, 1);
 
-		if(cantidad >0){
+		if(cantidad > 0){
 			printf("Farmacia: %-20s | Stock: %d unidades\n", farmacia, cantidad);
 		} else {
 			printf("Farmacia: %-20s | [AGOTADO]\n", farmacia);
@@ -313,6 +323,7 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 
 	if(encontrados == 0){
 		printf("[!] No se han encontrado farmacias con ese medicamento en la zona indicada.\n");
+		printf("Sugerencia: Revisa si el nombre dle medicamento es exacto (añade la dosis).\n");
 	}
 
 	sqlite3_finalize(res);
