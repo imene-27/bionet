@@ -182,6 +182,7 @@ void importar_stock(const char* fichero) {
 			}
 		}
 	}
+
 	fclose(f);
 	sqlite3_close(db);
 	printf("Inventario de medicamentos cargado correctamente\n");
