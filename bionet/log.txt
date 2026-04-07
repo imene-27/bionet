@@ -20,3 +20,4 @@
 [2026-04-07  13:13]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
 [2026-04-07  13:13]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
 [2026-04-07  13:13]  [[LOGIN]] ADMIN ha entrado al panel de control
+[2026-04-07  17:34]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z

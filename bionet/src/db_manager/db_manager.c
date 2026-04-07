@@ -99,6 +99,15 @@ void inicializar_db(char *ruta) {
 				"								  FOREIGN KEY (Id_Farmacia) REFERENCES Farmacia(ID),"
 				"								  FOREIGN KEY (ID_Medic) REFERENCES Medicamento(ID)); "
 
+				"CREATE TABLE IF NOT EXISTS Stock(ID INTEGER, "
+				"  	 							  ID_Farmacia INTEGER, "
+				"                                 Nombre TEXT, "
+				"                                 Tipo TEXT, "
+				"                                 Precio DOUBLE, "
+				"                                 Cantidad INTEGER, "
+				"                                 PRIMARY KEY (ID, ID_Farmacia), "
+				"                                 FOREIGN KEY (ID_Farmacia) REFERENCES Farmacia(ID));"
+
 				"CREATE TABLE IF NOT EXISTS FichaMedica(DNI_User TEXT PRIMARY KEY, "
 				"										Enfermedades TEXT, "
 				"										Operaciones TEXT, "
@@ -271,19 +280,17 @@ void buscar_medicamento(char *nombre_med, char *localidad){
 
 	if(es_numero == 1){
 		//Busqueda del medicamento por CP de farmacia
-		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
-			   "JOIN Vende v ON f.ID = v.ID_Farmacia "
-				"JOIN Medicamento m ON v.ID_Medic = m.ID "
-				"WHERE m.Nombre = ? AND f.CP = ?;";
+		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
+			   "JOIN Stock s ON f.ID = s.ID_Farmacia "
+			   "WHERE s.Nombre = ? AND f.CP = ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_int(res, 2, atoi(localidad));
 
 	} else {
-		sql = "SELECT f.Nombre, v.Cantidad FROM Farmacia f "
-		      "JOIN Vende v ON f.ID = v.ID_Farmacia "
-			   "JOIN Medicamento m ON v.ID_Medic = m.ID "
-			   "WHERE m.Nombre = ? AND f.Municipio = ?;";
+		sql = "SELECT f.Nombre, s.Cantidad FROM Farmacia f "
+		      "JOIN Stock s ON f.ID = s.ID_Farmacia "
+			   "WHERE s.Nombre = ? AND f.Municipio = ?;";
 		sqlite3_prepare_v2(db, sql, -1, &res, 0);
 		sqlite3_bind_text(res, 1, nombre_med, -1, SQLITE_STATIC);
 		sqlite3_bind_text(res, 2, localidad, -1, SQLITE_STATIC);

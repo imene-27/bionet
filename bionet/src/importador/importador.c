@@ -10,7 +10,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "constantes.h"
+#include "../db_manager/entidades.h"
 #include "../sqlite3/sqlite3.h"
+extern Config miConfig;
+
 
 void importar_farmacias(const char* fichero) {
 	FILE *f = fopen(fichero, "r");
@@ -20,7 +23,7 @@ void importar_farmacias(const char* fichero) {
 	}
 
 	sqlite3 *db;
-	sqlite3_open(DB_NAME, &db);
+	sqlite3_open(miConfig.ruta_db, &db);
 	char linea[MAX_LINEA];
 	int contador = 0;
 
@@ -69,7 +72,7 @@ void importar_centros_salud(const char* fichero) {
 	}
 
 	sqlite3 *db;
-	sqlite3_open(DB_NAME, &db);
+	sqlite3_open(miConfig.ruta_db, &db);
 	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
@@ -114,7 +117,7 @@ void importar_medicos(const char* fichero) {
 	}
 
 	sqlite3 *db;
-	sqlite3_open(DB_NAME, &db);
+	sqlite3_open(miConfig.ruta_db, &db);
 	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
@@ -139,7 +142,8 @@ void importar_medicos(const char* fichero) {
 	printf("Plantilla de medicos cargada\n");
 }
 
-void importar_stock(const char* fichero) {
+
+void importar_stock(const char* fichero){
 	FILE *f = fopen(fichero, "r");
 	if (f == NULL) {
 		printf("Error: No se encuentra el archivo %s\n", fichero);
@@ -147,26 +151,39 @@ void importar_stock(const char* fichero) {
 	}
 
 	sqlite3 *db;
-	sqlite3_open(DB_NAME, &db);
+    sqlite3_open(miConfig.ruta_db, &db);
 	char linea[MAX_LINEA];
 
 	while (fgets(linea, sizeof(linea), f)) {
 		linea[strcspn(linea, "\n")] = 0;
 		linea[strcspn(linea, "\r")] = 0;
 
-		char *id_farma = strtok(linea, ";");
-		char *id_medicamento = strtok(NULL, ";");
+		char *id = strtok(linea, ";");
+		char *id_farma = strtok(NULL, ";");
+		char *nombre = strtok(NULL, ";");
+		char *tipo = strtok(NULL, ";");
+		char *precio = strtok(NULL, ";");
 		char *cantidad = strtok(NULL, ";");
 
-
-		if (id_farma && id_medicamento && cantidad) {
+		if (id_farma && nombre && tipo && precio && cantidad) {
 			char sql[MAX_SQL];
-			sprintf(sql, "INSERT OR REPLACE INTO Vende (ID_Farmacia, ID_Medic, Cantidad) VALUES (%s, %s, %s);",
-					id_farma, id_medicamento, cantidad);
+			char *err_msg = 0;
+			sprintf(sql, "INSERT OR REPLACE INTO Stock (ID, ID_Farmacia, Nombre, Tipo, Precio, Cantidad) VALUES (%s, %s, %s, %s, %s, %s);",
+					id, id_farma, nombre, tipo, precio, cantidad);
+			int rc = sqlite3_exec(db, sql, 0, 0, &err_msg);
+			if(rc != SQLITE_OK){
+				printf("ERROR al importar %s: %s\n", nombre, err_msg);
+				sqlite3_free(err_msg);
+			}
+
 			sqlite3_exec(db, sql, 0, 0, 0);
 		}
+		fclose(f);
+		sqlite3_close(db);
+		printf("Inventario de medicamentos cargado correctamente\n");
 	}
-	fclose(f);
-	sqlite3_close(db);
-	printf("Inventario de medicamentos cargado correctamente\n");
+
+
+
 }
+
