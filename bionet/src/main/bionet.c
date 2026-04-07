@@ -589,7 +589,7 @@ void menu_sincronizacion_csv(){
 			case 3:
 				printf("[SISTEMA] Actualizando farmacias y stock....\n");
 				importar_farmacias("datos/farmacias.csv");
-				importar_stock("datos/medicamento.csv");
+				importar_stock("datos/stock.csv");
 				registrar_log("[ADMIN]", "Sincronización manual de farmacia y stock realizada");
 				printf("[OK] Farmacias y stock actualizados.\n");
 				break;
@@ -599,7 +599,7 @@ void menu_sincronizacion_csv(){
 				importar_medicos("datos/medicos.csv");
 				importar_centros_salud("datos/centros.csv");
 				importar_farmacias("datos/farmacias.csv");
-				importar_stock("datos/medicamento.csv");
+				importar_stock("datos/stock.csv");
 				registrar_log("[ADMIN]", "Sincronizacion total de CSV completada.");
 				printf("[OK] Todos los datos han sido refrescados");
 				break;
@@ -761,9 +761,11 @@ void menu_paciente(char* dni_sesion) {
 				printf("Nombre del medicamento: ");
 				fgets(input1, 50, stdin);
 				input1[strcspn(input1,  "\n")] = 0;
+				input1[strcspn(input1, "\r")] = 0;
 				printf("Introduce CP o Municipio para buscar cerca: ");
 				fgets(input2, 50, stdin);
 				input2[strcspn(input2, "\n")] = 0;
+				input2[strcspn(input2, "\r")] = 0;
 				buscar_medicamento(input1, input2);
 				break;
 
@@ -773,34 +775,60 @@ void menu_paciente(char* dni_sesion) {
 				break;
 
 			case 5: {
-				char especialidad[50], localidad[MAX_MUNICIPIO], fecha[15], hora[10];
-				int id_medico, exito = 0;
+				char especialidad_elegida[50], localidad[MAX_MUNICIPIO], fecha[15], hora[10];
+				int id_medico, opcion_esp, exito = 0;
 
-				printf("Especialidad deseada: ");
-				fgets(especialidad, 50, stdin);
-				especialidad[strcspn(especialidad, "\n")] = 0;;
+				const char *lista_especialidades[] = {
+						"Medicina General",  // Opción 1
+						"Pediatria",         // Opción 2
+						"Cardiologia",       // Opción 3
+						"Traumatologia",     // Opción 4
+						"Dermatologia",      // Opción 5
+						"Oftalmologia",      // Opción 6
+						"Ginecologia",       // Opción 7
+						"Fisioterapia"       // Opción 8
+				};
+
+				int total_especialidades = 8;
+
+				printf("\n--- RESERVAR CITA MÉDICA ---\n");
+
+				printf("Especialidades disponibles:\n ");
+
+				for (int i = 0; i < total_especialidades; i++) {
+					printf("[%d] %s\n", i+1, lista_especialidades[i]);
+				}
+				printf("Selecciones el número de la especialidad: ");
+				scanf("%d", &opcion_esp);
+				getchar();
+
+				if (opcion_esp < 1 || opcion_esp > total_especialidades){
+					printf("Opción no válida. Volviendo al menú...\n");
+					break;
+				}
+				strcpy(especialidad_elegida, lista_especialidades[opcion_esp -1]);
 
 				printf("Introduce CP o Municipio: ");
 				fgets(localidad, MAX_MUNICIPIO, stdin);
 				localidad[strcspn(localidad, "\n")] = 0;
+				localidad[strcspn(localidad, "\r")] = 0;
 
 
 				//Guardamos cuántos médicos se han encontrado
-				int encontrados = buscar_medicos_especialidad(especialidad, localidad);
+				int encontrados = buscar_medicos_especialidad(especialidad_elegida, localidad);
 
 				// Solo si hay médicos, pedimos lo datos de la cita
 				if(encontrados > 0){
 					printf("\nIntroduzca el ID del médico elegido: ");
 					scanf("%d", &id_medico);
-					printf("Introduzca su DNI para la reserva: ");
-					scanf("%s", dni_sesion);
 					getchar();
 
 					// Hacemos un bucle hasta encontrar una fecha y hora disponible
 					while (!exito) {
-						printf("\n--- COMPROBAR DISPONIBILIDAD ---\n");
+						printf("\n--- FECHA Y HORA DE LA CITA ---\n");
 						printf("Fecha (AAAA-MM-DD): ");
 						scanf("%s", fecha);
+
 						printf("Hora (HH:MM): ");
 						scanf("%s", hora);
 						getchar();
@@ -811,13 +839,20 @@ void menu_paciente(char* dni_sesion) {
 						} else {
 							printf("\n[!] El Dr. ya tiene una cita a esa hora. Intente con otra.\n");
 							printf("¿Desea probar otra hora? (S/N): ");
+
 							char respuesta;
-							scanf("%c", &respuesta);
-							if(respuesta == 'n' || respuesta == 'N') break;
+							scanf(" %c", &respuesta);
+							getchar();
+
+							if(respuesta == 'n' || respuesta == 'N'){
+								printf("Reserva cancelada. Volviendo al menú principal...\n");
+								break;
+							}
 						}
 					}
 
 				} else {
+					printf("No se encontraron médicis de esa especialidad en la zona.\n");
 					printf("Volviendo al menú principal...\n");
 				}
 
