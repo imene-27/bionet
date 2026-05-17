@@ -278,6 +278,8 @@ void menu_gestion_centros(){
 				db_insertar_centro(nombre, dir, cp, mun, hor, tipo, tel);
 				break;
 
+
+
 			case 2:
 				printf("Introduzca el ID del centro a modificar: ");
 				fgets(id, MAX_ID, stdin);
