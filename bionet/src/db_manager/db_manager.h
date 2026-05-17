@@ -34,6 +34,7 @@ int validar_paciente(char* dni, char* pass);
 void registrar_usuario(char* dni, char* nombre, char* email, char* municipio, char* pass, char* historial);
 int tabla_vacia(sqlite3 *db, const char *nombre_tabla);
 void auto_carga_datos();
+void generar_hash_password(const char* pass_plana, char* hash_resultado);
 
 
 #endif /* DB_MANAGER_H_ */
