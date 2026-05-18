@@ -32,6 +32,7 @@ void menu_sincronizacion_csv();
 void guardar_config(Config c);
 void cargar_config(Config *c);
 void menu_configuracion();
+void buscar_farmacias(char* criterio);
 
 Config miConfig;
 
@@ -39,6 +40,49 @@ void limpiar_buffer_teclado(){
 	int c;
 	while((c = getchar()) != '\n' && c != EOF);
 }
+
+void buscar_farmacias(char* criterio){
+	//Obtenemos el inicio de la lista generada en el db_manager con malloc
+	FarmaciaNodo *lista = buscar_farmcias_lista(criterio);
+
+	if(lista == NULL){
+		printf("\n[!] No se encontraron farmcacias con el criterio: %s\n", criterio);
+		return;
+	}
+
+	printf("\n==========================================\n");
+	printf("         FARMACIAS ENCONTRADAS              \n");
+	printf("============================================\n");
+
+	FarmaciaNodo *actual = lista;
+	int contador = 0;
+
+	//Recorremos la lista nodo por nodo
+	while(actual != 0){
+		contador ++;
+		printf("[%d] %s \n", contador, actual->nombre);
+		printf("Dirección: %s (CP: %d)\n", actual->direccion, actual->codigo_postal_fk);
+		printf("Horario: %s\n", actual->horario);
+		printf("Teléfono: %s\n", actual->telefono);
+		printf("Estado: %s\n", (actual->es_guardia == 1) ? "DE GUARDIA" : "Horario Normal");
+		printf("---------------------------------------------------------------------\n");
+
+		actual = actual->siguiente;
+	}
+
+	//Liberación completa de la memoria
+	actual = lista;
+	FarmaciaNodo *siguiente_aux = NULL;
+
+	while(actual != NULL){
+		siguiente_aux = actual->siguiente;
+		free(actual);
+		actual = siguiente_aux;
+	}
+
+
+}
+
 
 int main(){
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -82,7 +126,7 @@ int main(){
 
 			case 0:
 				registrar_log("[SISTEMA]", "Aplicación cerrada por el usuario.");
-				printf("[Saliendo....] Applicación apagada.\n");
+				printf("[Saliendo....] Aplicación apagada.\n");
 				break;
 
 			default:
@@ -189,18 +233,18 @@ void menu_administrador(){
 	int opcion = -1;
 	while(opcion != 0){
 		printf("=========================================\n");
-		printf("    BIONET - PANEL DE ADMINISTRACION     \n");
+		printf("    BIONET - PANEL DE ADMINISTRACIÓN     \n");
 		printf("=========================================\n");
-		printf("[1] Gestion de Centros de Salud\n");
-		printf("[2] Gestion de Personal Medico\n");
-		printf("[3] Gestion de usuarios\n");
-		printf("[4] Gestion de Farmacias\n");
+		printf("[1] Gestión de Centros de Salud\n");
+		printf("[2] Gestión de Personal Medico\n");
+		printf("[3] Gestión de usuarios\n");
+		printf("[4] Gestión de Farmacias\n");
 		printf("[5] Ver logs del sistema\n");
 		printf("[6] Sincronización de Datos (CSV)\n");
 		printf("[7] Configuración\n");
 		printf("[0] Salir y apagar servidor\n");
 		printf("-------------------------------\n");
-		printf("Seleccione una opcion: ");
+		printf("Seleccione una opción: ");
 		scanf("%d", &opcion);
 
 		limpiar_buffer_teclado();

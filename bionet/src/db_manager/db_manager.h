@@ -8,6 +8,7 @@
 #ifndef DB_MANAGER_H_
 #define DB_MANAGER_H_
 
+#include "entidades.h"
 #include "../sqlite3/sqlite3.h"
 
 void inicializar_db(char *ruta);
@@ -35,6 +36,7 @@ void registrar_usuario(char* dni, char* nombre, char* email, char* municipio, ch
 int tabla_vacia(sqlite3 *db, const char *nombre_tabla);
 void auto_carga_datos();
 void generar_hash_password(const char* pass_plana, char* hash_resultado);
+FarmaciaNodo* buscar_farmcias_lista(const char* criterio);
 
 
 #endif /* DB_MANAGER_H_ */

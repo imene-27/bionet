@@ -21,15 +21,16 @@ extern Config miConfig;
 
 
 
+
 void generar_hash_password(const char* pass_plana, char* hash_resultado){
-	uint32_t hash = 5381;
-	int c;
-	while((c *= pass_plana++)){
-		hash = ((hash << 5) + hash) + c;
+	unsigned int c = 5381;
+	while(*pass_plana){
+		c = c * 33 + (*pass_plana);
+		pass_plana++;
 	}
 
 	// Convertimos el número resultante en una cadena hexadecimal fija de 8 caracteres + \0
-	sprintf(hash_resultado, "%08x", hash);
+	sprintf(hash_resultado, "%08x", c);
 }
 
 
@@ -144,72 +145,130 @@ void inicializar_db(char *ruta) {
 }
 
 
-void buscar_farmacias(char *busqueda){
+//Función que busca farmacias por CP o Municipio y devuelve una lista Enlazada dinámica
+FarmaciaNodo* buscar_farmcias_lista(const char* criterio){
 	sqlite3 *db;
-	sqlite3_stmt *res;
-	char *sql;
-	int es_numero = 1;
-	int encontradas = 0;
+	sqlite3_stmt *stmt;
+	FarmaciaNodo *cabeza = NULL;
+	FarmaciaNodo *actual = NULL;
 
-	busqueda[strcspn(busqueda, "\n")] = 0;
-	busqueda[strcspn(busqueda, "\r")] = 0;
-
-	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
-	for (int i=0; busqueda[i] != '\0'; i++){
-		if(!isdigit(busqueda[i])){
-			es_numero = 0;
-			break;
-		}
-	}
 	if(sqlite3_open(miConfig.ruta_db, &db) != SQLITE_OK){
-		printf("ERROR: No se pudo abrir la BD\n");
-		return;
+		printf("[ERROR] No se pudo abrir la base de datos.\n");
+		return NULL;
 	}
 
+	char *sql = "SELECT ID, Nombre, Direccion, Municipio, Telefono, CP, Guardia "
+				"FROM Farmacia WHERE CP = ? OR Municipio LIKE ?;";
 
-	if(es_numero == 1){
-		//Si es un numero (CP)
-		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE CP LIKE '%' || ? || '%';";
-		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
-	} else {
-		//Si es un texto (nombre de un municipio)
-		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE Municipio LIKE '%' || ? || '%';";
-		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
-		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
-	}
+	if(sqlite3_prepare_v2(db, sql, -1, &stmt, 0) == SQLITE_OK){
+		int cp_buscado = atoi(criterio);
+		sqlite3_bind_int(stmt, 1, cp_buscado);
 
-	int rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
-	if(rc != SQLITE_OK){
-		printf("ERROR DE SQLITE AL BUSCAR : %s\n", sqlite3_errmsg(db));
-		sqlite3_close(db);
-		return;
-	}
+		char criterio_like[100];
+		sprintf(criterio_like, "%%%s%%", criterio);
+		sqlite3_bind_text(stmt, 2, criterio_like, -1, SQLITE_STATIC);
 
-	sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+		while(sqlite3_step(stmt) == SQLITE_ROW){
+			FarmaciaNodo *nuevo_nodo = (FarmaciaNodo*) malloc(sizeof(FarmaciaNodo));
+			if(nuevo_nodo == NULL){
+				printf("[ERROR] Sin memoria RAM disponible. \n");
+				break;
+			}
 
-	//Imprimimos los resultados
-	printf("--- RESULTADOS PARA: %s ---\n", busqueda);
+			nuevo_nodo->id_farmamcia = sqlite3_column_int(stmt, 0);
+			strcpy(nuevo_nodo->nombre, (const char*) sqlite3_column_text(stmt, 1));
+			strcpy(nuevo_nodo->direccion, (const char*) sqlite3_column_text(stmt, 2));
+			strcpy(nuevo_nodo->horario, (const char*) sqlite3_column_text(stmt, 3));
+			strcpy(nuevo_nodo->telefono, (const char*) sqlite3_column_text(stmt, 4));
+			nuevo_nodo->codigo_postal_fk = sqlite3_column_int(stmt, 5);
+			nuevo_nodo->es_guardia = sqlite3_column_int(stmt, 6);
+			nuevo_nodo->siguiente = NULL;
 
-	while(sqlite3_step(res) == SQLITE_ROW){
-		char *nombre = (char*)sqlite3_column_text(res, 0);
-		char *dir =(char*)sqlite3_column_text(res, 1);
-		int guardia = sqlite3_column_int(res, 2);
-
-		if(guardia == 1){
-			printf("[GUARDIA]    %s - %s\n", nombre, dir);
-		} else {
-			printf("[NO GUARDIA]    %s - %s\n", nombre, dir);
+			if(cabeza == NULL){
+				cabeza = nuevo_nodo;
+				actual = cabeza;
+			} else{
+				actual->siguiente = nuevo_nodo;
+				actual = nuevo_nodo;
+			}
 		}
-		encontradas++;
+	} else{
+		printf("[ERROR] Error en la consulta de búsqueda: %s\n", sqlite3_errmsg(db));
 	}
 
-	if(encontradas == 0){
-		printf("No se han encontrado farmacias\n");
-	}
-	sqlite3_finalize(res);
+	sqlite3_finalize(stmt);
 	sqlite3_close(db);
+
+	return cabeza;
 }
+
+//
+//void buscar_farmacias(char *busqueda){
+//	sqlite3 *db;
+//	sqlite3_stmt *res;
+//	char *sql;
+//	int es_numero = 1;
+//	int encontradas = 0;
+//
+//	busqueda[strcspn(busqueda, "\n")] = 0;
+//	busqueda[strcspn(busqueda, "\r")] = 0;
+//
+//	//Comprobamosn si la busqueda es un numero (CP) o text (Municipio)
+//	for (int i=0; busqueda[i] != '\0'; i++){
+//		if(!isdigit(busqueda[i])){
+//			es_numero = 0;
+//			break;
+//		}
+//	}
+//	if(sqlite3_open(miConfig.ruta_db, &db) != SQLITE_OK){
+//		printf("ERROR: No se pudo abrir la BD\n");
+//		return;
+//	}
+//
+//
+//	if(es_numero == 1){
+//		//Si es un numero (CP)
+//		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE CP LIKE '%' || ? || '%';";
+//		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+//		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+//	} else {
+//		//Si es un texto (nombre de un municipio)
+//		sql = "SELECT Nombre, Direccion, Guardia FROM Farmacia WHERE Municipio LIKE '%' || ? || '%';";
+//		//sqlite3_prepare_v2(db, sql, -1, &res, 0);
+//		//sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+//	}
+//
+//	int rc = sqlite3_prepare_v2(db, sql, -1, &res, 0);
+//	if(rc != SQLITE_OK){
+//		printf("ERROR DE SQLITE AL BUSCAR : %s\n", sqlite3_errmsg(db));
+//		sqlite3_close(db);
+//		return;
+//	}
+//
+//	sqlite3_bind_text(res, 1, busqueda, -1, SQLITE_STATIC);
+//
+//	//Imprimimos los resultados
+//	printf("--- RESULTADOS PARA: %s ---\n", busqueda);
+//
+//	while(sqlite3_step(res) == SQLITE_ROW){
+//		char *nombre = (char*)sqlite3_column_text(res, 0);
+//		char *dir =(char*)sqlite3_column_text(res, 1);
+//		int guardia = sqlite3_column_int(res, 2);
+//
+//		if(guardia == 1){
+//			printf("[GUARDIA]    %s - %s\n", nombre, dir);
+//		} else {
+//			printf("[NO GUARDIA]    %s - %s\n", nombre, dir);
+//		}
+//		encontradas++;
+//	}
+//
+//	if(encontradas == 0){
+//		printf("No se han encontrado farmacias\n");
+//	}
+//	sqlite3_finalize(res);
+//	sqlite3_close(db);
+//}
 
 
 void buscar_centros(char *busqueda){
@@ -633,7 +692,7 @@ void db_modificar_centro(int id, char* nuevo_nombre){
 
 void db_eliminar_centro(int id){
 	sqlite3 *db;
-	sqlite3 *stmt;
+	sqlite3_stmt *stmt;
 
 	if(sqlite3_open(miConfig.ruta_db, &db) != SQLITE_OK){
 		printf("[!] Error al abrir la base de datos.\n");
@@ -641,14 +700,14 @@ void db_eliminar_centro(int id){
 
 	}
 
-	char *sql = "DELETE FROM Centro Salud WHERE ID = ?;";
+	char *sql = "DELETE FROM CentroSalud WHERE ID = ?;";
 
 	if(sqlite3_prepare_v2(db, sql, -1, &stmt, 0) == SQLITE_OK){
 		sqlite3_bind_int(stmt, 1, id);
 
 		if(sqlite3_step(stmt) == SQLITE_DONE){
 			char log_msg[MAX_INFO_LOG];
-			sprintf(log_msg, "DELETE CENTRO: Centro con ID &d eliminado", id);
+			sprintf(log_msg, "DELETE CENTRO: Centro con ID %d eliminado", id);
 			registrar_log("CENTRO", log_msg);
 			printf("[DB] Centro con ID %d eliminado. \n", id);
 
@@ -885,8 +944,8 @@ void db_modificar_guardia(int id, int estado){
 	char *sql = "UPDATE Farmacia SET Guardia = ? WHERE ID = ?;";
 
 	if(sqlite3_prepare_v2(db, sql, -1, &stmt, 0) == SQLITE_OK){
-		sqlite3_bind_ind(stmt, 1, estado);
-		sqlite3_bind_ind(stmt, 2, id);
+		sqlite3_bind_int(stmt, 1, estado);
+		sqlite3_bind_int(stmt, 2, id);
 
 		if(sqlite3_step(stmt) == SQLITE_DONE){
 			char log_msg[MAX_INFO_LOG];

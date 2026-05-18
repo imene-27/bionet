@@ -19,6 +19,18 @@ typedef struct {
 	int es_guardia; //1 si esta de guardia o 0 si no lo esta
 } Farmacia;
 
+typedef struct FarmaciaNodo{
+	int id_farmamcia;
+	char nombre[50];
+	char direccion[100];
+	char horario[50];
+	char municipio[50];
+	char telefono[15];
+	int codigo_postal_fk;
+	int es_guardia;
+	struct FarmaciaNodo* siguiente;
+}FarmaciaNodo;
+
 
 //Definimos la estructura para Usuario (tanto admin como ciudadano)
 typedef struct {
