@@ -16,6 +16,7 @@
 #include "../db_manager/db_manager.h"
 #include "../importador/importador.h"
 
+void limpiar_buffer_teclado();
 void menu_administrador();
 void menu_paciente(char* dni_sesion);
 
@@ -33,6 +34,11 @@ void cargar_config(Config *c);
 void menu_configuracion();
 
 Config miConfig;
+
+void limpiar_buffer_teclado(){
+	int c;
+	while((c = getchar()) != '\n' && c != EOF);
+}
 
 int main(){
 	setvbuf(stdout, NULL, _IONBF, 0);
@@ -58,7 +64,8 @@ int main(){
 		printf("Seleccione: ");
 		scanf("%d", &opcion_inicial);
 
-		getchar();
+		limpiar_buffer_teclado();
+
 
 		switch(opcion_inicial){
 			case 1:
@@ -95,12 +102,12 @@ void login_paciente(){
 	printf("======================================\n");
 
 	printf("DNI: ");
-	scanf("%s", dni);
-	getchar();
+	fgets(dni, MAX_DNI, stdin);
+	dni[strcspn(dni, "\r\n")] = 0;
 
 	printf("Contraseña: ");
-	scanf("%s", pass);
-	getchar();
+	fgets(pass, MAX_PASS, stdin);
+	pass[strcspn(pass, "\r\n")] = 0;
 
 	//Llamamos a la funcion de la DB para validar el Usuario
 	if(validar_paciente(dni, pass)){
@@ -120,21 +127,21 @@ void login_admin(){
 	printf("          ACCESO ADMINISTRADOR          \n");
 	printf("=======================================\n");
 
-		printf("Usuario: ");
-		scanf("%s", user);
-		getchar();
+	printf("Usuario: ");
+	fgets(user, 20, stdin);
+	user[strcspn(user, "\r\n")] = 0;
 
-		printf("Contraseña: ");
-		scanf("%s", pass);
-		getchar();
+	printf("Contraseña: ");
+	fgets(pass, MAX_PASS, stdin);
+	pass[strcspn(pass, "\r\n")] = 0;
 
-		if(strcmp(user, "admin") == 0 && strcmp(pass, "1234") == 0){
-			registrar_log("[LOGIN]", "ADMIN ha entrado al panel de control");
-			menu_administrador();
+	if(strcmp(user, "admin") == 0 && strcmp(pass, "1234") == 0){
+		registrar_log("[LOGIN]", "ADMIN ha entrado al panel de control");
+		menu_administrador();
 
-		}else{
-			printf("[!] Datos de administrador incorrectos. \n");
-		}
+	}else{
+		printf("[!] Datos de administrador incorrectos. \n");
+	}
 
 }
 
@@ -147,8 +154,8 @@ void registro_nuevo_paciente(){
 
 
 	printf("DNI: ");
-	scanf("%s", dni);
-	getchar();
+	fgets(dni, MAX_DNI, stdin);
+	dni[strcspn(dni, "\r\n")] = 0;
 
 	printf("Nombre Completo: ");
 	fgets(nombre, MAX_NOMBRE, stdin);
@@ -163,8 +170,8 @@ void registro_nuevo_paciente(){
 	mun[strcspn(mun, "\n")] = 0;
 
 	printf("Contraseña: ");
-	scanf("%s", pass);
-	getchar();
+	fgets(pass, MAX_PASS, stdin);
+	pass[strcspn(pass, "\r\n")] = 0;
 
 	printf("Historial médico breve (alergias, enfermedades....): ");
 	fgets(historial, 200, stdin);
@@ -196,7 +203,7 @@ void menu_administrador(){
 		printf("Seleccione una opcion: ");
 		scanf("%d", &opcion);
 
-		getchar();
+		limpiar_buffer_teclado();
 
 		switch(opcion){
 			case 1:
@@ -220,20 +227,12 @@ void menu_administrador(){
 				break;
 
 			case 6:
-//				printf("\n---IMPORTANDO DATOS DESDE CSV---\n");
-//				// Llamamos a las funciones
-//				importar_farmacias("datos/farmacias.csv");
-//				importar_centros_salud("datos/centros.csv");
-//				importar_medicos("datos/medicos.csv");
-//				importar_stock("datos/medicamento.csv");
-//				printf("[OK] ¡Todos los datos han sido importados a la Base de Datos!\n");
 				menu_sincronizacion_csv();
 				break;
 
 			case 7:
 				menu_configuracion();
 				break;
-
 
 			case 0:
 				printf("Saliendo...Apagando el panel.\n");
@@ -263,26 +262,28 @@ void menu_gestion_centros(){
 		printf("Seleccione una opcion: ");
 		scanf("%d", &sub_opcion);
 
-		getchar();
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
-				printf("Nombre: "); fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\n")] = 0;
-				printf("Direccion: "); fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
-				printf("CP: "); scanf("%s", cp); getchar();
-				printf("Municipio: "); fgets(mun, MAX_MUNICIPIO, stdin); mun[strcspn(mun, "\n")] = 0;
-				printf("Horario: "); fgets(hor, 20, stdin); hor[strcspn(hor, "\n")] = 0;
-				printf("Tipo Centro: "); fgets(tipo, 20, stdin); tipo[strcspn(tipo, "\n")] = 0;
-				printf("Telefono: "); scanf("%s", tel); getchar();
+				printf("Nombre: "); fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\r\n")] = 0;
+				printf("Direccion: "); fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\r\n")] = 0;
+				printf("CP: "); fgets(cp, MAX_CP, stdin); cp[strcspn(cp, "\r\n")] = 0;
+				printf("Municipio: "); fgets(mun, MAX_MUNICIPIO, stdin); mun[strcspn(mun, "\r\n")] = 0;
+				printf("Horario: "); fgets(hor, 20, stdin); hor[strcspn(hor, "\r\n")] = 0;
+				printf("Tipo Centro: "); fgets(tipo, 20, stdin); tipo[strcspn(tipo, "\r\n")] = 0;
+				printf("Telefono: "); fgets(tel, MAX_DNI, stdin); tel[strcspn(tel, "\r\n")] = 0;
 
 				//Llamada a la DB
 				db_insertar_centro(nombre, dir, cp, mun, hor, tipo, tel);
 				break;
 
+
+
 			case 2:
 				printf("Introduzca el ID del centro a modificar: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				printf("Introduzca el nuevo nombre para el centro: ");
 				fgets(nombre, MAX_NOMBRE, stdin);
@@ -294,8 +295,8 @@ void menu_gestion_centros(){
 
 			case 3:
 				printf("Introduzca el ID del centro a eliminar: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				db_eliminar_centro(atoi(id));
 				break;
@@ -323,7 +324,8 @@ void menu_gestion_personal(){
 		printf("--------------------------------------------\n");
 		printf("Seleccione una opción: ");
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
@@ -336,27 +338,26 @@ void menu_gestion_personal(){
 				especialidad[strcspn(especialidad, "\n")] = 0;
 
 				printf("ID del centro de Salud donde trabaja: ");
-				scanf("%s", id_centro);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				db_insertar_medico(nombre, especialidad, atoi(id_centro));
 				break;
 
 			case 2:
 				printf("Introduzca el ID del médico para dar de baja: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				db_eliminar_medico(atoi(id));
 				break;
 
 			case 0:
-				printf("[Saliendo....] Volviendo al Panel de Administracion.\n");
+				printf("[Saliendo....] Volviendo al Panel de Administración.\n");
 				break;
 
 			default:
-				printf("Opcion no valida.\n");
-
+				printf("Opción no válida.\n");
 
 		}
 	}
@@ -374,25 +375,26 @@ void menu_gestion_usuarios(){
 		printf("--------------------------------------------\n");
 		printf("Seleccione una opcion: ");
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
 				printf("Introduzca el DNI del usuario a eliminar: ");
-				scanf("%s", dni);
-				getchar();
+				fgets(dni, MAX_DNI, stdin);
+				dni[strcspn(dni, "\r\n")] = 0;
 
 				db_eliminar_usuario(dni);
 				break;
 
 			case 2:
 				printf("Introduzca el DNI del usuario: ");
-				scanf("%s", dni);
-				getchar();
+				fgets(dni, MAX_DNI, stdin);
+				dni[strcspn(dni, "\r\n")] = 0;
 
 				printf("Introduzca la nueva contraseña: ");
-				scanf("%s", new_pass);
-				getchar();
+				fgets(new_pass, MAX_PASS, stdin);
+				new_pass[strcspn(new_pass, "\r\n")] = 0;
 
 				db_modificar_password_usuario(dni, new_pass);
 				break;
@@ -423,31 +425,45 @@ void menu_gestion_farmacias(){
 		printf("--------------------------------------------\n");
 		printf("Seleccione una opcion: ");
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
 				printf("Nombre: "); fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\n")] = 0;
 				printf("Direccion: "); fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
-				printf("CP: "); scanf("%s", cp); getchar();
+				printf("CP: "); fgets(cp, MAX_CP, stdin); cp[strcspn(cp, "\r\n")] = 0;
 				printf("Municipio: "); fgets(mun, MAX_MUNICIPIO, stdin); mun[strcspn(mun, "\n")] = 0;
-				printf("Telefono: "), scanf("%s", tel); getchar();
-				printf("¿Esta de guardia? (1: Si / 0: No): "); scanf("%d", &guardia); getchar();
+				printf("Telefono: "), fgets(tel, MAX_DNI, stdin); tel[strcspn(tel, "\r\n")] = 0;
+
+				printf("¿Esta de guardia? (1: Si / 0: No): ");
+				if(scanf("%d", &guardia) != 1){
+					guardia = 0;
+				}
+
+				limpiar_buffer_teclado();
 
 				db_insertar_farmacia(nombre, dir, cp, mun, tel, guardia);
 				break;
 
 			case 2:
+
 				printf("ID de la farmcia a modificar: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
+
 				printf("Nuevo Nombre: ");
-				fgets(nombre, MAX_NOMBRE, stdin); nombre[strcspn(nombre, "\n")] = 0;
+				fgets(nombre, MAX_NOMBRE, stdin);
+				nombre[strcspn(nombre, "\n")] = 0;
+
 				printf("Nueva direccion: ");
-				fgets(dir, MAX_DIR, stdin); dir[strcspn(dir, "\n")] = 0;
+				fgets(dir, MAX_DIR, stdin);
+				dir[strcspn(dir, "\n")] = 0;
+
+
 				printf("Nuevo telefono: ");
-				scanf("%s", tel);
-				getchar();
+				fgets(tel, MAX_DNI, stdin);
+				tel[strcspn(tel, "\r\n")] = 0;
 
 				db_modificar_farmacia(atoi(id), nombre, dir, tel);
 				break;
@@ -455,8 +471,8 @@ void menu_gestion_farmacias(){
 
 			case 3:
 				printf("ID de la farmacia a eliminar: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				db_eliminar_farmacia(atoi(id));
 				break;
@@ -464,12 +480,15 @@ void menu_gestion_farmacias(){
 
 			case 4:
 				printf("ID de la farmacia: ");
-				scanf("%s", id);
-				getchar();
+				fgets(id, MAX_ID, stdin);
+				id[strcspn(id, "\r\n")] = 0;
 
 				printf("Nuevo estado (1: Guardia / 0: Normal): ");
-				scanf("%d", &guardia);
-				getchar();
+				if(scanf("%d", &guardia) != 1){
+					guardia = 0;
+				}
+
+				limpiar_buffer_teclado();
 
 				db_modificar_guardia(atoi(id), guardia);
 				break;
@@ -518,7 +537,8 @@ void mostrar_logs_sistema(){
 		printf("[0] Volver al menu anterior\n");
 		printf("Seleccione una opcion: ");
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
@@ -528,8 +548,10 @@ void mostrar_logs_sistema(){
 			case 2:
 				printf("¿Seguro que desea vaciar el historial? (S/N): ");
 				char conf;
-				scanf("%c", &conf);
-				getchar();
+				if(scanf("%c", &conf) != 1){
+					conf = 'n';
+				}
+				limpiar_buffer_teclado();
 
 				if(conf == 'S' || conf == 's'){
 					f = fopen(miConfig.ruta_logs, "w");
@@ -569,7 +591,8 @@ void menu_sincronizacion_csv(){
 		printf("Seleccione una opción: ");
 
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
@@ -642,9 +665,28 @@ void cargar_config(Config *c){
 		strcpy(c->ruta_logs, "./logs/errores.log");
 		return;
 	}
-	fscanf(f, "puerto=%d\n", &c->puerto);
-	fscanf(f, "ruta_db=%s\n", c->ruta_db);
-	fscanf(f, "ruta_logs=%s\n", c->ruta_logs);
+
+	char linea[256];
+	//Inicialización por defecto preventiva
+	c->puerto = 8080;
+	strcpy(c->ruta_db, "./database/bionet.db");
+	strcpy(c->ruta_logs, "./logs/errores.log");
+
+	while(fgets(linea, sizeof(linea), f)){
+		linea[strcspn(linea, "\r\n")] = 0;
+		if(strncmp(linea, "puerto=", 7) == 0){
+			c->puerto = atoi(linea + 7);
+
+		} else if (strncmp(linea, "ruta_db=", 8) == 0){
+			strncpy(c->ruta_db, linea + 8, sizeof(c->ruta_db) - 1);
+			c->ruta_db[sizeof(c->ruta_db) -1] = 0;
+
+		} else if (strncmp(linea, "ruta_logs=", 10) == 0){
+			strncpy(c->ruta_logs, linea + 10, sizeof(c->ruta_logs) -1);
+			c->ruta_logs[sizeof(c->ruta_logs) - 1] = 0;
+		}
+	}
+
 	fclose(f);
 }
 
@@ -656,44 +698,48 @@ void menu_configuracion(){
 		cargar_config(&miConfig);
 
 		printf("\n==========================\n");
-		printf("        CONFIGURACION        \n");
+		printf("        CONFIGURACIÓN        \n");
 		printf("=============================\n");
 		printf("[1] Cambiar puerto de escucha\n");
 		printf("[2] Cambiar ruta Base de Datos\n");
 		printf("[3] Cambiar ruta de logs\n");
 		printf("[0] Volver al panel del administrador\n");
-		printf("Seleccione una opcion: ");
+		printf("Seleccione una opción: ");
 
 		scanf("%d", &sub_opcion);
-		getchar();
+
+		limpiar_buffer_teclado();
 
 		switch(sub_opcion){
 			case 1:
 				printf("Nuevo puerto: ");
 				scanf("%d", &miConfig.puerto);
+				limpiar_buffer_teclado();
 				guardar_config(miConfig);
 
 				//Registro en el LOG
 				sprintf(mensaje_log, "ADMIN: Cambio de puerto a %d", miConfig.puerto);
-				registrar_log("[CONFIGURACION]", mensaje_log);
+				registrar_log("[CONFIGURACIÓN]", mensaje_log);
 				break;
 
 			case 2:
 				printf("Nueva ruta de Base de Datos: ");
-				scanf("%s", miConfig.ruta_db);
+				fgets(miConfig.ruta_db, sizeof(miConfig.ruta_db), stdin);
+				miConfig.ruta_db[strcspn(miConfig.ruta_db, "\r\n")] = 0;
 				guardar_config(miConfig);
 
 				sprintf(mensaje_log, "ADMIN: Nueva ruta DB establecida %s", miConfig.ruta_db);
-				registrar_log("[CONFIGURACION]", mensaje_log);
+				registrar_log("[CONFIGURACIÓN]", mensaje_log);
 				break;
 
 			case 3:
 				printf("Nueva ruta de Logs: ");
-				scanf("%s", miConfig.ruta_logs);
+				fgets(miConfig.ruta_logs, sizeof(miConfig.ruta_logs), stdin);
+				miConfig.ruta_logs[strcspn(miConfig.ruta_logs, "\r\n")] = 0;
 				guardar_config(miConfig);
 
 				sprintf(mensaje_log, "ADMIN: El sistema de logs se ha movido a esa ruta");
-				registrar_log("[CONFIGURACION]", mensaje_log);
+				registrar_log("[CONFIGURACIÓN]", mensaje_log);
 				break;
 
 			case 0:
@@ -701,7 +747,7 @@ void menu_configuracion(){
 				break;
 
 			default:
-				printf("Opcion no válida.\n");
+				printf("Opción no válida.\n");
 
 		}
 
@@ -712,15 +758,6 @@ void menu_configuracion(){
 void menu_paciente(char* dni_sesion) {
 	int opcion = -1;
 	char input1[50], input2[50];
-
-//	//Inicializamos la base de datos
-//	inicializar_db();
-//
-//	//Importamos todos los csvs
-//	importar_farmacias("farmacias.csv");
-//	importar_centros_salud("centros.csv");
-//	importar_medicos("medicos.csv");
-//	importar_stock("stock.csv");
 
 	//Menu
 	while(opcion !=0){
@@ -736,39 +773,34 @@ void menu_paciente(char* dni_sesion) {
 		printf("----------------------------------\n");
 		printf("Seleccione una opcion: ");
 		scanf("%d", &opcion);
-		//Limpiamos el buffer del salto de linea
-		getchar();
+
+		limpiar_buffer_teclado();
+
 
 		switch(opcion){
 			case 1:
 				printf("Introduce CP o Municipio: ");
 				fgets(input1, 50, stdin);
 				//Eliminamos el salto de linea del input
-				input1[strcspn(input1, "\n")] = 0;
-				input1[strcspn(input1, "\r")] = 0;
+				input1[strcspn(input1, "\r\n")] = 0;
 				buscar_farmacias(input1);
 				break;
 
 			case 2:
 				printf("Introduce CP o Municipio: ");
 				fgets(input1, 50, stdin);
-				input1[strcspn(input1, "\n")] = 0;
-				input1[strcspn(input1, "\r")] = 0;
+				input1[strcspn(input1, "\r\n")] = 0;
 				buscar_centros(input1);
 				break;
 
 			case 3:
-				fflush(stdin);
-
 				printf("Nombre del medicamento: ");
 				fgets(input1, 50, stdin);
-				input1[strcspn(input1,  "\n")] = 0;
-				input1[strcspn(input1, "\r")] = 0;
+				input1[strcspn(input1,  "\r\n")] = 0;
 
 				printf("Introduce CP o Municipio para buscar cerca: ");
 				fgets(input2, 50, stdin);
-				input2[strcspn(input2, "\n")] = 0;
-				input2[strcspn(input2, "\r")] = 0;
+				input2[strcspn(input2, "\r\n")] = 0;
 
 				buscar_medicamento(input1, input2);
 				break;
@@ -804,7 +836,7 @@ void menu_paciente(char* dni_sesion) {
 				}
 				printf("Seleccione el número de la especialidad: ");
 				scanf("%d", &opcion_esp);
-				getchar();
+				limpiar_buffer_teclado();
 
 				if (opcion_esp < 1 || opcion_esp > total_especialidades){
 					printf("Opción no válida. Volviendo al menú...\n");
@@ -814,9 +846,7 @@ void menu_paciente(char* dni_sesion) {
 
 				printf("Introduce CP o Municipio: ");
 				fgets(localidad, MAX_MUNICIPIO, stdin);
-				localidad[strcspn(localidad, "\n")] = 0;
-				localidad[strcspn(localidad, "\r")] = 0;
-
+				localidad[strcspn(localidad, "\r\n")] = 0;
 
 				//Guardamos cuántos médicos se han encontrado
 				int encontrados = buscar_medicos_especialidad(especialidad_elegida, localidad);
@@ -825,17 +855,19 @@ void menu_paciente(char* dni_sesion) {
 				if(encontrados > 0){
 					printf("\nIntroduzca el ID del médico elegido: ");
 					scanf("%d", &id_medico);
-					getchar();
+					limpiar_buffer_teclado();
 
 					// Hacemos un bucle hasta encontrar una fecha y hora disponible
 					while (!exito) {
 						printf("\n--- FECHA Y HORA DE LA CITA ---\n");
 						printf("Fecha (AAAA-MM-DD): ");
-						scanf("%s", fecha);
+						fgets(fecha, sizeof(fecha), stdin);
+						fecha[strcspn(fecha, "\r\n")] = 0;
 
 						printf("Hora (HH:MM): ");
-						scanf("%s", hora);
-						getchar();
+						fgets(hora, sizeof(hora), stdin);
+						hora[strcspn(hora, "\r\n")] = 0;
+
 
 						if (comprobar_y_reservar(dni_sesion, id_medico, fecha, hora)) {
 							printf("\n[OK] ¡Cita reservada con exito!\n");
@@ -846,7 +878,7 @@ void menu_paciente(char* dni_sesion) {
 
 							char respuesta;
 							scanf(" %c", &respuesta);
-							getchar();
+							limpiar_buffer_teclado();
 
 							if(respuesta == 'n' || respuesta == 'N'){
 								printf("Reserva cancelada. Volviendo al menú principal...\n");
@@ -868,7 +900,7 @@ void menu_paciente(char* dni_sesion) {
 				break;
 
 			default:
-				printf("Opcion no valida\n");
+				printf("Opción no válida\n");
 				break;
 			}
 
