@@ -37,6 +37,24 @@
 [2026-04-07  22:28]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
 [2026-04-07  22:41]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
 <<<<<<< HEAD
+[2026-04-07  23:21]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 67985252G denegado
+[2026-04-07  23:23]  [[SISTEMA]] NUEVO REGISTRO: Oihane Cueva (DNI: 67985252G) con historial medico inicial.
+[2026-04-07  23:24]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
+[2026-04-07  23:28]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 67985252G
+[2026-04-07  23:31]  [[ACCION USUARIO]] Cita resevada por 67985252G con Medico ID 39 el 2026-05-25
+[2026-04-07  23:32]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 67985252G
+[2026-04-07  23:32]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 67985252G
+[2026-04-07  23:33]  [[SISTEMA]] Aplicación cerrada por el usuario.
+[2026-04-07  23:34]  [[LOGIN]] ADMIN ha entrado al panel de control
+[2026-04-07  23:34]  [[ADMIN]] Sincronización manual de médicos realizada
+[2026-04-07  23:34]  [[ADMIN]] Sincronización manual de centros de salud realizada
+[2026-04-07  23:36]  [[ADMIN]] Sincronización manual de farmacia y stock realizada
+[2026-04-07  23:36]  [[ADMIN]] Sincronizacion total de CSV completada.
+[2026-04-07  23:38]  [[CONFIGURACION]] ADMIN: Cambio de puerto a 9000
+[2026-04-07  23:38]  [[CONFIGURACION]] ADMIN: Nueva ruta DB establecida 0
+[2026-04-07  23:41]  [[SISTEMA]] Aplicación cerrada por el usuario.
+=======
+<<<<<<< HEAD
 [2026-04-07  22:53]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
 [2026-04-07  22:55]  [[ACCION USUARIO]] Cita resevada por 20976428Z con Medico ID 3 el 2026-05-27
 [2026-04-07  22:58]  [[ACCION USUARIO]] Cita resevada por 20976428Z con Medico ID 39 el 2026-09-08
@@ -72,6 +90,7 @@
 [2026-04-07  23:38]  [[CONFIGURACION]] ADMIN: Cambio de puerto a 9000
 [2026-04-07  23:38]  [[CONFIGURACION]] ADMIN: Nueva ruta DB establecida 0
 >>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
+<<<<<<< HEAD
 [2026-05-18  10:48]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428Z denegado
 [2026-05-18  10:49]  [[SISTEMA]] NUEVO REGISTRO: Imene Djouhra (DNI: 20976428Z) con historial médico inicial.
 [2026-05-18  10:49]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428Z denegado
@@ -82,3 +101,6 @@
 [2026-05-18  11:00]  [[SISTEMA]] Aplicación cerrada por el usuario.
 [2026-05-18  21:38]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
 [2026-05-18  21:40]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+=======
+>>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
+>>>>>>> branch 'master' of https://github.com/imene-27/bionet.git

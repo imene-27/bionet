@@ -196,6 +196,7 @@ FarmaciaNodo* buscar_farmcias_lista(const char* criterio){
 		printf("[ERROR] Error en la consulta de búsqueda: %s\n", sqlite3_errmsg(db));
 	}
 
+
 	sqlite3_finalize(stmt);
 	sqlite3_close(db);
 
