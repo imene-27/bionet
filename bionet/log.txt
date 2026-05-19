@@ -104,3 +104,12 @@
 =======
 >>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
 >>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
+[2026-05-19  21:05]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428Z denegado
+[2026-05-19  21:05]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428Z denegado
+[2026-05-19  21:06]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428s denegado
+[2026-05-19  21:06]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 20976428Z denegado
+[2026-05-19  21:07]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-19  21:13]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-19  21:15]  [[SISTEMA]] NUEVO REGISTRO: Maya (DNI: 12345678k) con historial médico inicial.
+[2026-05-19  21:15]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 12345678k
+[2026-05-19  21:50]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z

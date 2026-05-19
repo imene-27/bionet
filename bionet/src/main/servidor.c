@@ -70,6 +70,35 @@ static void capturar_salida2(void (*func)(char*, char*), char* arg1, char* arg2,
     if (leido == 0) strcpy(sendBuff, "Sin resultados");
 }
 
+void buscar_farmacias(char* criterio){
+	FarmaciaNodo* lista = buscar_farmcias_lista(criterio);
+
+	if(lista == NULL){
+		printf("No se han encontrado farmacias en esa zona o con ese CP.\n");
+		return;
+	}
+
+	printf("---- FARMACIAS ENCONTRADAS ----\n");
+	FarmaciaNodo* actual = lista;
+	while(actual != NULL){
+		printf("[%s] %s - Tlf; %s (Dir: %s)\n",
+				actual->es_guardia ? "GUARDIA" : "NORMAL",
+				actual->nombre,
+				actual->telefono,
+				actual->direccion);
+
+		actual = actual->siguiente;
+	}
+
+	actual = lista;
+	while(actual != NULL){
+		FarmaciaNodo* aux = actual->siguiente;
+		free(actual);
+		actual = aux;
+	}
+
+}
+
 
 
 void procesar_comando(char *recvBuff, char *sendBuff) {
@@ -123,7 +152,7 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
 		strcpy(sendBuff, "OK");
 
     } else if (strcmp(partes[0], "BUSCAR_FARMACIA") == 0 && n >= 2) {
-        capturar_salida((void(*)(char*))buscar_farmacias, partes[1], sendBuff);
+        capturar_salida(buscar_farmacias, partes[1], sendBuff);
 
     } else if (strcmp(partes[0], "BUSCAR_CENTRO") == 0 && n >= 2) {
         capturar_salida((void(*)(char*))buscar_centros, partes[1], sendBuff);
@@ -207,14 +236,62 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
        registrar_log("[ADMIN]", "Medico eliminado");
        strcpy(sendBuff, "OK;Medico eliminado correctamente");
 
-   } else {
+   } else if(strcmp(partes[0], "VER_LOGS") == 0){
+	   FILE* f = fopen(miConfig.ruta_logs, "r");
+	   if(f == NULL){
+		   strcpy(sendBuff, "ERROR;No se pudo abrir el archivo de logs.\n");
+
+	   } else{
+		   char linea[256];
+		   sendBuff[0] = '\0';
+
+		   while(fgets(linea, sizeof(linea), f)){
+			   if(strlen(sendBuff) + strlen(linea) < 4000){
+				   strcat(sendBuff, linea);
+			   } else{
+				   break;
+			   }
+		   }
+		   fclose(f);
+	   }
+
+   }  else if(strcmp(partes[0], "VACIAR_LOGS") == 0){
+	   FILE* f = fopen(miConfig.ruta_logs, "w");
+	   if(f == NULL){
+		   strcpy(sendBuff, "ERROR;No se pudo vaciar el archivo de logs.\n");
+
+	   } else{
+		   fprintf(f, "[%s] Logs vaciados correctamente\n", __DATE__);
+		   fclose(f);
+		   strcpy(sendBuff, "OK");
+
+	   	}
+    }  else if(strcmp(partes[0], "SET_CONFIG") == 0){
+
+ 	   if(strcmp(partes[1], "PUERTO") == 0){
+ 		   miConfig.puerto = atoi(partes[2]);
+ 		   strcpy(sendBuff, "OK;Puerto modificado. Aplica al reiniciar el servidor.");
+
+ 	   } else if(strcmp(partes[1], "DB") == 0){
+ 		   strcpy(miConfig.ruta_db, partes[2]);
+ 		   strcpy(sendBuff, "OK;Ruta de Base de Datos actualizada.");
+
+ 	   } else if (strcmp(partes[1], "LOGS") == 0){
+ 		   strcpy(miConfig.ruta_logs, partes[2]);
+ 		   strcpy(sendBuff, "OK;Ruta de Logs actualizada.");
+
+ 	   } else{
+ 		   strcpy(sendBuff, "ERROR;Parametro de configuracion desconocido");
+ 	   }
+
+    }  else {
 	   strcpy(sendBuff, "ERROR;Comando desconocido");
-   }
+    	}
 }
 int main() {
     miConfig.puerto = SERVER_PORT;
-    strcpy(miConfig.ruta_db, "./bionet.db");
-    strcpy(miConfig.ruta_logs, "./log.txt");
+    strcpy(miConfig.ruta_db, "../bionet.db");
+    strcpy(miConfig.ruta_logs, "../log.txt");
 
     inicializar_db(miConfig.ruta_db);
     auto_carga_datos();
