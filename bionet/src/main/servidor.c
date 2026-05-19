@@ -90,6 +90,8 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
     	return;
     }
 
+    //Para el PACIENTE
+
     if (strcmp(partes[0], "LOGIN") == 0 && n >= 3) {
         int ok = validar_paciente(partes[1], partes[2]);
         if (ok) {
@@ -139,6 +141,70 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
 	   int ok = comprobar_y_reservar(partes[1], atoi(partes[2]),
 									 partes[3], partes[4]);
 	   strcpy(sendBuff, ok ? "OK" : "ERROR;Cita no disponible");
+
+   //Para el ADMINISTRADOR
+
+   } else if (strcmp(partes[0], "ADMIN_ADD_CENTRO") == 0 && n >= 8) {
+       // ADMIN_ADD_CENTRO;nombre;dir;cp;municipio;horario;tipo;telefono
+       db_insertar_centro(partes[1], partes[2], partes[3], partes[4],
+                          partes[5], partes[6], partes[7]);
+       registrar_log("[ADMIN]", "Centro de salud añadido");
+       strcpy(sendBuff, "OK;Centro añadido correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_MOD_CENTRO") == 0 && n >= 3) {
+       // ADMIN_MOD_CENTRO;id;nuevo_nombre
+       db_modificar_centro(atoi(partes[1]), partes[2]);
+       registrar_log("[ADMIN]", "Centro de salud modificado");
+       strcpy(sendBuff, "OK;Centro modificado correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_DEL_CENTRO") == 0 && n >= 2) {
+       // ADMIN_DEL_CENTRO;id
+       db_eliminar_centro(atoi(partes[1]));
+       registrar_log("[ADMIN]", "Centro de salud eliminado");
+       strcpy(sendBuff, "OK;Centro eliminado correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_ADD_FARMACIA") == 0 && n >= 7) {
+       // ADMIN_ADD_FARMACIA;nombre;dir;cp;municipio;telefono;guardia
+       db_insertar_farmacia(partes[1], partes[2], partes[3],
+                            partes[4], partes[5], atoi(partes[6]));
+       registrar_log("[ADMIN]", "Farmacia añadida");
+       strcpy(sendBuff, "OK;Farmacia añadida correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_MOD_FARMACIA") == 0 && n >= 5) {
+       // ADMIN_MOD_FARMACIA;id;nuevo_nombre;nueva_dir;nuevo_tel
+       db_modificar_farmacia(atoi(partes[1]), partes[2], partes[3], partes[4]);
+       registrar_log("[ADMIN]", "Farmacia modificada");
+       strcpy(sendBuff, "OK;Farmacia modificada correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_DEL_FARMACIA") == 0 && n >= 2) {
+       // ADMIN_DEL_FARMACIA;id
+       db_eliminar_farmacia(atoi(partes[1]));
+       registrar_log("[ADMIN]", "Farmacia eliminada");
+       strcpy(sendBuff, "OK;Farmacia eliminada correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_DEL_USUARIO") == 0 && n >= 2) {
+       // ADMIN_DEL_USUARIO;dni
+       db_eliminar_usuario(partes[1]);
+       registrar_log("[ADMIN]", "Usuario eliminado");
+       strcpy(sendBuff, "OK;Usuario eliminado correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_MOD_PASS") == 0 && n >= 3) {
+       // ADMIN_MOD_PASS;dni;nueva_pass
+       db_modificar_password_usuario(partes[1], partes[2]);
+       registrar_log("[ADMIN]", "Contrasena de usuario modificada");
+       strcpy(sendBuff, "OK;Contrasena modificada correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_ADD_MEDICO") == 0 && n >= 4) {
+       // ADMIN_ADD_MEDICO;nombre;especialidad;id_centro
+       db_insertar_medico(partes[1], partes[2], atoi(partes[3]));
+       registrar_log("[ADMIN]", "Medico añadido");
+       strcpy(sendBuff, "OK;Medico añadido correctamente");
+
+   } else if (strcmp(partes[0], "ADMIN_DEL_MEDICO") == 0 && n >= 2) {
+       // ADMIN_DEL_MEDICO;id
+       db_eliminar_medico(atoi(partes[1]));
+       registrar_log("[ADMIN]", "Medico eliminado");
+       strcpy(sendBuff, "OK;Medico eliminado correctamente");
 
    } else {
 	   strcpy(sendBuff, "ERROR;Comando desconocido");
