@@ -142,6 +142,7 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
 									 partes[3], partes[4]);
 	   strcpy(sendBuff, ok ? "OK" : "ERROR;Cita no disponible");
 
+
    //Para el ADMINISTRADOR
 
    } else if (strcmp(partes[0], "ADMIN_ADD_CENTRO") == 0 && n >= 8) {
