@@ -122,6 +122,7 @@ int main() {
 		if (comm_socket == INVALID_SOCKET) { perror("accept"); continue; }
 		printf("Cliente conectado: %s\n", inet_ntoa(client.sin_addr));
 
+
 		memset(recvBuff, 0, BUFF_SIZE);
 		int bytes = recv(comm_socket, recvBuff, BUFF_SIZE - 1, 0);
 		if (bytes > 0) {
