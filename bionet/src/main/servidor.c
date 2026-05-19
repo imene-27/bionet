@@ -13,6 +13,65 @@
 
 Config miConfig;
 
+static void capturar_salida(void(*func)(char*), char* arg, char* sendBuff){
+	FILE *tmp = fopen("_tmp_out.txt", "w");
+	if (!tmp) { strcpy(sendBuff, "ERROR;No se pudo capturar salida"); return; }
+
+	// Redirigimos el stdout al fichero temporal
+	FILE *old_stdout = stdout;
+	*stdout = *tmp;
+
+	func(arg);
+
+	fflush(stdout);
+	// Restauramos stdout
+	*stdout = *old_stdout;
+	fclose(tmp);
+
+	// Leemos lo que se ha escrito en el fichero
+	FILE *f = fopen("_tmp_out.txt", "r");
+	if (!f) {
+		strcpy(sendBuff, "ERROR;No se pudo leer salida");
+		return;
+	}
+
+	size_t leido = fread(sendBuff, 1, BUFF_SIZE - 1, f);
+	sendBuff[leido] = '\0';
+	fclose(f);
+	remove("_tmp_out.txt");
+
+	if (leido == 0) {
+		strcpy(sendBuff, "Sin resultados");
+	}
+}
+
+//El mismo metodo que el anteriror pero para funciones con dos argumentos
+static void capturar_salida2(void (*func)(char*, char*), char* arg1, char* arg2, char* sendBuff) {
+    FILE *tmp = fopen("_tmp_out.txt", "w");
+    if (!tmp) { strcpy(sendBuff, "ERROR;No se pudo capturar salida"); return; }
+
+    FILE *old_stdout = stdout;
+    *stdout = *tmp;
+
+    func(arg1, arg2);
+
+    fflush(stdout);
+    *stdout = *old_stdout;
+    fclose(tmp);
+
+    FILE *f = fopen("_tmp_out.txt", "r");
+    if (!f) { strcpy(sendBuff, "ERROR;No se pudo leer salida"); return; }
+
+    size_t leido = fread(sendBuff, 1, BUFF_SIZE - 1, f);
+    sendBuff[leido] = '\0';
+    fclose(f);
+    remove("_tmp_out.txt");
+
+    if (leido == 0) strcpy(sendBuff, "Sin resultados");
+}
+
+
+
 void procesar_comando(char *recvBuff, char *sendBuff) {
 
     char *partes[10];
@@ -22,7 +81,8 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
     strncpy(copia, recvBuff, BUFF_SIZE);
     char *tok = strtok(copia, ";");
     while (tok && n < 10) {
-    	partes[n++] = tok; tok = strtok(NULL, ";");
+    	partes[n++] = tok;
+    	tok = strtok(NULL, ";");
     }
 
     if (n == 0) {
@@ -32,7 +92,28 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
 
     if (strcmp(partes[0], "LOGIN") == 0 && n >= 3) {
         int ok = validar_paciente(partes[1], partes[2]);
-        strcpy(sendBuff, ok ? "OK" : "ERROR;Credenciales incorrectas");
+        if (ok) {
+            // Formato: OK;dni;nombre;email;municipio
+            sqlite3 *db;
+            sqlite3_stmt *stmt;
+            if (sqlite3_open(miConfig.ruta_db, &db) == SQLITE_OK) {
+                char *sql = "SELECT Nombre, Email, Municipio FROM Usuario WHERE DNI = ?;";
+                if (sqlite3_prepare_v2(db, sql, -1, &stmt, 0) == SQLITE_OK) {
+                    sqlite3_bind_text(stmt, 1, partes[1], -1, SQLITE_STATIC);
+                    if (sqlite3_step(stmt) == SQLITE_ROW) {
+                        snprintf(sendBuff, BUFF_SIZE, "OK;%s;%s;%s;%s",
+                            partes[1],
+                            sqlite3_column_text(stmt, 0),
+                            sqlite3_column_text(stmt, 1),
+                            sqlite3_column_text(stmt, 2));
+                    }
+                    sqlite3_finalize(stmt);
+                }
+                sqlite3_close(db);
+            }
+        } else {
+            strcpy(sendBuff, "ERROR;Credenciales incorrectas");
+        }
 
     } else if (strcmp(partes[0], "REGISTRO") == 0 && n >= 7) {
 		registrar_usuario(partes[1], partes[2], partes[3],
@@ -40,23 +121,19 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
 		strcpy(sendBuff, "OK");
 
     } else if (strcmp(partes[0], "BUSCAR_FARMACIA") == 0 && n >= 2) {
-		buscar_farmacias(partes[1]);
-		strcpy(sendBuff, "OK");             // TODO: capturar salida y mandarla
+        capturar_salida((void(*)(char*))buscar_farmacias, partes[1], sendBuff);
 
     } else if (strcmp(partes[0], "BUSCAR_CENTRO") == 0 && n >= 2) {
-		buscar_centros(partes[1]);
-		strcpy(sendBuff, "OK");
+        capturar_salida((void(*)(char*))buscar_centros, partes[1], sendBuff);
 
 	} else if (strcmp(partes[0], "BUSCAR_MED") == 0 && n >= 3) {
-		buscar_medicamento(partes[1], partes[2]);
-		strcpy(sendBuff, "OK");
+        capturar_salida2(buscar_medicamento, partes[1], partes[2], sendBuff);
 
 	} else if (strcmp(partes[0], "FICHA_MEDICA") == 0 && n >= 2) {
-		ver_ficha_medica(partes[1]);
-		strcpy(sendBuff, "OK");
+        capturar_salida((void(*)(char*))ver_ficha_medica, partes[1], sendBuff);
+
 	} else if (strcmp(partes[0], "BUSCAR_MEDICOS") == 0 && n >= 3) {
-		   buscar_medicos_especialidad(partes[1], partes[2]);
-		   strcpy(sendBuff, "OK");
+        capturar_salida2((void(*)(char*,char*))buscar_medicos_especialidad, partes[1], partes[2], sendBuff);
 
    } else if (strcmp(partes[0], "RESERVAR_CITA") == 0 && n >= 5) {
 	   int ok = comprobar_y_reservar(partes[1], atoi(partes[2]),
@@ -68,7 +145,12 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
    }
 }
 int main() {
-	inicializar_db("bionet.db");
+    miConfig.puerto = SERVER_PORT;
+    strcpy(miConfig.ruta_db, "./bionet.db");
+    strcpy(miConfig.ruta_logs, "./log.txt");
+
+    inicializar_db(miConfig.ruta_db);
+    auto_carga_datos();
 
 	SOCKET conn_socket, comm_socket;
 	struct sockaddr_in server, client;
