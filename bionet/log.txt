@@ -113,3 +113,9 @@
 [2026-05-19  21:15]  [[SISTEMA]] NUEVO REGISTRO: Maya (DNI: 12345678k) con historial médico inicial.
 [2026-05-19  21:15]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 12345678k
 [2026-05-19  21:50]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  17:49]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  17:55]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  17:59]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
+[2026-05-20  18:01]  [[ACCION USUARIO]] Cita resevada por 20976428Z con Medico ID 9 el 2027-06-09
+[2026-05-20  18:01]  [[PACIENTE]] Cita médica reservada correctamente
+[2026-05-20  18:01]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
