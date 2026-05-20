@@ -100,7 +100,6 @@ void buscar_farmacias(char* criterio){
 }
 
 
-
 void procesar_comando(char *recvBuff, char *sendBuff) {
 
     char *partes[10];
@@ -120,7 +119,6 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
     }
 
     //Para el PACIENTE
-
     if (strcmp(partes[0], "LOGIN") == 0 && n >= 3) {
         int ok = validar_paciente(partes[1], partes[2]);
         if (ok) {
