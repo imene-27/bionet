@@ -1057,7 +1057,7 @@ void registrar_usuario(char* dni, char* nombre, char* email, char* municipio, ch
 	sqlite3 *db;
 	sqlite3_stmt *stmt;
 	int rc = sqlite3_open(miConfig.ruta_db, &db);
-	char pass_hash[9];
+	char pass_hash[64];
 
 	generar_hash_password(pass, pass_hash);
 
