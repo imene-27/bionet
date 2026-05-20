@@ -113,6 +113,7 @@
 [2026-05-19  21:15]  [[SISTEMA]] NUEVO REGISTRO: Maya (DNI: 12345678k) con historial médico inicial.
 [2026-05-19  21:15]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 12345678k
 [2026-05-19  21:50]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+<<<<<<< HEAD
 [2026-05-20  18:13]  [[SISTEMA]] NUEVO REGISTRO: nahia (DNI: 1111) con historial médico inicial.
 [2026-05-20  18:13]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 1111
 [2026-05-20  18:17]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 1111
@@ -120,3 +121,15 @@
 [2026-05-20  18:27]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 1111
 [2026-05-20  18:31]  [[ACCION USUARIO]] Cita resevada por 1111 con Medico ID 9 el 2026-05-31
 [2026-05-20  18:33]  [[SISTEMA]] NUEVO REGISTRO: maria (DNI: 12345678A) con historial médico inicial.
+=======
+[2026-05-20  17:49]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  17:55]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  17:59]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
+[2026-05-20  18:01]  [[ACCION USUARIO]] Cita resevada por 20976428Z con Medico ID 9 el 2027-06-09
+[2026-05-20  18:01]  [[PACIENTE]] Cita médica reservada correctamente
+[2026-05-20  18:01]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 20976428Z
+[2026-05-20  18:11]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 12345678k denegado
+[2026-05-20  18:11]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 12345678k denegado
+[2026-05-20  18:16]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 12345678k denegado
+[2026-05-20  18:20]  [[SEGURIDAD]] LOGIN FALLIDO: Acceso del paciente con DNI 12345678k denegado
+>>>>>>> branch 'master' of https://github.com/imene-27/bionet.git
