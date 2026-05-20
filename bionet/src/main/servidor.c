@@ -167,8 +167,12 @@ void procesar_comando(char *recvBuff, char *sendBuff) {
    } else if (strcmp(partes[0], "RESERVAR_CITA") == 0 && n >= 5) {
 	   int ok = comprobar_y_reservar(partes[1], atoi(partes[2]),
 									 partes[3], partes[4]);
-	   strcpy(sendBuff, ok ? "OK" : "ERROR;Cita no disponible");
-
+	   if(ok){
+		   registrar_log("[PACIENTE]", "Cita médica reservada correctamente");
+		   strcpy(sendBuff,"OK;Cita reservada con éxito");
+	   } else{
+		   strcpy(sendBuff, ok ? "OK" : "ERROR;Cita no disponible");
+	   }
 
    //Para el ADMINISTRADOR
 
