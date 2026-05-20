@@ -113,3 +113,10 @@
 [2026-05-19  21:15]  [[SISTEMA]] NUEVO REGISTRO: Maya (DNI: 12345678k) con historial médico inicial.
 [2026-05-19  21:15]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 12345678k
 [2026-05-19  21:50]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 20976428Z
+[2026-05-20  18:13]  [[SISTEMA]] NUEVO REGISTRO: nahia (DNI: 1111) con historial médico inicial.
+[2026-05-20  18:13]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 1111
+[2026-05-20  18:17]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 1111
+[2026-05-20  18:19]  [[ACCESO]] LOGIN EXITOSO: Paciente con DNI 1111
+[2026-05-20  18:27]  [[ACCESO PRIVADO]] Consulta de ficha medica completa por el usuario: 1111
+[2026-05-20  18:31]  [[ACCION USUARIO]] Cita resevada por 1111 con Medico ID 9 el 2026-05-31
+[2026-05-20  18:33]  [[SISTEMA]] NUEVO REGISTRO: maria (DNI: 12345678A) con historial médico inicial.
